@@ -8,15 +8,17 @@
     
     <string name="rank_label">Current Rank: Probationary FF</string>
     
-    <!-- Spinner information for payday check -->
-    <string name="payperiod_label">Which payday are you calculating for?</string>
-    <string-array name="payperiod_choice">
-        <item>1st Payday</item>
-        <item>2nd Payday</item>
-        <item>3rd Payday</item>
-    </string-array>
     
-    <string name="scheduled_days_label">Scheduled\nDays:</string>
-    <string name="overtime_label">Overtime:</string>
-    <string name="holidays_label">Holidays:</string>
+    <string name="payperiod_label">Which payday are you calculating for?</string>
+    <string name="pay1_button">1st Pay</string>
+    <string name="pay2_button">2nd Pay</string>
+    <string name="pay3_button">3rd Pay</string>
+    
+    <string name="enter_hourly_information">Enter the correct values for each  item:</string>
+    
+    <string name="scheduled_days_label">Scheduled Days: 4</string>
+    <string name="overtime_label">Overtime: 0 hrs</string>
+    <string name="holidays_label">Holidays: 0 day</string>
+    
+    <string name ="calculate_button">Calculate</string>
 </resources>
