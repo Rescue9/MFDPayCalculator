@@ -37,4 +37,10 @@
     <string name="holidays_label">Holidays: 0 days</string>
     
     <string name ="calculate_button">Calculate</string>
+    
+    <!-- Advanced layout resources -->
+    <string name="base_pay_rate_label">Base pay rate:</string>
+    <string name="overtime1_rate_label">Overtime 1 rate:</string>
+    <string name="overtime2_rate_label">Overtime 2 rate:</string>
+    <string name="years_worked_label">Years worked:</string>
 </resources>
