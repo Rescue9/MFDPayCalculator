@@ -5,4 +5,18 @@
     <string name="taxes_label">Taxes:</string>
     <string name="deposit_label">Deposited:</string>
     <string name="zero_amounts">$0.00</string>
+    
+    <string name="rank_label">Current Rank: Probationary FF</string>
+    
+    <!-- Spinner information for payday check -->
+    <string name="payperiod_label">Which payday are you calculating for?</string>
+    <string-array name="payperiod_choice">
+        <item>1st Payday</item>
+        <item>2nd Payday</item>
+        <item>3rd Payday</item>
+    </string-array>
+    
+    <string name="scheduled_days_label">Scheduled\nDays:</string>
+    <string name="overtime_label">Overtime:</string>
+    <string name="holidays_label">Holidays:</string>
 </resources>
