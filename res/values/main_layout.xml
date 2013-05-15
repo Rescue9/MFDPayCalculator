@@ -7,6 +7,22 @@
     <string name="zero_amounts">$0.00</string>
     
     <string name="rank_label">Current Rank: Probationary FF</string>
+    <string-array name="rankOptions">
+        <item >Probationary Firefighter</item>
+        <item >Firefighter</item>
+        <item >Engineer</item>
+        <item >Lieutenant</item>
+        <item >Captain</item>
+        <item >Major</item>
+    </string-array>
+    <string-array name="rankValues">
+        <item >Probationary Firefighter</item>
+        <item >Firefighter</item>
+        <item >Engineer</item>
+        <item >Lieutenant</item>
+        <item >Captain</item>
+        <item >Major</item>
+    </string-array>
     
     
     <string name="payperiod_label">Which payday are you calculating for?</string>
