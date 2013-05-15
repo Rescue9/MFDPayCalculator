@@ -196,7 +196,8 @@
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".5"
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground"
                     android:text="@string/holidays_label" />
 
                 <Button
@@ -204,16 +205,25 @@
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".5"
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground"
                     android:text="@string/overtime_label" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/button3"
-                style="?android:attr/buttonBarButtonStyle"
+            <LinearLayout
+                style="?android:attr/buttonBarStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/scheduled_days_label" />
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/button3"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"                    
+                    android:text="@string/scheduled_days_label" />
+
+            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>
