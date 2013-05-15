@@ -12,9 +12,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-	// create sharedPreferences final
-	public static final String PREFS_FILE = "MFDPayCalcPrefs";
-	
+	// gui text elements	
 	TextView base_pay_total;
 	TextView gross_pay_total;
 	TextView taxes_total;
