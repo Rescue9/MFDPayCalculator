@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="base_pay_label">Base pay:</string>
+    <string name="gross_pay_label">Gross pay:</string>
+    <string name="taxes_label">Taxes:</string>
+    <string name="deposit_label">Deposited:</string>
+    <string name="zero_amounts">$0.00</string>
+</resources>
