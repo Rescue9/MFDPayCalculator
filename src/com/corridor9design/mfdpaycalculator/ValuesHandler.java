@@ -25,6 +25,10 @@ public class ValuesHandler {
 		// TODO Auto-generated constructor stub
 	}
 
+	public static double getIncentive() {
+		return INCENTIVE;
+	}
+
 	public double getBase_pay_final() {
 		return base_pay_final;
 	}

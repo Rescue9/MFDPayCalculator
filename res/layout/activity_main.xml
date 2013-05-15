@@ -35,7 +35,7 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/base_pay_amount"
+            android:id="@+id/base_pay_total"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -44,7 +44,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-            android:id="@+id/gross_pay_amount"
+            android:id="@+id/gross_pay_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -64,7 +64,7 @@
         android:layout_marginTop="5dp" >
 
         <TextView
-            android:id="@+id/taxes_amount"
+            android:id="@+id/taxes_total"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -73,7 +73,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-            android:id="@+id/deposited_amount"
+            android:id="@+id/deposited_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -148,7 +148,7 @@
                     android:layout_height="wrap_content" >
 
                     <TextView
-                        android:id="@+id/textView1"
+                        android:id="@+id/base_pay_rate_label"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".5"
@@ -156,7 +156,7 @@
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
-                        android:id="@+id/editText1"
+                        android:id="@+id/base_pay_rate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".5"
@@ -169,7 +169,7 @@
                     android:layout_height="wrap_content" >
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/overtime1_rate_label"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".5"
@@ -177,7 +177,7 @@
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
-                        android:id="@+id/editText2"
+                        android:id="@+id/overtime1_rate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".5"
@@ -190,7 +190,7 @@
                     android:layout_height="wrap_content" >
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/overtime2_rate_label"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".5"
@@ -198,7 +198,7 @@
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
-                        android:id="@+id/editText3"
+                        android:id="@+id/overtime2_rate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".5"
@@ -211,7 +211,7 @@
                     android:layout_height="wrap_content" >
 
                     <TextView
-                        android:id="@+id/textView5"
+                        android:id="@+id/years_worked_label"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".5"
@@ -219,7 +219,7 @@
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
-                        android:id="@+id/editText4"
+                        android:id="@+id/years_worked"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".5"
@@ -283,7 +283,7 @@
                 android:layout_marginTop="5dp" >
 
                 <Button
-                    android:id="@+id/button1"
+                    android:id="@+id/holidays_button"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -292,7 +292,7 @@
                     android:text="@string/holidays_label" />
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/overtime_button"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -307,7 +307,7 @@
                 android:layout_height="wrap_content">
 
                 <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/scheduled_days_button"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -325,7 +325,7 @@
         android:layout_marginTop="5dp" >
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/calculate_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/calculate_button" />
