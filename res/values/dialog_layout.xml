@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_textview1">Message</string>
+    <string name="dialog_edittext1">0.00</string>
+    <string name="dialog_button_accept">Accept</string>
+    <string name="dialog_button_cancel">Cancel</string>
+    
+</resources>

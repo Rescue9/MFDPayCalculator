@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -53,7 +54,8 @@ public class MainActivity extends Activity {
 		// set valueHandler values from preferences
 		ph.setValuesFromPreferences(this);
 
-		testButton();
+		holidayButton();
+		calcButton();
 	}
 
 	@Override
@@ -98,14 +100,28 @@ public class MainActivity extends Activity {
 		vh.setYears_worked(vm.editToInt(years_worked));
 	}
 
-	public void testButton() {
+	public void holidayButton() {
 		holidays_button.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				base_pay_total.setText("TESTING");
+				DialogFragment newFragment = new DialogHandler();
+				newFragment.show(getFragmentManager(), "holidays");
 
 			}
 		});
+	}
+
+	public void calcButton() {
+		calculate_button.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				base_pay_total.setText(vh.getBase_pay_total() + "");
+
+			}
+		});
+
 	}
 }
