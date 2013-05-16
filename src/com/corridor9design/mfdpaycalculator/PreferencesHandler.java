@@ -59,6 +59,6 @@ public class PreferencesHandler extends Activity{
 		// additional values needed for calculation
 		vhandler.setCallback_hours(this.getDoublePreference("callback_hours", context));
 		vhandler.setYears_worked(this.getIntPreference("years_worked", context));
-		vhandler.setHolidays_worked(this.getIntPreference("holidays_worked", context));
+		vhandler.setHolidays_during_pay(this.getIntPreference("holidays_worked", context));
 	}
 }

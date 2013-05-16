@@ -19,7 +19,8 @@ public class ValuesHandler {
 	// additional variables
 	private static double callback_hours;
 	private static int years_worked;
-	private static int holidays_worked;
+	private static int holidays_during_pay;
+	
 
 	public ValuesHandler() {
 		// TODO Auto-generated constructor stub
@@ -109,12 +110,12 @@ public class ValuesHandler {
 		ValuesHandler.years_worked = years_worked;
 	}
 
-	public int getHolidays_worked() {
-		return holidays_worked;
+	public int getHolidays_during_pay() {
+		return holidays_during_pay;
 	}
 
-	public void setHolidays_worked(int holidays_worked) {
-		ValuesHandler.holidays_worked = holidays_worked;
+	public void setHolidays_during_pay(int holidays_worked) {
+		ValuesHandler.holidays_during_pay = holidays_worked;
 	}
 
 }

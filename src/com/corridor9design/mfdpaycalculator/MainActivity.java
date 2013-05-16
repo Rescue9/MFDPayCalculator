@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,7 +14,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-	// gui text elements	
+	// gui text elements
 	TextView base_pay_total;
 	TextView gross_pay_total;
 	TextView taxes_total;
@@ -33,12 +32,12 @@ public class MainActivity extends Activity {
 	Button overtime_button;
 	Button scheduled_days_button;
 	Button calculate_button;
-	
+
 	PreferencesHandler ph = new PreferencesHandler();
 	ValuesHandler vh = new ValuesHandler();
-	
-	DecimalFormat df = new DecimalFormat("$##0.00");
+	ValueModifier vm = new ValueModifier();
 
+	DecimalFormat df = new DecimalFormat("$##0.00");
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +46,13 @@ public class MainActivity extends Activity {
 
 		// hide the keyboard until user requests it
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-		
+
 		// setup gui instances
 		setupGuiInstances();
-		
+
 		// set valueHandler values from preferences
 		ph.setValuesFromPreferences(this);
-		
+
 		testButton();
 	}
 
@@ -84,13 +83,28 @@ public class MainActivity extends Activity {
 		scheduled_days_button = (Button) findViewById(R.id.scheduled_days_button);
 		calculate_button = (Button) findViewById(R.id.calculate_button);
 	}
-		
-	public void testButton(){
-		calculate_button.setOnClickListener(new OnClickListener(){
-			
+
+	public void readGuiIntoValues() {
+		// we need to reread the gui inputs into values right before
+		// calculating to make sure that we accept any user changes made
+		vh.setBase_pay_rate(vm.editToDouble(base_pay_rate));
+		vh.setOvertime1_pay_rate(vm.editToDouble(overtime1_rate));
+		vh.setOvertime2_pay_rate(vm.editToDouble(overtime2_rate));
+
+		vh.setScheduled_days(vm.buttToInt(scheduled_days_button));
+		vh.setHolidays_during_pay(vm.buttToInt(holidays_button));
+		vh.setCallback_hours(vm.buttToDouble(overtime_button));
+
+		vh.setYears_worked(vm.editToInt(years_worked));
+	}
+
+	public void testButton() {
+		holidays_button.setOnClickListener(new OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
-				base_pay_total.setText(df.format(vh.getBase_pay_total()));
+				base_pay_total.setText("TESTING");
+
 			}
 		});
 	}
