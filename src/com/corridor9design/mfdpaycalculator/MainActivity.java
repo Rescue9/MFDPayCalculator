@@ -1,7 +1,10 @@
 package com.corridor9design.mfdpaycalculator;
 
+import java.text.DecimalFormat;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,6 +33,11 @@ public class MainActivity extends Activity {
 	Button overtime_button;
 	Button scheduled_days_button;
 	Button calculate_button;
+	
+	PreferencesHandler ph = new PreferencesHandler();
+	ValuesHandler vh = new ValuesHandler();
+	
+	DecimalFormat df = new DecimalFormat("$##0.00");
 
 
 	@Override
@@ -73,14 +81,14 @@ public class MainActivity extends Activity {
 		scheduled_days_button = (Button) findViewById(R.id.scheduled_days_button);
 		calculate_button = (Button) findViewById(R.id.calculate_button);
 	}
-	
+		
 	public void testButton(){
 		calculate_button.setOnClickListener(new OnClickListener(){
 			
 			@Override
 			public void onClick(View v) {
-				base_pay_total.setText("TESTING");
-				
+				ph.setValuesFromPreferences(getApplicationContext());
+				base_pay_total.setText(df.format(vh.getBase_pay_total()));
 			}
 		});
 	}

@@ -5,10 +5,10 @@ public class ValuesHandler {
 	private static final double INCENTIVE = 258.33;
 
 	// totals after calculation
-	private static double base_pay_final;
-	private static double gross_pay_final;
-	private static double taxes_final;
-	private static double deposit_final;
+	private static double base_pay_total;
+	private static double gross_pay_total;
+	private static double taxes_total;
+	private static double deposit_total;
 
 	// variables for hourly calculations
 	private static double base_pay_rate;
@@ -29,36 +29,36 @@ public class ValuesHandler {
 		return INCENTIVE;
 	}
 
-	public double getBase_pay_final() {
-		return base_pay_final;
+	public double getBase_pay_total() {
+		return base_pay_total;
 	}
 
-	public void setBase_pay_final(double base_pay_final) {
-		ValuesHandler.base_pay_final = base_pay_final;
+	public void setBase_pay_total(double base_pay_total) {
+		ValuesHandler.base_pay_total = base_pay_total;
 	}
 
-	public double getGross_pay_final() {
-		return gross_pay_final;
+	public double getGross_pay_total() {
+		return gross_pay_total;
 	}
 
-	public void setGross_pay_final(double gross_pay_final) {
-		ValuesHandler.gross_pay_final = gross_pay_final;
+	public void setGross_pay_total(double gross_pay_total) {
+		ValuesHandler.gross_pay_total = gross_pay_total;
 	}
 
-	public double getTaxes_final() {
-		return taxes_final;
+	public double getTaxes_total() {
+		return taxes_total;
 	}
 
-	public void setTaxes_final(double taxes_final) {
-		ValuesHandler.taxes_final = taxes_final;
+	public void setTaxes_total(double taxes_total) {
+		ValuesHandler.taxes_total = taxes_total;
 	}
 
-	public double getDeposit_final() {
-		return deposit_final;
+	public double getDeposit_total() {
+		return deposit_total;
 	}
 
-	public void setDeposit_final(double deposit_final) {
-		ValuesHandler.deposit_final = deposit_final;
+	public void setDeposit_total(double deposit_total) {
+		ValuesHandler.deposit_total = deposit_total;
 	}
 
 	public double getBase_pay_rate() {
