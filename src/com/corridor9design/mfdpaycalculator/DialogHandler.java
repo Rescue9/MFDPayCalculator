@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.widget.EditText;
 
 public class DialogHandler extends DialogFragment {
 	
@@ -30,7 +31,8 @@ public class DialogHandler extends DialogFragment {
 	           .setPositiveButton(R.string.dialog_button_accept, new DialogInterface.OnClickListener() {
 	               @Override
 	               public void onClick(DialogInterface dialog, int id) {
-	            	   vh.setBase_pay_total(1233231);
+	            	   EditText value = (EditText) ((AlertDialog) dialog). findViewById(R.id.dialog_edittext1);
+	            	   vh.setBase_pay_total(Double.parseDouble(value.getText().toString()));
 	               }
 	           })
 	           .setNegativeButton(R.string.dialog_button_cancel, new DialogInterface.OnClickListener() {
