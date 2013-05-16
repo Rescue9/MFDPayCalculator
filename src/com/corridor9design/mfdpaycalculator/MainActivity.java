@@ -51,6 +51,9 @@ public class MainActivity extends Activity {
 		// setup gui instances
 		setupGuiInstances();
 		
+		// set valueHandler values from preferences
+		ph.setValuesFromPreferences(this);
+		
 		testButton();
 	}
 
@@ -87,7 +90,6 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				ph.setValuesFromPreferences(getApplicationContext());
 				base_pay_total.setText(df.format(vh.getBase_pay_total()));
 			}
 		});
