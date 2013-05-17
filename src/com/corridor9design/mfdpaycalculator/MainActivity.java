@@ -105,10 +105,48 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				base_pay_total.setText("TESTING");
 				DialogFragment newFragment = new DialogHandler();
-				newFragment.show(getFragmentManager(), "holidays");
 
+				Bundle args = new Bundle();
+				args.putString("key", "holidays");
+				newFragment.setArguments(args);
+				
+				base_pay_total.setText("TESTING_Holiday");
+				newFragment.show(getFragmentManager(), "holidays");
+			}
+		});
+	}
+	
+	public void overtimeButtonClick(){
+		overtime_button.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				DialogFragment newFragment = new DialogHandler();
+
+				Bundle args = new Bundle();
+				args.putString("key", "overtime");
+				newFragment.setArguments(args);
+				
+				base_pay_total.setText("TESTING_Overtime");
+				newFragment.show(getFragmentManager(), "overtime");
+			}
+		});
+	}
+	
+	public void scheduledDaysButtonClick(){
+		scheduled_days_button.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				DialogFragment newFragment = new DialogHandler();
+
+				Bundle args = new Bundle();
+				args.putString("key", "scheduled");
+				newFragment.setArguments(args);
+
+				base_pay_total.setText("TESTING_Scheduled");
+				newFragment.show(getFragmentManager(), "scheduled");				
 			}
 		});
 	}
@@ -118,8 +156,8 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				base_pay_total.setText(vh.getBase_pay_total() + "");
-
+				//FIXME
+				//execute calcengine here
 			}
 		});
 

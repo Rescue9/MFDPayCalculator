@@ -13,13 +13,17 @@ public class DialogHandler extends DialogFragment {
 	ValuesHandler vh = new ValuesHandler();
 	ValueModifier vm = new ValueModifier();
 	
-
-	public DialogHandler() {
-		// TODO Auto-generated constructor stub
+	String whichButton = new String();
+	
+	public DialogHandler(){
+		// empty constructor
 	}
 
-	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		// get arguments from bundle
+		String value = getArguments().getString("key");
+		System.out.println(value);
+		
 	    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 	    // Get the layout inflater
 	    LayoutInflater inflater = getActivity().getLayoutInflater();
