@@ -30,5 +30,15 @@ public class ValueModifier {
 		int value = Integer.parseInt(bt.getText().toString());
 		return value;
 	}
+	
+	public String doubleToString(double db){
+		String value = db +"";
+		return value;
+	}
+	
+	public String intToString(int nt){
+		String value = nt +"";
+		return value;
+	}
 
 }
