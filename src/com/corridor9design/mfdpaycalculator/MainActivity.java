@@ -48,11 +48,12 @@ public class MainActivity extends Activity {
 		// hide the keyboard until user requests it
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+		// set valueHandler values from preferences
+		ph.setValuesFromPreferences(this);
+		
 		// setup gui instances
 		setupGuiInstances();
 
-		// set valueHandler values from preferences
-		ph.setValuesFromPreferences(this);
 
 		setupButtonClicks();
 	}
@@ -62,6 +63,16 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	public void onPause(){
+		super.onPause();
+		readGuiIntoValues();
+	}
+	
+	public void onResume(){
+		super.onResume();
+		refreshGui();
 	}
 	
 	public void setupGuiInstances() {
@@ -105,6 +116,12 @@ public class MainActivity extends Activity {
 		gross_pay_total.setText(vm.doubleToString(vh.getGross_pay_total()));
 		taxes_total.setText(vm.doubleToString(vh.getTaxes_total()));
 		deposited_total.setText(vm.doubleToString(vh.getDeposit_total()));
+		
+		// refresh specific values
+		base_pay_rate.setText(vm.doubleToString(vh.getBase_pay_rate()));
+		overtime1_rate.setText(vm.doubleToString(vh.getOvertime1_pay_rate()));
+		overtime2_rate.setText(vm.doubleToString(vh.getOvertime2_pay_rate()));
+		years_worked.setText(vm.intToString(vh.getYears_worked()));
 		
 		// refresh buttons
 		holidays_button.setText("Holidays: " + vh.getHolidays_during_pay());
