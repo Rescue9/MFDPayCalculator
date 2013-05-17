@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.webkit.WebView.FindListener;
 import android.widget.EditText;
 
 public class DialogHandler extends DialogFragment {
@@ -21,13 +22,23 @@ public class DialogHandler extends DialogFragment {
 
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		// get arguments from bundle
-		String value = getArguments().getString("key");
+		int value = getArguments().getInt("key");
 		
 		//System.out.println(value); //TESTING used to check value passed during dialog creation
 				
 	    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 	    // Get the layout inflater
 	    LayoutInflater inflater = getActivity().getLayoutInflater();
+	    
+	    // create switch statement for dialog message display per button
+	    String dialogMessage = null;
+	    switch (value){
+	    case 0: dialogMessage = getResources().getString(R.string.dialog_message_holidays); break;
+	    case 1: dialogMessage = getResources().getString(R.string.dialog_message_overtime); break;
+	    case 2: dialogMessage = getResources().getString(R.string.dialog_message_scheduled); break;
+		   
+	    }
+	    builder.setMessage(dialogMessage);
 	    	    
 	    // Inflate and set the layout for the dialog
 	    // Pass null as the parent view because its going in the dialog layout

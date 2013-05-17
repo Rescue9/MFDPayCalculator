@@ -114,7 +114,7 @@ public class MainActivity extends Activity {
 				DialogFragment newFragment = new DialogHandler();
 
 				Bundle args = new Bundle();
-				args.putString("key", "holidays");
+				args.putInt("key", 0);
 				newFragment.setArguments(args);
 				
 				base_pay_total.setText("TESTING_Holiday");
@@ -131,7 +131,7 @@ public class MainActivity extends Activity {
 				DialogFragment newFragment = new DialogHandler();
 
 				Bundle args = new Bundle();
-				args.putString("key", "overtime");
+				args.putInt("key", 1);
 				newFragment.setArguments(args);
 				
 				base_pay_total.setText("TESTING_Overtime");
@@ -148,7 +148,7 @@ public class MainActivity extends Activity {
 				DialogFragment newFragment = new DialogHandler();
 
 				Bundle args = new Bundle();
-				args.putString("key", "scheduled");
+				args.putInt("key", 2);
 				newFragment.setArguments(args);
 
 				base_pay_total.setText("TESTING_Scheduled");
