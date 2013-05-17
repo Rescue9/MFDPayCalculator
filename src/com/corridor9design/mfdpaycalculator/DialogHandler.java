@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 
@@ -21,7 +22,7 @@ public class DialogHandler extends DialogFragment {
 
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		// get arguments from bundle
-		int value = getArguments().getInt("key");
+		final int value = getArguments().getInt("key");
 
 		// System.out.println(value); //TESTING used to check value passed during dialog creation
 
@@ -53,7 +54,21 @@ public class DialogHandler extends DialogFragment {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
 						dialog_edittext_value = (EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_edittext1);
-						vh.setBase_pay_total(Double.parseDouble(dialog_edittext_value.getText().toString()));
+						if(dialog_edittext_value.getText().length()==0){
+							dialog_edittext_value.setText("0");
+						}
+						switch (value) {
+						case 0:
+							vh.setHolidays_during_pay(Integer.parseInt(dialog_edittext_value.getText().toString()));
+							break;
+						case 1:
+							vh.setOvertime_hours(Double.parseDouble(dialog_edittext_value.getText().toString()));
+							break;
+						case 2:
+							vh.setScheduled_days(Integer.parseInt(dialog_edittext_value.getText().toString()));
+							break;
+
+						}
 					}
 				}).setNegativeButton(R.string.dialog_button_cancel, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {

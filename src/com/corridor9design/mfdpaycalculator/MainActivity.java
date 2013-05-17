@@ -94,7 +94,7 @@ public class MainActivity extends Activity {
 
 		vh.setScheduled_days(vm.buttToInt(scheduled_days_button));
 		vh.setHolidays_during_pay(vm.buttToInt(holidays_button));
-		vh.setCallback_hours(vm.buttToDouble(overtime_button));
+		vh.setOvertime_hours(vm.buttToDouble(overtime_button));
 
 		vh.setYears_worked(vm.editToInt(years_worked));
 	}

@@ -11,7 +11,7 @@
         android:layout_gravity="center"
         android:ems="10"
         android:hint="@string/dialog_edittext_zero"
-        android:inputType="number" >
+        android:inputType="number|numberDecimal" >
 
         <requestFocus />
     </EditText>
