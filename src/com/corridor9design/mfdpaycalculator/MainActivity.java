@@ -54,9 +54,9 @@ public class MainActivity extends Activity {
 		// set valueHandler values from preferences
 		ph.setValuesFromPreferences(this);
 
-		setupButtons();
+		setupButtonClicks();
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -99,11 +99,28 @@ public class MainActivity extends Activity {
 		vh.setYears_worked(vm.editToInt(years_worked));
 	}
 	
-	public void setupButtons(){
+	public void refreshGui(){
+		// refresh totals
+		base_pay_total.setText(vm.doubleToString(vh.getBase_pay_total()));
+		gross_pay_total.setText(vm.doubleToString(vh.getGross_pay_total()));
+		taxes_total.setText(vm.doubleToString(vh.getTaxes_total()));
+		deposited_total.setText(vm.doubleToString(vh.getDeposit_total()));
+		
+		// refresh buttons
+		holidays_button.setText("Holidays: " + vh.getHolidays_during_pay());
+		overtime_button.setText("Overtime: " + vh.getCallback_hours() + " hrs.");
+		scheduled_days_button.setText("Scheduled Days: " + vh.getScheduled_days());
+	}
+	
+	public void setupButtonClicks(){
 		holidayButtonClick();
 		overtimeButtonClick();
 		scheduledDaysButtonClick();
 		calcButtonClick();
+	}
+	
+	final public void readButtonValues(){
+		holidays_button.setText(vh.getBase_pay_total()+"");
 	}
 
 	public void holidayButtonClick() {
@@ -118,7 +135,7 @@ public class MainActivity extends Activity {
 				newFragment.setArguments(args);
 				
 				base_pay_total.setText("TESTING_Holiday");
-				newFragment.show(getFragmentManager(), "holidays");
+				newFragment.show(getFragmentManager(), "holidays");		
 			}
 		});
 	}

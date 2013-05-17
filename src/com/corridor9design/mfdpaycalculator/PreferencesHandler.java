@@ -23,7 +23,7 @@ public class PreferencesHandler extends Activity{
 	
 	public String getPreferences(String key, Context context){
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-		return preferences.getString(key, "1234");
+		return preferences.getString(key, "0");
 	}
 	
 	public double getDoublePreference(String key, Context context){
