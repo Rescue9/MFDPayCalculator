@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -47,22 +48,33 @@ public class MainActivity extends Activity {
 		// hide the keyboard until user requests it
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+		// set valueHandler values from preferences
+		ph.setValuesFromPreferences(this);
+		
 		// setup gui instances
 		setupGuiInstances();
 
-		// set valueHandler values from preferences
-		ph.setValuesFromPreferences(this);
 
-		testButton();
+		setupButtonClicks();
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
+	
+	public void onPause(){
+		super.onPause();
+		readGuiIntoValues();
+	}
+	
+	public void onResume(){
+		super.onResume();
+		refreshGui();
+	}
+	
 	public void setupGuiInstances() {
 		// gui display elements
 		base_pay_total = (TextView) findViewById(R.id.base_pay_total);
@@ -93,19 +105,102 @@ public class MainActivity extends Activity {
 
 		vh.setScheduled_days(vm.buttToInt(scheduled_days_button));
 		vh.setHolidays_during_pay(vm.buttToInt(holidays_button));
-		vh.setCallback_hours(vm.buttToDouble(overtime_button));
+		vh.setOvertime_hours(vm.buttToDouble(overtime_button));
 
 		vh.setYears_worked(vm.editToInt(years_worked));
 	}
+	
+	public void refreshGui(){
+		// refresh totals
+		base_pay_total.setText(vm.doubleToString(vh.getBase_pay_total()));
+		gross_pay_total.setText(vm.doubleToString(vh.getGross_pay_total()));
+		taxes_total.setText(vm.doubleToString(vh.getTaxes_total()));
+		deposited_total.setText(vm.doubleToString(vh.getDeposit_total()));
+		
+		// refresh specific values
+		base_pay_rate.setText(vm.doubleToString(vh.getBase_pay_rate()));
+		overtime1_rate.setText(vm.doubleToString(vh.getOvertime1_pay_rate()));
+		overtime2_rate.setText(vm.doubleToString(vh.getOvertime2_pay_rate()));
+		years_worked.setText(vm.intToString(vh.getYears_worked()));
+		
+		// refresh buttons
+		holidays_button.setText("Holidays: " + vh.getHolidays_during_pay());
+		overtime_button.setText("Overtime: " + vh.getCallback_hours() + " hrs.");
+		scheduled_days_button.setText("Scheduled Days: " + vh.getScheduled_days());
+	}
+	
+	public void setupButtonClicks(){
+		holidayButtonClick();
+		overtimeButtonClick();
+		scheduledDaysButtonClick();
+		calcButtonClick();
+	}
+	
+	final public void readButtonValues(){
+		holidays_button.setText(vh.getBase_pay_total()+"");
+	}
 
-	public void testButton() {
+	public void holidayButtonClick() {
 		holidays_button.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				base_pay_total.setText("TESTING");
+				DialogFragment newFragment = new DialogHandler();
 
+				Bundle args = new Bundle();
+				args.putInt("key", 0);
+				newFragment.setArguments(args);
+				
+				base_pay_total.setText("TESTING_Holiday");
+				newFragment.show(getFragmentManager(), "holidays");		
 			}
 		});
+	}
+	
+	public void overtimeButtonClick(){
+		overtime_button.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				DialogFragment newFragment = new DialogHandler();
+
+				Bundle args = new Bundle();
+				args.putInt("key", 1);
+				newFragment.setArguments(args);
+				
+				base_pay_total.setText("TESTING_Overtime");
+				newFragment.show(getFragmentManager(), "overtime");
+			}
+		});
+	}
+	
+	public void scheduledDaysButtonClick(){
+		scheduled_days_button.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				DialogFragment newFragment = new DialogHandler();
+
+				Bundle args = new Bundle();
+				args.putInt("key", 2);
+				newFragment.setArguments(args);
+
+				base_pay_total.setText("TESTING_Scheduled");
+				newFragment.show(getFragmentManager(), "scheduled");				
+			}
+		});
+	}
+
+	public void calcButtonClick() {
+		calculate_button.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				//FIXME
+				//execute calcengine here
+				refreshGui();
+			}
+		});
+
 	}
 }

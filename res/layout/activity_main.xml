@@ -56,12 +56,14 @@
         android:id="@+id/GrayLine01"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray" />
+        android:background="@android:color/darker_gray"
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp" >
+        android:layout_marginTop="5dp"
+        android:visibility="gone" >
 
         <TextView
             android:id="@+id/taxes_total"
@@ -83,7 +85,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:visibility="gone" >
 
         <TextView
             android:id="@+id/taxes_label"
@@ -107,7 +110,8 @@
         android:layout_height="2dp"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:background="@android:color/holo_blue_dark" />
+        android:background="@android:color/holo_blue_dark"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/rank_label"
@@ -116,7 +120,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="5dp"
         android:text="@string/rank_label"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:visibility="gone" />
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -142,7 +147,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone" >
+                android:visibility="visible" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -305,19 +310,17 @@
             <LinearLayout
                 style="?android:attr/buttonBarStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content" >
 
                 <Button
                     android:id="@+id/scheduled_days_button"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"                    
+                    android:background="?android:attr/selectableItemBackground"
                     android:text="@string/scheduled_days_label" />
-
             </LinearLayout>
         </LinearLayout>
-
     </ScrollView>
 
     <RelativeLayout
@@ -330,7 +333,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/calculate_button" />
-
     </RelativeLayout>
 
 </LinearLayout>

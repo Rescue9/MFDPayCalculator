@@ -22,12 +22,26 @@ public class ValueModifier {
 	}
 	
 	public double buttToDouble(Button bt){
-		double value = Double.parseDouble(bt.getText().toString());
+		String wholeString = bt.getText().toString();
+		String numbOnly = wholeString.replaceAll("[^0-9]", "");
+		double value = Double.parseDouble(numbOnly);
 		return value;
 	}
 	
 	public int buttToInt(Button bt){
-		int value = Integer.parseInt(bt.getText().toString());
+		String wholeString = bt.getText().toString();
+		String numbOnly = wholeString.replaceAll("[^0-9]", "");
+		int value = Integer.parseInt(numbOnly);
+		return value;
+	}
+	
+	public String doubleToString(double db){
+		String value = db +"";
+		return value;
+	}
+	
+	public String intToString(int nt){
+		String value = nt +"";
 		return value;
 	}
 

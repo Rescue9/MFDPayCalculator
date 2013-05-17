@@ -23,7 +23,7 @@ public class PreferencesHandler extends Activity{
 	
 	public String getPreferences(String key, Context context){
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-		return preferences.getString(key, "1234");
+		return preferences.getString(key, "0");
 	}
 	
 	public double getDoublePreference(String key, Context context){
@@ -57,7 +57,7 @@ public class PreferencesHandler extends Activity{
 		vhandler.setScheduled_days(this.getIntPreference("scheduled_days", context));
 		
 		// additional values needed for calculation
-		vhandler.setCallback_hours(this.getDoublePreference("callback_hours", context));
+		vhandler.setOvertime_hours(this.getDoublePreference("callback_hours", context));
 		vhandler.setYears_worked(this.getIntPreference("years_worked", context));
 		vhandler.setHolidays_during_pay(this.getIntPreference("holidays_worked", context));
 	}

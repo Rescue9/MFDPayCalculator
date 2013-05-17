@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_message_holidays">Enter holidays this pay</string>
+    <string name="dialog_message_overtime">Enter overtime hours</string>
+    <string name="dialog_message_scheduled">Enter scheduled days</string>
+    <string name="dialog_edittext_zero">0</string>
+    <string name="dialog_button_accept">Accept</string>
+    <string name="dialog_button_cancel">Cancel</string>
+    
+</resources>

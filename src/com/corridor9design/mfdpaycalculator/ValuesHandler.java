@@ -98,7 +98,7 @@ public class ValuesHandler {
 		return callback_hours;
 	}
 
-	public void setCallback_hours(double callback_hours) {
+	public void setOvertime_hours(double callback_hours) {
 		ValuesHandler.callback_hours = callback_hours;
 	}
 
