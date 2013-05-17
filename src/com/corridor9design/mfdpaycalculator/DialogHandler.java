@@ -95,16 +95,20 @@ public class DialogHandler extends DialogFragment {
 		super.onActivityCreated(savedInstanceState);
 		System.out.println(value);
 		dialog_edittext_value = (EditText) view.findViewById(R.id.dialog_edittext1);
+		dialog_edittext_value.clearFocus();
 
 		switch (value) {
 		case 0:
+			dialog_edittext_value.requestFocus();
 			dialog_edittext_value.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
 			break;
 		case 1:
 			dialog_edittext_value.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			dialog_edittext_value.requestFocus();
 			break;
 		case 2:
 			dialog_edittext_value.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
+			dialog_edittext_value.requestFocus();
 			break;
 
 		}
