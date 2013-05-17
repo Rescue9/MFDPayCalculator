@@ -53,9 +53,18 @@ public class DialogHandler extends DialogFragment {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
 						dialog_edittext_value = (EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_edittext1);
+						
+						//check entry for empty 
 						if(dialog_edittext_value.getText().length()==0){
 							dialog_edittext_value.setText("0");
 						}
+						
+						// check for int
+						//FIXME START HERE!!!! CHECK FOR INT in edittext vox
+						
+						// check for double
+						//FIXME Then check for double!
+						
 						switch (value) {
 						case 0:
 							vh.setHolidays_during_pay(Integer.parseInt(dialog_edittext_value.getText().toString()));
