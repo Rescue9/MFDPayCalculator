@@ -54,8 +54,7 @@ public class MainActivity extends Activity {
 		// set valueHandler values from preferences
 		ph.setValuesFromPreferences(this);
 
-		holidayButton();
-		calcButton();
+		setupButtons();
 	}
 
 	@Override
@@ -99,8 +98,15 @@ public class MainActivity extends Activity {
 
 		vh.setYears_worked(vm.editToInt(years_worked));
 	}
+	
+	public void setupButtons(){
+		holidayButtonClick();
+		overtimeButtonClick();
+		scheduledDaysButtonClick();
+		calcButtonClick();
+	}
 
-	public void holidayButton() {
+	public void holidayButtonClick() {
 		holidays_button.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -151,7 +157,7 @@ public class MainActivity extends Activity {
 		});
 	}
 
-	public void calcButton() {
+	public void calcButtonClick() {
 		calculate_button.setOnClickListener(new OnClickListener() {
 
 			@Override

@@ -13,7 +13,7 @@ public class DialogHandler extends DialogFragment {
 	ValuesHandler vh = new ValuesHandler();
 	ValueModifier vm = new ValueModifier();
 	
-	String whichButton = new String();
+	EditText dialog_edittext_value;
 	
 	public DialogHandler(){
 		// empty constructor
@@ -22,12 +22,13 @@ public class DialogHandler extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		// get arguments from bundle
 		String value = getArguments().getString("key");
-		System.out.println(value);
 		
+		//System.out.println(value); //TESTING used to check value passed during dialog creation
+				
 	    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 	    // Get the layout inflater
 	    LayoutInflater inflater = getActivity().getLayoutInflater();
-	    
+	    	    
 	    // Inflate and set the layout for the dialog
 	    // Pass null as the parent view because its going in the dialog layout
 	    builder.setView(inflater.inflate(R.layout.dialog_fragment, null))
@@ -35,8 +36,8 @@ public class DialogHandler extends DialogFragment {
 	           .setPositiveButton(R.string.dialog_button_accept, new DialogInterface.OnClickListener() {
 	               @Override
 	               public void onClick(DialogInterface dialog, int id) {
-	            	   EditText value = (EditText) ((AlertDialog) dialog). findViewById(R.id.dialog_edittext1);
-	            	   vh.setBase_pay_total(Double.parseDouble(value.getText().toString()));
+	            	   dialog_edittext_value = (EditText) ((AlertDialog) dialog). findViewById(R.id.dialog_edittext1);
+	            	   vh.setBase_pay_total(Double.parseDouble(dialog_edittext_value.getText().toString()));
 	               }
 	           })
 	           .setNegativeButton(R.string.dialog_button_cancel, new DialogInterface.OnClickListener() {

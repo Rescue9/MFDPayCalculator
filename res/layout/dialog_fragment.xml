@@ -18,7 +18,7 @@
         android:layout_gravity="center"
         android:ems="10"
         android:inputType="number"
-        android:text="@string/dialog_edittext1" >
+        android:hint="@string/dialog_edittext1" >
 
         <requestFocus />
     </EditText>
