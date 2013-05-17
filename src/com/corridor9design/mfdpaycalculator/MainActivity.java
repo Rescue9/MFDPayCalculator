@@ -63,7 +63,7 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
+	
 	public void setupGuiInstances() {
 		// gui display elements
 		base_pay_total = (TextView) findViewById(R.id.base_pay_total);
@@ -181,6 +181,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				//FIXME
 				//execute calcengine here
+				refreshGui();
 			}
 		});
 
