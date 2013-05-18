@@ -23,7 +23,7 @@ public class ValueModifier {
 	
 	public double buttToDouble(Button bt){
 		String wholeString = bt.getText().toString();
-		String numbOnly = wholeString.replaceAll("[^0-9]", "");
+		String numbOnly = wholeString.replaceAll("[^0-9.]+", "");
 		double value = Double.parseDouble(numbOnly);
 		return value;
 	}

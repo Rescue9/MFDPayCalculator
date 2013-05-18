@@ -131,7 +131,7 @@ public class MainActivity extends Activity {
 		
 		// refresh buttons
 		holidays_button.setText("Holidays: " + vh.getHolidays_during_pay());
-		overtime_button.setText("Overtime: " + vh.getCallback_hours() + " hrs.");
+		overtime_button.setText("Overtime: " + vh.getCallback_hours() + " hrs");
 		scheduled_days_button.setText("Scheduled Days: " + vh.getScheduled_days());
 	}
 	
