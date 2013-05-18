@@ -117,10 +117,11 @@ public class MainActivity extends Activity {
 	
 	public void refreshGui(){
 		// refresh totals
-		base_pay_total.setText(vm.doubleToString(vh.getBase_pay_total()));
-		gross_pay_total.setText(vm.doubleToString(vh.getGross_pay_total()));
-		taxes_total.setText(vm.doubleToString(vh.getTaxes_total()));
-		deposited_total.setText(vm.doubleToString(vh.getDeposit_total()));
+		//df.format(vh.getBase_pay_total());
+		base_pay_total.setText(df.format(vh.getBase_pay_total()));
+		gross_pay_total.setText(df.format(vh.getGross_pay_total()));
+		taxes_total.setText(df.format(vh.getTaxes_total()));
+		deposited_total.setText(df.format(vh.getDeposit_total()));
 		
 		// refresh specific values
 		base_pay_rate.setText(vm.doubleToString(vh.getBase_pay_rate()));
@@ -203,6 +204,7 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				//FIXME
 				//execute calcengine here
+				
 				refreshGui();
 			}
 		});
