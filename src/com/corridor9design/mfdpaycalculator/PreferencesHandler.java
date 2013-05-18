@@ -7,7 +7,7 @@ import android.preference.PreferenceManager;
 
 public class PreferencesHandler extends Activity{
 	
-	ValuesHandler vhandler = new ValuesHandler();
+	ValuesHandler vh = new ValuesHandler();
 	
 
 	public PreferencesHandler() {
@@ -44,21 +44,25 @@ public class PreferencesHandler extends Activity{
 	
 	public void setValuesFromPreferences(Context context){
 		// set values for totals from previous run
-		vhandler.setBase_pay_total(this.getDoublePreference("base_pay_final", context));
-		vhandler.setGross_pay_total(this.getDoublePreference("gross_pay_final", context));
-		vhandler.setTaxes_total(this.getDoublePreference("taxes_final", context));
-		vhandler.setDeposit_total(this.getDoublePreference("deposit_final", context));
+		vh.setBase_pay_total(this.getDoublePreference("base_pay_total", context));
+		vh.setGross_pay_total(this.getDoublePreference("gross_pay_total", context));
+		vh.setTaxes_total(this.getDoublePreference("taxes_total", context));
+		vh.setDeposit_total(this.getDoublePreference("deposit_total", context));
 		
 		// set values for hourly calculations
 		
-		vhandler.setBase_pay_rate(this.getDoublePreference("base_pay_rate", context));
-		vhandler.setOvertime1_pay_rate(this.getDoublePreference("overtime1_pay_rate", context));
-		vhandler.setOvertime2_pay_rate(this.getDoublePreference("overtime2_pay_rate", context));
-		vhandler.setScheduled_days(this.getIntPreference("scheduled_days", context));
+		vh.setBase_pay_rate(this.getDoublePreference("base_pay_rate", context));
+		vh.setOvertime1_pay_rate(this.getDoublePreference("overtime1_pay_rate", context));
+		vh.setOvertime2_pay_rate(this.getDoublePreference("overtime2_pay_rate", context));
+		vh.setScheduled_days(this.getIntPreference("scheduled_days", context));
 		
 		// additional values needed for calculation
-		vhandler.setOvertime_hours(this.getDoublePreference("callback_hours", context));
-		vhandler.setYears_worked(this.getIntPreference("years_worked", context));
-		vhandler.setHolidays_during_pay(this.getIntPreference("holidays_worked", context));
+		vh.setOvertime_hours(this.getDoublePreference("callback_hours", context));
+		vh.setYears_worked(this.getIntPreference("years_worked", context));
+		vh.setHolidays_during_pay(this.getIntPreference("holidays_worked", context));
+	}
+	
+	public void saveValuesToPreferences(Context context){
+		setPreferences("base_pay_total", vh.getBase_pay_total()+"", context);
 	}
 }
