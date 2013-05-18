@@ -20,13 +20,12 @@ public class ValuesHandler {
 	private static double callback_hours;
 	private static int years_worked;
 	private static int holidays_during_pay;
-	
 
 	public ValuesHandler() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static double getIncentive() {
+	public double getIncentive() {
 		return INCENTIVE;
 	}
 
