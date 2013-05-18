@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
 	
 	public void onPause(){
 		super.onPause();
-		readGuiIntoValues();
+		ph.saveValuesToPreferences(this);
 	}
 	
 	public void onResume(){
