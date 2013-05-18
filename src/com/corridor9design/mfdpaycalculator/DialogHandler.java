@@ -93,21 +93,32 @@ public class DialogHandler extends DialogFragment {
 
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		System.out.println(value);
 		dialog_edittext_value = (EditText) view.findViewById(R.id.dialog_edittext1);
 		dialog_edittext_value.clearFocus();
 
 		switch (value) {
 		case 0:
-			dialog_edittext_value.requestFocus();
+			if(vh.getHolidays_during_pay()!=0){
+				dialog_edittext_value.setText(vh.getHolidays_during_pay()+"");
+			}
 			dialog_edittext_value.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
+			dialog_edittext_value.selectAll();
+			dialog_edittext_value.requestFocus();
 			break;
 		case 1:
+			if(vh.getCallback_hours()!=0){
+				dialog_edittext_value.setText(vh.getCallback_hours()+"");
+			}
 			dialog_edittext_value.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			dialog_edittext_value.selectAll();
 			dialog_edittext_value.requestFocus();
 			break;
 		case 2:
+			if(vh.getScheduled_days()!=0){
+				dialog_edittext_value.setText(vh.getScheduled_days()+"");
+			}
 			dialog_edittext_value.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
+			dialog_edittext_value.selectAll();
 			dialog_edittext_value.requestFocus();
 			break;
 
