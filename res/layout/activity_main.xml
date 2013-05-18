@@ -12,7 +12,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:visibility="visible" >
 
         <TextView
             android:id="@+id/base_pay_label"
@@ -20,19 +21,22 @@
             android:layout_height="wrap_content"
             android:layout_weight=".5"
             android:text="@string/base_pay_label"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/gross_pay_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/gross_pay_label"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:visibility="visible" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:visibility="visible" >
 
         <TextView
             android:id="@+id/base_pay_total"
@@ -41,7 +45,8 @@
             android:layout_marginLeft="10dp"
             android:layout_weight=".5"
             android:text="@string/zero_amounts"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/gross_pay_total"
@@ -49,7 +54,8 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:text="@string/zero_amounts"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:visibility="visible" />
     </LinearLayout>
 
     <View
@@ -57,13 +63,13 @@
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:visibility="gone" >
+        android:visibility="visible" >
 
         <TextView
             android:id="@+id/taxes_total"
@@ -72,7 +78,8 @@
             android:layout_marginLeft="10dp"
             android:layout_weight=".5"
             android:text="@string/zero_amounts"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/deposited_total"
@@ -80,13 +87,14 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:text="@string/zero_amounts"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:visibility="visible" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone" >
+        android:visibility="visible" >
 
         <TextView
             android:id="@+id/taxes_label"
@@ -94,14 +102,16 @@
             android:layout_height="wrap_content"
             android:layout_weight=".5"
             android:text="@string/taxes_label"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/deposited_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/deposit_label"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:visibility="visible" />
     </LinearLayout>
 
     <View
@@ -111,7 +121,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:background="@android:color/holo_blue_dark"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/rank_label"
@@ -121,18 +131,20 @@
         android:layout_marginBottom="5dp"
         android:text="@string/rank_label"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:visibility="visible" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:visibility="visible" >
 
             <View
                 android:id="@+id/GrayLine02"
@@ -140,7 +152,8 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="5dp"
-                android:background="@android:color/darker_gray" />
+                android:background="@android:color/darker_gray"
+                android:visibility="visible" />
 
             <LinearLayout
                 android:id="@+id/advanced_layout_container"
@@ -151,7 +164,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:visibility="visible" >
 
                     <TextView
                         android:id="@+id/base_pay_rate_label"
@@ -159,7 +173,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight=".5"
                         android:text="@string/base_pay_rate_label"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:visibility="visible" />
 
                     <EditText
                         android:id="@+id/base_pay_rate"
@@ -167,12 +182,15 @@
                         android:layout_height="wrap_content"
                         android:layout_weight=".5"
                         android:ems="10"
-                        android:inputType="numberDecimal" />
+                        android:hint="@string/zero_amounts"
+                        android:inputType="numberDecimal"
+                        android:visibility="visible" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:visibility="visible" >
 
                     <TextView
                         android:id="@+id/overtime1_rate_label"
@@ -180,7 +198,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight=".5"
                         android:text="@string/overtime1_rate_label"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:visibility="visible" />
 
                     <EditText
                         android:id="@+id/overtime1_rate"
@@ -188,12 +207,15 @@
                         android:layout_height="wrap_content"
                         android:layout_weight=".5"
                         android:ems="10"
-                        android:inputType="numberDecimal" />
+                        android:hint="@string/zero_amounts"
+                        android:inputType="numberDecimal"
+                        android:visibility="visible" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:visibility="visible" >
 
                     <TextView
                         android:id="@+id/overtime2_rate_label"
@@ -201,7 +223,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight=".5"
                         android:text="@string/overtime2_rate_label"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:visibility="visible" />
 
                     <EditText
                         android:id="@+id/overtime2_rate"
@@ -209,12 +232,15 @@
                         android:layout_height="wrap_content"
                         android:layout_weight=".5"
                         android:ems="10"
-                        android:inputType="numberDecimal" />
+                        android:hint="@string/zero_amounts"
+                        android:inputType="numberDecimal"
+                        android:visibility="visible" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:visibility="visible" >
 
                     <TextView
                         android:id="@+id/years_worked_label"
@@ -222,7 +248,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight=".5"
                         android:text="@string/years_worked_label"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:visibility="visible" />
 
                     <EditText
                         android:id="@+id/years_worked"
@@ -230,7 +257,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight=".5"
                         android:ems="10"
-                        android:inputType="numberDecimal" />
+                        android:hint="@string/zero_hint"
+                        android:inputType="numberDecimal"
+                        android:visibility="visible" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -239,14 +268,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="@string/payperiod_label" />
+                android:text="@string/payperiod_label"
+                android:visibility="visible" />
 
             <RadioGroup
                 android:id="@+id/radioGroup1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:visibility="visible" >
 
                 <RadioButton
                     android:id="@+id/radio0"
@@ -255,7 +286,8 @@
                     android:layout_weight=".5"
                     android:checked="true"
                     android:text="@string/pay1_button"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:visibility="visible" />
 
                 <RadioButton
                     android:id="@+id/radio1"
@@ -263,7 +295,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight=".5"
                     android:text="@string/pay2_button"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:visibility="visible" />
 
                 <RadioButton
                     android:id="@+id/radio2"
@@ -272,7 +305,8 @@
                     android:layout_weight=".5"
                     android:checked="true"
                     android:text="@string/pay3_button"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:visibility="visible" />
             </RadioGroup>
 
             <TextView
@@ -280,13 +314,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="@string/enter_hourly_information" />
+                android:text="@string/enter_hourly_information"
+                android:visibility="visible" />
 
             <LinearLayout
                 style="?android:attr/buttonBarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp" >
+                android:layout_marginTop="5dp"
+                android:visibility="visible" >
 
                 <Button
                     android:id="@+id/holidays_button"
@@ -295,7 +331,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="?android:attr/selectableItemBackground"
-                    android:text="@string/holidays_label" />
+                    android:text="@string/holidays_label"
+                    android:visibility="visible" />
 
                 <Button
                     android:id="@+id/overtime_button"
@@ -304,13 +341,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="?android:attr/selectableItemBackground"
-                    android:text="@string/overtime_label" />
+                    android:text="@string/overtime_label"
+                    android:visibility="visible" />
             </LinearLayout>
 
             <LinearLayout
                 style="?android:attr/buttonBarStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:visibility="visible" >
 
                 <Button
                     android:id="@+id/scheduled_days_button"
@@ -318,7 +357,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
-                    android:text="@string/scheduled_days_label" />
+                    android:text="@string/scheduled_days_label"
+                    android:visibility="visible" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -326,13 +366,15 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp" >
+        android:layout_marginTop="5dp"
+        android:visibility="visible" >
 
         <Button
             android:id="@+id/calculate_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/calculate_button" />
+            android:text="@string/calculate_button"
+            android:visibility="visible" />
     </RelativeLayout>
 
 </LinearLayout>
