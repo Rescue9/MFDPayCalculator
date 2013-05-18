@@ -114,10 +114,10 @@ public class DialogHandler extends DialogFragment {
 		}
 	}
 
-/*	@Override
+	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		MainActivity ma = (MainActivity) getActivity();
 		ma.refreshGui();
-	}*/
+	}
 }
