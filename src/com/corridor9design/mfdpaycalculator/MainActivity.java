@@ -72,7 +72,12 @@ public class MainActivity extends Activity {
 	
 	public void onResume(){
 		super.onResume();
+		ph.setValuesFromPreferences(this);
 		refreshGui();
+	}
+	public void onDestroy(){
+		super.onDestroy();
+		ph.saveValuesToPreferences(this);
 	}
 	
 	public void setupGuiInstances() {

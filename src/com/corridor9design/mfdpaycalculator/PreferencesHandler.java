@@ -50,7 +50,6 @@ public class PreferencesHandler extends Activity{
 		vh.setDeposit_total(this.getDoublePreference("deposit_total", context));
 		
 		// set values for hourly calculations
-		
 		vh.setBase_pay_rate(this.getDoublePreference("base_pay_rate", context));
 		vh.setOvertime1_pay_rate(this.getDoublePreference("overtime1_pay_rate", context));
 		vh.setOvertime2_pay_rate(this.getDoublePreference("overtime2_pay_rate", context));
@@ -63,6 +62,21 @@ public class PreferencesHandler extends Activity{
 	}
 	
 	public void saveValuesToPreferences(Context context){
+		// save values in total fields
 		setPreferences("base_pay_total", vh.getBase_pay_total()+"", context);
+		setPreferences("gross_pay_total", vh.getGross_pay_total()+"", context);
+		setPreferences("taxes_total", vh.getTaxes_total()+"", context);
+		setPreferences("deposit_total", vh.getDeposit_total()+"", context);
+		
+		// save values for hourly calculations
+		setPreferences("base_pay_rate", vh.getBase_pay_rate()+"", context);
+		setPreferences("overtime1_pay_rate", vh.getOvertime1_pay_rate()+"", context);
+		setPreferences("overtime2_pay_rate", vh.getOvertime2_pay_rate()+"", context);
+		setPreferences("scheduled_days", vh.getScheduled_days()+"", context);
+		
+		// save additional values
+		setPreferences("callback_hours", vh.getCallback_hours()+"", context);
+		setPreferences("years_worked", vh.getYears_worked()+"", context);
+		setPreferences("holidays_worked", vh.getHolidays_during_pay()+"", context);
 	}
 }

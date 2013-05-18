@@ -32,7 +32,7 @@
     
     <string name="enter_hourly_information">Enter the correct values for each  item:</string>
     
-    <string name="scheduled_days_label">Scheduled Days: 4</string>
+    <string name="scheduled_days_label">Scheduled Days: 0</string>
     <string name="overtime_label">Overtime: 0 hrs</string>
     <string name="holidays_label">Holidays: 0 days</string>
     
