@@ -146,14 +146,12 @@ public class MainActivity extends Activity {
 		EditText[] gui_values = { base_pay_rate, overtime1_rate, overtime2_rate, years_worked };
 		Button[] gui_button = { scheduled_days_button, holidays_button, overtime_button };
 		for (EditText gvn : gui_values) {
-			System.out.println(gvn.getText());
 			if (gvn.getText().toString().equals("")) {
 				Toast.makeText(this, "Empty values. Resetting to previous", Toast.LENGTH_LONG).show();
 				return false;
 			}
 		}
 		for (Button gbn : gui_button) {
-			System.out.println(gbn.getText());
 			if (gbn.getText().toString().equals("")) {
 				Toast.makeText(this, "Empty values. Resetting to previous", Toast.LENGTH_LONG).show();
 				return false;
@@ -236,7 +234,7 @@ public class MainActivity extends Activity {
 				CalcEngine cEngine = new CalcEngine();
 				cEngine.calculateBase();
 				cEngine.calculateGross(radio_pay_group.indexOfChild((View) findViewById(radio_pay_group
-						.getCheckedRadioButtonId()))); // FIXME write switch statement to pick for
+						.getCheckedRadioButtonId())));
 				cEngine.calculateTaxes(vh.getGross_pay_total());
 				cEngine.calculateDeposti(vh.getGross_pay_total() / 3);
 				refreshGui();
