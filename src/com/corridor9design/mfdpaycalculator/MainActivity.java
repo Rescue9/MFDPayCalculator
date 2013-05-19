@@ -2,10 +2,12 @@ package com.corridor9design.mfdpaycalculator;
 
 import java.text.DecimalFormat;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -68,17 +70,34 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// handle item selection
+		switch (item.getItemId()) {
+		case R.id.action_about:
+			Intent intent = new Intent(this, AboutActivity.class);
+			startActivity(intent);
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
 	public void onPause() {
 		super.onPause();
 		ph.saveValuesToPreferences(this);
 	}
 
+	@Override
 	public void onResume() {
 		super.onResume();
 		ph.setValuesFromPreferences(this);
 		refreshGui();
 	}
 
+	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		ph.saveValuesToPreferences(this);
@@ -233,7 +252,7 @@ public class MainActivity extends Activity {
 
 				CalcEngine cEngine = new CalcEngine();
 				cEngine.calculateBase();
-				cEngine.calculateGross(radio_pay_group.indexOfChild((View) findViewById(radio_pay_group
+				cEngine.calculateGross(radio_pay_group.indexOfChild(findViewById(radio_pay_group
 						.getCheckedRadioButtonId())));
 				cEngine.calculateTaxes(vh.getGross_pay_total());
 				cEngine.calculateDeposti(vh.getGross_pay_total() / 3);
