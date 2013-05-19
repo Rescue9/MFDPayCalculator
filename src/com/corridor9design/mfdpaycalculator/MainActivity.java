@@ -146,15 +146,20 @@ public class MainActivity extends Activity {
 		// get preference settings
 		boolean isAdvancedLayout = ph.preferenceSet("pref_advanced_layout", this);
 		String current_rank_label = ph.getPreferences("pref_rank", this);
-		
+			
 		// change layout based upon preferences
 		if(!isAdvancedLayout){
 			simple_layout_container.setVisibility(View.VISIBLE);
 			rank_label.setText("Current rank: " + current_rank_label);
-			advanced_layout_container.setVisibility(View.GONE);
+			advanced_layout_container.setVisibility(View.GONE); 
+			
+			vh.setupSimpleValues(Integer.parseInt(ph.getPreferences("current_rank_int", this)));
+			System.out.println(ph.getPreferences("current_rank_int", this) + " from main activity");
+
 		} else {
 			simple_layout_container.setVisibility(View.GONE);
 			advanced_layout_container.setVisibility(View.VISIBLE);
+			vh.setupSimpleValues(0);
 		}
 	}
 

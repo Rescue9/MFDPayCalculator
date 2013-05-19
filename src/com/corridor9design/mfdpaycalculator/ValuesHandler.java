@@ -116,39 +116,43 @@ public class ValuesHandler {
 		ValuesHandler.holidays_during_pay = holidays_worked;
 	}
 
-	public void setValuesFromProbationaryFirefighterPay() {
-		this.setBase_pay_rate(8.773);
-		this.setOvertime1_pay_rate(13.160);
-		this.setOvertime2_pay_rate(15.395);
-	}
+	public void setupSimpleValues(int rank) {
+		switch (rank) {
+		case 0:
+			this.setBase_pay_rate(8.773);
+			this.setOvertime1_pay_rate(13.160);
+			this.setOvertime2_pay_rate(15.395);
+			break;
 
-	public void setValuesFromFirefighterPay() {
-		this.setBase_pay_rate(11.737);
-		this.setOvertime1_pay_rate(17.606);
-		this.setOvertime2_pay_rate(19.841);
-	}
+		case 1:
+			this.setBase_pay_rate(11.737);
+			this.setOvertime1_pay_rate(17.606);
+			this.setOvertime2_pay_rate(19.841);
+			break;
 
-	public void setValuesFromEngineerPay() {
-		this.setBase_pay_rate(12.060);
-		this.setOvertime1_pay_rate(18.098);
-		this.setOvertime2_pay_rate(20.333);
-	}
+		case 2:
+			this.setBase_pay_rate(12.060);
+			this.setOvertime1_pay_rate(18.098);
+			this.setOvertime2_pay_rate(20.333);
+			break;
 
-	public void setValuesFromLieutenantPay() {
-		this.setBase_pay_rate(12.556);
-		this.setOvertime1_pay_rate(18.834);
-		this.setOvertime2_pay_rate(21.069);
-	}
+		case 3:
+			this.setBase_pay_rate(12.556);
+			this.setOvertime1_pay_rate(18.834);
+			this.setOvertime2_pay_rate(21.069);
+			break;
 
-	public void setValuesFromCaptainPay() {
-		this.setBase_pay_rate(13.138);
-		this.setOvertime1_pay_rate(19.707);
-		this.setOvertime2_pay_rate(21.942);
-	}
+		case 4:
+			this.setBase_pay_rate(13.138);
+			this.setOvertime1_pay_rate(19.707);
+			this.setOvertime2_pay_rate(21.942);
+			break;
 
-	public void setValuesFromMajorPay() {
-		this.setBase_pay_rate(13.929);
-		this.setOvertime1_pay_rate(20.894);
-		this.setOvertime2_pay_rate(23.129);
+		case 5:
+			this.setBase_pay_rate(13.929);
+			this.setOvertime1_pay_rate(20.894);
+			this.setOvertime2_pay_rate(23.129);
+			break;
+		}
 	}
 }
