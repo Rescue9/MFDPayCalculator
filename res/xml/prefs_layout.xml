@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="Layout" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:disableDependentsState="true"
+            android:enabled="true"
+            android:key="pref_advanced_layout"
+            android:selectable="true"
+            android:summary="Enter specific pay rates"
+            android:title="Enable advanced layout" />
+
+        <ListPreference
+            android:defaultValue="Probationary Firefighter"
+            android:dependency="pref_advanced_layout"
+            android:dialogTitle="Set your current rank"
+            android:enabled="true"
+            android:entries="@array/rank_options"
+            android:entryValues="@array/rank_values"
+            android:key="pref_rank"
+            android:selectable="true"
+            android:summary="@string/rank_default"
+            android:title="Current rank:" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

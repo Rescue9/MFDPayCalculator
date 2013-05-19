@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 		// setup settings defaults (preferences, not preference handler)
-		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+		PreferenceManager.setDefaultValues(this, R.xml.prefs_layout, false);
 
 		// set valueHandler values from preference handler
 		ph.setValuesFromPreferences(this);
