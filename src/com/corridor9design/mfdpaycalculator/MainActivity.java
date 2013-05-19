@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,7 +55,10 @@ public class MainActivity extends Activity {
 		// hide the keyboard until user requests it
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-		// set valueHandler values from preferences
+		// setup settings defaults (preferences, not preference handler)
+		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
+		// set valueHandler values from preference handler
 		ph.setValuesFromPreferences(this);
 
 		// setup gui instances
@@ -75,19 +79,16 @@ public class MainActivity extends Activity {
 		// handle item selection
 		switch (item.getItemId()) {
 		case R.id.action_about:
-			Intent intent = new Intent(this, AboutActivity.class);
-			startActivity(intent);
+			Intent about = new Intent(this, AboutActivity.class);
+			startActivity(about);
 			return true;
-
+		case R.id.action_settings:
+			Intent settings = new Intent(this, SettingsActivity.class);
+			startActivity(settings);
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		ph.saveValuesToPreferences(this);
 	}
 
 	@Override
@@ -95,6 +96,12 @@ public class MainActivity extends Activity {
 		super.onResume();
 		ph.setValuesFromPreferences(this);
 		refreshGui();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		ph.saveValuesToPreferences(this);
 	}
 
 	@Override
