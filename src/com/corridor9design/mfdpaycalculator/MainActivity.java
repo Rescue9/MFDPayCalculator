@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,10 @@ public class MainActivity extends Activity {
 	Button overtime_button;
 	Button scheduled_days_button;
 	Button calculate_button;
+	
+	// gui layout elements
+	LinearLayout simple_layout_container;
+	LinearLayout advanced_layout_container;
 
 	private RadioGroup radio_pay_group;
 
@@ -61,10 +66,9 @@ public class MainActivity extends Activity {
 		// set valueHandler values from preference handler
 		ph.setValuesFromPreferences(this);
 
-		// setup gui instances
+		// setup gui instances & set layout
 		setupGuiInstances();
 
-		setupButtonClicks();
 	}
 
 	@Override
@@ -95,6 +99,8 @@ public class MainActivity extends Activity {
 	public void onResume() {
 		super.onResume();
 		ph.setValuesFromPreferences(this);
+		setupGuiLayout();
+		setupButtonClicks();
 		refreshGui();
 	}
 
@@ -116,7 +122,6 @@ public class MainActivity extends Activity {
 		gross_pay_total = (TextView) findViewById(R.id.gross_pay_total);
 		taxes_total = (TextView) findViewById(R.id.taxes_total);
 		deposited_total = (TextView) findViewById(R.id.deposited_total);
-		rank_label = (TextView) findViewById(R.id.rank_label);
 
 		// gui entry elements
 		base_pay_rate = (EditText) findViewById(R.id.base_pay_rate);
@@ -130,6 +135,27 @@ public class MainActivity extends Activity {
 		scheduled_days_button = (Button) findViewById(R.id.scheduled_days_button);
 		calculate_button = (Button) findViewById(R.id.calculate_button);
 		radio_pay_group = (RadioGroup) findViewById(R.id.radioGroup1);
+		
+		// gui simple & advanced layout
+		rank_label = (TextView) findViewById(R.id.rank_label);
+		simple_layout_container = (LinearLayout) findViewById(R.id.simple_layout_container);
+		advanced_layout_container = (LinearLayout) findViewById(R.id.advanced_layout_container);
+	}
+	
+	public void setupGuiLayout(){
+		// get preference settings
+		boolean isAdvancedLayout = ph.preferenceSet("pref_advanced_layout", this);
+		String current_rank_label = ph.getPreferences("pref_rank", this);
+		
+		// change layout based upon preferences
+		if(!isAdvancedLayout){
+			simple_layout_container.setVisibility(View.VISIBLE);
+			rank_label.setText("Current rank: " + current_rank_label);
+			advanced_layout_container.setVisibility(View.GONE);
+		} else {
+			simple_layout_container.setVisibility(View.GONE);
+			advanced_layout_container.setVisibility(View.VISIBLE);
+		}
 	}
 
 	public void readGuiIntoValues() {

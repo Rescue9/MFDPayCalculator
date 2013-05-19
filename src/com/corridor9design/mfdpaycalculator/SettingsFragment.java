@@ -5,6 +5,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.util.Log;
 
 public class SettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 
@@ -25,14 +26,12 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 			rank_list.setSummary(sharedPreferences.getString(key, ""));
 		}
 		if (key.equals(ADVANCED_LAYOUT)){
-			// find layouts
-			int advanced_layout = R.id.advanced_layout_container;
-			int simple_layout = R.id.simple_layout_container;
+			//get rank & layout preference
+			String current_rank_label = sharedPreferences.getString(CURRENT_RANK_LISTPREFERENCE, "");
+			Boolean advanced_layout_current = sharedPreferences.getBoolean(ADVANCED_LAYOUT, false);
 			
-			//get rank preference
-			String current_rank_title = sharedPreferences.getString("pref_rank", "");
-			
-			System.out.println("ADVANCED_RANK");
+			// print layout preference & rank
+			Log.d("AdvancedLayout: " + advanced_layout_current, current_rank_label + "");
 		}
 		
 	}
