@@ -50,8 +50,8 @@ public class MainActivity extends Activity {
 	ValuesHandler vh = new ValuesHandler();
 	ValueModifier vm = new ValueModifier();
 
-	DecimalFormat df = new DecimalFormat("$##0.00");
-
+	DecimalFormat df_totals = new DecimalFormat("$##0.00");
+	DecimalFormat df_rates = new DecimalFormat("$##0.000");
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -177,15 +177,15 @@ public class MainActivity extends Activity {
 	public void refreshGui() {
 		// refresh totals
 		// df.format(vh.getBase_pay_total());
-		base_pay_total.setText(df.format(vh.getBase_pay_total()));
-		gross_pay_total.setText(df.format(vh.getGross_pay_total()));
-		taxes_total.setText(df.format(vh.getTaxes_total()));
-		deposited_total.setText(df.format(vh.getDeposit_total()));
+		base_pay_total.setText(df_totals.format(vh.getBase_pay_total()));
+		gross_pay_total.setText(df_totals.format(vh.getGross_pay_total()));
+		taxes_total.setText(df_totals.format(vh.getTaxes_total()));
+		deposited_total.setText(df_totals.format(vh.getDeposit_total()));
 
 		// refresh specific values
-		base_pay_rate.setText(vm.doubleToString(vh.getBase_pay_rate()));
-		overtime1_rate.setText(vm.doubleToString(vh.getOvertime1_pay_rate()));
-		overtime2_rate.setText(vm.doubleToString(vh.getOvertime2_pay_rate()));
+		base_pay_rate.setText(df_rates.format(vh.getBase_pay_rate()));
+		overtime1_rate.setText(df_rates.format(vh.getOvertime1_pay_rate()));
+		overtime2_rate.setText(df_rates.format(vh.getOvertime2_pay_rate()));
 		years_worked.setText(vm.intToString(vh.getYears_worked()));
 
 		// refresh buttons
