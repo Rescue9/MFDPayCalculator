@@ -20,7 +20,7 @@
             android:entryValues="@array/rank_values"
             android:key="pref_rank"
             android:selectable="true"
-            android:summary="@string/rank_default"
+            android:summary="%s"
             android:title="Current rank:" />
     </PreferenceCategory>
 

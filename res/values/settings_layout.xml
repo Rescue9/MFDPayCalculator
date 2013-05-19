@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
-    <string name="rank_default">Probationary Firefighter</string>
-    
+      
     <string-array name="rank_options">
         <item >Probationary Firefighter</item>
         <item >Firefighter</item>
