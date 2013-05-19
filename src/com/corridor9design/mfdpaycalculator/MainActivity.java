@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -204,13 +205,19 @@ public class MainActivity extends Activity {
 		Button[] gui_button = { scheduled_days_button, holidays_button, overtime_button };
 		for (EditText gvn : gui_values) {
 			if (gvn.getText().toString().equals("")) {
-				Toast.makeText(this, "Empty values. Resetting to previous", Toast.LENGTH_LONG).show();
+				Toast emptygvn = Toast.makeText(this, "Empty values. Resetting to previous", Toast.LENGTH_LONG);
+				TextView thisToast = (TextView) emptygvn.getView().findViewById(android.R.id.message);
+				thisToast.setTextColor(Color.RED);
+				emptygvn.show();
 				return false;
 			}
 		}
 		for (Button gbn : gui_button) {
 			if (gbn.getText().toString().equals("")) {
-				Toast.makeText(this, "Empty values. Resetting to previous", Toast.LENGTH_LONG).show();
+				Toast emptygbn = Toast.makeText(this, "Empty values. Resetting to previous", Toast.LENGTH_LONG);
+				TextView thisToast = (TextView) emptygbn.getView().findViewById(android.R.id.message);
+				thisToast.setTextColor(Color.RED);
+				emptygbn.show();				
 				return false;
 			}
 		}
