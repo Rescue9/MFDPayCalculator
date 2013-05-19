@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
 		// hide the keyboard until user requests it
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-		// setup settings defaults (preferences, not preference handler)
+		// setup settings defaults
 		PreferenceManager.setDefaultValues(this, R.xml.prefs_layout, false);
 
 		// set valueHandler values from preference handler
@@ -267,6 +267,5 @@ public class MainActivity extends Activity {
 
 			}
 		});
-
 	}
 }
