@@ -51,7 +51,7 @@ public class MainActivity extends Activity {
 	ValueModifier vm = new ValueModifier();
 
 	DecimalFormat df_totals = new DecimalFormat("$##0.00");
-	DecimalFormat df_rates = new DecimalFormat("$##0.000");
+	DecimalFormat df_rates = new DecimalFormat("##0.000");
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -285,6 +285,23 @@ public class MainActivity extends Activity {
 
 				CalcEngine cEngine = new CalcEngine();
 				cEngine.calculateBase();
+				
+				// calculate gross & toast
+				switch(radio_pay_group.indexOfChild(findViewById(radio_pay_group
+						.getCheckedRadioButtonId()))){
+				case 0:
+					cEngine.calculateGross(radio_pay_group.indexOfChild(findViewById(radio_pay_group.getCheckedRadioButtonId())));
+					Toast.makeText(MainActivity.this, R.string.toast_1st_payday, Toast.LENGTH_SHORT).show();
+					break;
+				case 1:
+					cEngine.calculateGross(radio_pay_group.indexOfChild(findViewById(radio_pay_group.getCheckedRadioButtonId())));
+					Toast.makeText(MainActivity.this, R.string.toast_2nd_payday, Toast.LENGTH_SHORT).show();
+					break;
+				case 2:
+					cEngine.calculateGross(radio_pay_group.indexOfChild(findViewById(radio_pay_group.getCheckedRadioButtonId())));
+					Toast.makeText(MainActivity.this, R.string.toast_3rd_payday, Toast.LENGTH_SHORT).show();
+					break;					
+				}
 				cEngine.calculateGross(radio_pay_group.indexOfChild(findViewById(radio_pay_group
 						.getCheckedRadioButtonId())));
 				cEngine.calculateTaxes(vh.getGross_pay_total());

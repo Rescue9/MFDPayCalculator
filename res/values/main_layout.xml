@@ -29,4 +29,9 @@
     <string name="overtime1_rate_label">Overtime 1 rate:</string>
     <string name="overtime2_rate_label">Overtime 2 rate:</string>
     <string name="years_worked_label">Years worked:</string>
+    
+    <!-- Toasts for specific payday -->
+    <string name="toast_1st_payday">Longevity included</string>
+    <string name="toast_2nd_payday">Incentive included</string>
+    <string name="toast_3rd_payday">No Longevity or Incentive</string>
 </resources>
