@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="copyright">© 2012 &#8211; 2013 Andrew Buskov</string>
+    <string name="about_description">This application is designed to calculate the base &amp; gross amounts that a member will receive on their paycheck. it takes into account the number of scheduled shift days, holidays, and any unscheduled overtime that an employee worked. It will calculate based upon the base pay, overtime 1, and overtime 2 values of a particular pay scale. There is also an advanced mode that will allow users to tweak their pay rates for an even closer approximation. Also factored in are longevity and state incentive based upon which pay period is selected before calculating.\n\n Currently, the application does not account for any sort of tax rate, nor does it calculate any deductions that the individual may have (though calculating deductions will be included in the future).\n\nThe inspiration for creating this application came from an Excel spreadsheed that MFD Engineer Baldwin created.\n\nPlease submit any bugs to the email below.\n\nWhile this application is designed to update while preserving your preferences, understand that this is still a work in progress and changes in the preference structure may affect the way updated versions work. If you experience \'force closing\' of the application, please delete all data from the System Settings-&gt;Apps-&gt;MFD Pay Calculator menu. Also note that there was a previous build of this application that is not compatible with this one. If you have something other than "MFD Pay Calculator" installed, please uninstall that application prior to installing this one. You will likely receive errors and force closes if you do not.</string>
+    <string name="release_version">Version - TESTING</string>
+    <string name="contact_information">mobile.apps@corridor9design.com</string>
+    
+    
+</resources>
