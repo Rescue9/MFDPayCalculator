@@ -22,7 +22,6 @@ public class ValuesHandler {
 	private static int holidays_during_pay;
 
 	public ValuesHandler() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public double getIncentive() {
@@ -117,4 +116,39 @@ public class ValuesHandler {
 		ValuesHandler.holidays_during_pay = holidays_worked;
 	}
 
+	public void setValuesFromProbationaryFirefighterPay() {
+		this.setBase_pay_rate(8.773);
+		this.setOvertime1_pay_rate(13.160);
+		this.setOvertime2_pay_rate(15.395);
+	}
+
+	public void setValuesFromFirefighterPay() {
+		this.setBase_pay_rate(11.737);
+		this.setOvertime1_pay_rate(17.606);
+		this.setOvertime2_pay_rate(19.841);
+	}
+
+	public void setValuesFromEngineerPay() {
+		this.setBase_pay_rate(12.060);
+		this.setOvertime1_pay_rate(18.098);
+		this.setOvertime2_pay_rate(20.333);
+	}
+
+	public void setValuesFromLieutenantPay() {
+		this.setBase_pay_rate(12.556);
+		this.setOvertime1_pay_rate(18.834);
+		this.setOvertime2_pay_rate(21.069);
+	}
+
+	public void setValuesFromCaptainPay() {
+		this.setBase_pay_rate(13.138);
+		this.setOvertime1_pay_rate(19.707);
+		this.setOvertime2_pay_rate(21.942);
+	}
+
+	public void setValuesFromMajorPay() {
+		this.setBase_pay_rate(13.929);
+		this.setOvertime1_pay_rate(20.894);
+		this.setOvertime2_pay_rate(23.129);
+	}
 }
