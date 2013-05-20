@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager.LayoutParams;
 import android.widget.EditText;
 
 public class DialogHandler extends DialogFragment {
@@ -95,27 +96,28 @@ public class DialogHandler extends DialogFragment {
 		super.onActivityCreated(savedInstanceState);
 		dialog_edittext_value = (EditText) view.findViewById(R.id.dialog_edittext1);
 		dialog_edittext_value.clearFocus();
+		getDialog().getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
 		switch (value) {
 		case 0:
-			if(vh.getHolidays_during_pay()!=0){
-				dialog_edittext_value.setText(vh.getHolidays_during_pay()+"");
+			if (vh.getHolidays_during_pay() != 0) {
+				dialog_edittext_value.setText(vh.getHolidays_during_pay() + "");
 			}
 			dialog_edittext_value.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
 			dialog_edittext_value.selectAll();
 			dialog_edittext_value.requestFocus();
 			break;
 		case 1:
-			if(vh.getCallback_hours()!=0){
-				dialog_edittext_value.setText(vh.getCallback_hours()+"");
+			if (vh.getCallback_hours() != 0) {
+				dialog_edittext_value.setText(vh.getCallback_hours() + "");
 			}
 			dialog_edittext_value.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 			dialog_edittext_value.selectAll();
 			dialog_edittext_value.requestFocus();
 			break;
 		case 2:
-			if(vh.getScheduled_days()!=0){
-				dialog_edittext_value.setText(vh.getScheduled_days()+"");
+			if (vh.getScheduled_days() != 0) {
+				dialog_edittext_value.setText(vh.getScheduled_days() + "");
 			}
 			dialog_edittext_value.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
 			dialog_edittext_value.selectAll();
