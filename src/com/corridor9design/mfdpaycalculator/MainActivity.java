@@ -210,8 +210,10 @@ public class MainActivity extends Activity {
 				TextView thisToast = (TextView) emptygvn.getView().findViewById(android.R.id.message);
 				thisToast.setTextColor(Color.RED);
 				emptygvn.show();
+				gvn.setTextColor(Color.RED);
 				return false;
 			}
+			gvn.setTextColor(Color.WHITE);
 		}
 		for (Button gbn : gui_button) {
 			if (gbn.getText().toString().equals("")) {
@@ -219,9 +221,12 @@ public class MainActivity extends Activity {
 				TextView thisToast = (TextView) emptygbn.getView().findViewById(android.R.id.message);
 				thisToast.setTextColor(Color.RED);
 				emptygbn.show();
+				gbn.setTextColor(Color.RED);
 				return false;
 			}
+			gbn.setTextColor(Color.WHITE);
 		}
+		
 		return true;
 	}
 
