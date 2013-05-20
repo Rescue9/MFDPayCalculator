@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 	Button overtime_button;
 	Button scheduled_days_button;
 	Button calculate_button;
-	
+
 	// gui layout elements
 	LinearLayout simple_layout_container;
 	LinearLayout advanced_layout_container;
@@ -53,6 +53,7 @@ public class MainActivity extends Activity {
 
 	DecimalFormat df_totals = new DecimalFormat("$##0.00");
 	DecimalFormat df_rates = new DecimalFormat("##0.000");
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -136,26 +137,25 @@ public class MainActivity extends Activity {
 		scheduled_days_button = (Button) findViewById(R.id.scheduled_days_button);
 		calculate_button = (Button) findViewById(R.id.calculate_button);
 		radio_pay_group = (RadioGroup) findViewById(R.id.radioGroup1);
-		
+
 		// gui simple & advanced layout
 		rank_label = (TextView) findViewById(R.id.rank_label);
 		simple_layout_container = (LinearLayout) findViewById(R.id.simple_layout_container);
 		advanced_layout_container = (LinearLayout) findViewById(R.id.advanced_layout_container);
 	}
-	
-	public void setupGuiLayout(){
+
+	public void setupGuiLayout() {
 		// get preference settings
 		boolean isAdvancedLayout = ph.preferenceSet("pref_advanced_layout", this);
 		String current_rank_label = ph.getPreferences("pref_rank", this);
-			
+
 		// change layout based upon preferences
-		if(!isAdvancedLayout){
+		if (!isAdvancedLayout) {
 			simple_layout_container.setVisibility(View.VISIBLE);
 			rank_label.setText("Current rank: " + current_rank_label);
-			advanced_layout_container.setVisibility(View.GONE); 
-			
+			advanced_layout_container.setVisibility(View.GONE);
+
 			vh.setupSimpleValues(Integer.parseInt(ph.getPreferences("current_rank_int", this)));
-			System.out.println(ph.getPreferences("current_rank_int", this) + " from main activity");
 
 		} else {
 			simple_layout_container.setVisibility(View.GONE);
@@ -217,7 +217,7 @@ public class MainActivity extends Activity {
 				Toast emptygbn = Toast.makeText(this, "Empty values. Resetting to previous", Toast.LENGTH_LONG);
 				TextView thisToast = (TextView) emptygbn.getView().findViewById(android.R.id.message);
 				thisToast.setTextColor(Color.RED);
-				emptygbn.show();				
+				emptygbn.show();
 				return false;
 			}
 		}
@@ -297,22 +297,24 @@ public class MainActivity extends Activity {
 
 				CalcEngine cEngine = new CalcEngine();
 				cEngine.calculateBase();
-				
+
 				// calculate gross & toast
-				switch(radio_pay_group.indexOfChild(findViewById(radio_pay_group
-						.getCheckedRadioButtonId()))){
+				switch (radio_pay_group.indexOfChild(findViewById(radio_pay_group.getCheckedRadioButtonId()))) {
 				case 0:
-					cEngine.calculateGross(radio_pay_group.indexOfChild(findViewById(radio_pay_group.getCheckedRadioButtonId())));
+					cEngine.calculateGross(radio_pay_group.indexOfChild(findViewById(radio_pay_group
+							.getCheckedRadioButtonId())));
 					Toast.makeText(MainActivity.this, R.string.toast_1st_payday, Toast.LENGTH_SHORT).show();
 					break;
 				case 1:
-					cEngine.calculateGross(radio_pay_group.indexOfChild(findViewById(radio_pay_group.getCheckedRadioButtonId())));
+					cEngine.calculateGross(radio_pay_group.indexOfChild(findViewById(radio_pay_group
+							.getCheckedRadioButtonId())));
 					Toast.makeText(MainActivity.this, R.string.toast_2nd_payday, Toast.LENGTH_SHORT).show();
 					break;
 				case 2:
-					cEngine.calculateGross(radio_pay_group.indexOfChild(findViewById(radio_pay_group.getCheckedRadioButtonId())));
+					cEngine.calculateGross(radio_pay_group.indexOfChild(findViewById(radio_pay_group
+							.getCheckedRadioButtonId())));
 					Toast.makeText(MainActivity.this, R.string.toast_3rd_payday, Toast.LENGTH_SHORT).show();
-					break;					
+					break;
 				}
 				cEngine.calculateGross(radio_pay_group.indexOfChild(findViewById(radio_pay_group
 						.getCheckedRadioButtonId())));
