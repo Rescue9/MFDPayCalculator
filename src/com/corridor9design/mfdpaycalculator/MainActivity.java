@@ -153,7 +153,7 @@ public class MainActivity extends Activity {
 		if (!isAdvancedLayout) {
 			simple_layout_container.setVisibility(View.VISIBLE);
 			rank_label.setText("Current rank: " + current_rank_label);
-			advanced_layout_container.setVisibility(View.VISIBLE);
+			advanced_layout_container.setVisibility(View.GONE);
 
 			vh.setupSimpleValues(Integer.parseInt(ph.getPreferences("current_rank_int", this)));
 			vh.setYears_worked(ph.getIntPreference("pref_years_of_service", this));
