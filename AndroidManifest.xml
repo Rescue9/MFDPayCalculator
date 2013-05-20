@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.corridor9design.mfdpaycalculator"
-    android:versionCode="12"
-    android:versionName="Ver_0.30z" >
+    android:versionCode="13"
+    android:versionName="Ver_0.35" >
 
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -22,6 +25,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.corridor9design.mfdpaycalculator.AboutActivity" />
+        <activity android:name="com.corridor9design.mfdpaycalculator.SettingsActivity" >
+        </activity>
+        <activity
+            android:name="com.google.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
     </application>
 
 </manifest>

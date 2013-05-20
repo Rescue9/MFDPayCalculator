@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="Layout" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:disableDependentsState="true"
+            android:enabled="true"
+            android:key="pref_advanced_layout"
+            android:selectable="true"
+            android:summary="@string/pref_advanced_layout_summary"
+            android:title="@string/pref_advanced_layout_title" />
+
+        <ListPreference
+            android:defaultValue="Probationary Firefighter"
+            android:dependency="pref_advanced_layout"
+            android:dialogTitle="@string/pref_rank_dialog_title"
+            android:enabled="true"
+            android:entries="@array/rank_options"
+            android:entryValues="@array/rank_values"
+            android:key="pref_rank"
+            android:selectable="true"
+            android:summary="%s"
+            android:title="@string/pref_rank_title" />
+
+        <EditTextPreference
+            android:defaultValue="0"
+            android:dependency="pref_advanced_layout"
+            android:dialogMessage="@string/pref_years_of_service_dialog_message"
+            android:dialogTitle="@string/pref_years_of_service_dialog_title"
+            android:enabled="true"
+            android:inputType="number"
+            android:key="pref_years_of_service"
+            android:selectAllOnFocus="true"
+            android:selectable="true"
+            android:summary="@string/pref_years_of_service_summary"
+            android:title="@string/pref_years_of_service_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

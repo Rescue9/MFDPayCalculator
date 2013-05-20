@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="rank_options">
+        <item>Probationary Firefighter</item>
+        <item>Firefighter</item>
+        <item>Engineer</item>
+        <item>Lieutenant</item>
+        <item>Captain</item>
+        <item>Major</item>
+    </string-array>
+    <string-array name="rank_values">
+        <item>Probationary Firefighter</item>
+        <item>Firefighter</item>
+        <item>Engineer</item>
+        <item>Lieutenant</item>
+        <item>Captain</item>
+        <item>Major</item>
+    </string-array>
+
+    <string name="pref_advanced_layout_title">Enable advanced layout</string>
+    <string name="pref_advanced_layout_summary">Enter specific pay rates</string>
+    <string name="pref_rank_title">Current rank:</string>
+    <string name="pref_rank_dialog_title">Set your current rank</string>
+    <string name="pref_years_of_service_title">Years of service</string>
+    <string name="pref_years_of_service_dialog_title">Enter your years of service</string>
+    <string name="pref_years_of_service_dialog_message">Used for calculating longevity</string>
+    <string name="pref_years_of_service_summary">0</string>
+
+</resources>
