@@ -29,7 +29,9 @@
             android:dialogMessage="@string/pref_years_of_service_dialog_message"
             android:dialogTitle="@string/pref_years_of_service_dialog_title"
             android:enabled="true"
+            android:inputType="number"
             android:key="pref_years_of_service"
+            android:selectAllOnFocus="true"
             android:selectable="true"
             android:summary="@string/pref_years_of_service_summary"
             android:title="@string/pref_years_of_service_title" />
