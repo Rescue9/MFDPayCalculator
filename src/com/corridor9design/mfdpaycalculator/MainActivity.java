@@ -2,18 +2,12 @@ package com.corridor9design.mfdpaycalculator;
 
 import java.text.DecimalFormat;
 
-import com.corridor9design.mfdpaycalculator.billing.IabHelper;
-import com.corridor9design.mfdpaycalculator.billing.IabResult;
-import com.corridor9design.mfdpaycalculator.billing.Inventory;
-import com.corridor9design.mfdpaycalculator.billing.Purchase;
-
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,18 +25,6 @@ public class MainActivity extends Activity {
 	// debug tag for logging
 	static final String TAG = "MFDPayCalc";
 	
-	// SKU for our products:
-	static final String SKU_PREMIUM = "mfd_pay_calculator_remove_ads";
-	
-	// does user have premium key?
-	boolean mIsPremium = false;
-	
-	// (arbitrary) tequest code for the purchase flow
-	static final int RC_REQUEST = 12131;
-	
-	// create an IAB helper object
-	IabHelper mHelper;
-
 	// gui text elements
 	TextView base_pay_total;
 	TextView gross_pay_total;
@@ -83,28 +65,6 @@ public class MainActivity extends Activity {
 		// hide the keyboard until user requests it
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		
-		// setup in-app billing
-		String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApMZgB6WstG7wxH5/595qHdO5uo7vQu2wDcwNs4DGgzJVKIbHxafw3lg1RswIMECems9sqoj6bI6aISqLhASx2lX/fCDXI5PSxPymlkgNUTMlS4yd7ZBkQF1UMwbwMSJWJ84FYOjRB26ctXTkhOa9A9oL73OgMvolTNbpuCG7YB9UnoJuhlmu182537Qh5sZAMi6fAM4JfaVKicFczIuIhHXTXSGWUX0d2xPiRGXNDHzTB8D2MT1LmfTrjjC8gsEBg/+Frjk5U6I3gUH9aH2fxKeVvy+KblrZsMVNrv7APPqSJ3CSkBlI3+4FiSBjnyLGfUYdmNRBhPeXi55PJN3A9QIDAQAB"; //FIXME need to pass this securely after testing completed
-		mHelper = new IabHelper(this, base64EncodedPublicKey);
-		
-		Log.d(TAG, "Starting IAB setup");
-		mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-			
-			@Override
-			public void onIabSetupFinished(IabResult result) {
-				Log.d(TAG, "Setup finished");
-				
-				if(!result.isSuccess()){
-					// oh noes, there was a problem.
-					Log.d(TAG, "Problem setting up in-app billing: " + result);
-				}
-				
-				// hooray, iab is fully set up!
-				mHelper.queryInventoryAsync(mGotInventoryListener);
-			}
-		});
-	
-
 		// setup settings defaults
 		PreferenceManager.setDefaultValues(this, R.xml.prefs_layout, false);
 
@@ -159,62 +119,6 @@ public class MainActivity extends Activity {
 	public void onDestroy() {
 		super.onDestroy();
 		ph.saveValuesToPreferences(this);
-		
-		// destroy billing helper
-		if(mHelper != null) mHelper.dispose();
-		mHelper = null;
-	}
-	
-	IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
-		
-		@Override
-		public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
-			Log.d(TAG, "Query inventory finished");
-			if(result.isFailure()){
-				Log.d(TAG, "Failed to query inventory: " + result);
-				return;
-			} else {
-				Log.d(TAG, "Query inventory was successful.");
-				
-				// does the user have the premium upgrade?
-				mIsPremium = inventory.hasPurchase(SKU_PREMIUM);
-				
-				// update the UI accordingly
-				//FIXME add premium purchase info to the about screen
-				
-				Log.d(TAG, "User is " + (mIsPremium ? "PREMIUM" : "NOT PREMIUM"));
-			}
-			
-			Log.d(TAG, "Initial inventory query finished; enabling main UI");
-		}
-	};
-	
-	IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
-		
-		@Override
-		public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
-			if(result.isFailure()){
-				Log.d(TAG, "Error purchasing: " + result);
-				return;
-			} else if (purchase.getSku().equals(SKU_PREMIUM)){
-				// give user access to premium content & update the UI
-				//FIXME remove the ads from the about screen here
-			}
-		}
-	};
-	
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data){
-		super.onActivityResult(requestCode, resultCode, data);
-		
-		Log.d(TAG, "onActivityResult(" + requestCode + "," + resultCode + "," + data);
-		
-		// pass on the activity result to the helper for handling
-		if(!mHelper.handleActivityResult(requestCode, resultCode, data)){
-			super.onActivityResult(requestCode, resultCode, data);
-		} else {
-			Log.d(TAG, "onActivityResult handled by IABUtil");
-		}
 	}
 
 	public void setupGuiInstances() {
