@@ -21,6 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
+	
+	// debug tag for logging
+	static final String TAG = "MFDPayCalc";
 
 	// gui text elements
 	TextView base_pay_total;
