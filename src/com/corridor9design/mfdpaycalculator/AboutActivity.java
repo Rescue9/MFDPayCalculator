@@ -6,7 +6,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,6 +25,11 @@ public class AboutActivity extends Activity {
 
 	AdRequest ad_request = new AdRequest();
 	private AdView ad_view;
+	
+	// objects
+	Button purchase_button;
+	TextView premium_versin_text;
+
 	
 	// debug tag for logging
 	static final String TAG = "MFDPayCalc";
@@ -48,6 +56,10 @@ public class AboutActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_about);
+		
+		purchase_button = (Button)findViewById(R.id.about_premium_purchase_button);
+		premium_versin_text = (TextView)findViewById(R.id.about_premium_version);
+
 		
 		// setup in-app billing
 		String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApMZgB6WstG7wxH5/595qHdO5uo7vQu2wDcwNs4DGgzJVKIbHxafw3lg1RswIMECems9sqoj6bI6aISqLhASx2lX/fCDXI5PSxPymlkgNUTMlS4yd7ZBkQF1UMwbwMSJWJ84FYOjRB26ctXTkhOa9A9oL73OgMvolTNbpuCG7YB9UnoJuhlmu182537Qh5sZAMi6fAM4JfaVKicFczIuIhHXTXSGWUX0d2xPiRGXNDHzTB8D2MT1LmfTrjjC8gsEBg/+Frjk5U6I3gUH9aH2fxKeVvy+KblrZsMVNrv7APPqSJ3CSkBlI3+4FiSBjnyLGfUYdmNRBhPeXi55PJN3A9QIDAQAB"; //FIXME need to pass this securely after testing completed
@@ -89,6 +101,7 @@ public class AboutActivity extends Activity {
 		ad_view.loadAd(ad_request);
 
 		getVersionNumber();
+		purchasePro();
 	}
 
 	// get version number from AndroidManifest
@@ -133,8 +146,15 @@ public class AboutActivity extends Activity {
 				// does the user have the premium upgrade?
 				mIsPremium = inventory.hasPurchase(SKU_PREMIUM);
 				
-				// update the UI accordingly
-				//FIXME add premium purchase info to the about screen
+				// update UI here
+				if(mIsPremium){
+					purchase_button.setVisibility(View.GONE);
+					premium_versin_text.setVisibility(View.VISIBLE);
+					
+				} else {
+					purchase_button.setVisibility(View.VISIBLE);
+					premium_versin_text.setVisibility(View.GONE);
+				}
 				
 				Log.d(TAG, "User is " + (mIsPremium ? "PREMIUM" : "NOT PREMIUM"));
 			}
@@ -152,7 +172,8 @@ public class AboutActivity extends Activity {
 				return;
 			} else if (purchase.getSku().equals(SKU_PREMIUM)){
 				// give user access to premium content & update the UI
-				//FIXME remove the ads from the about screen here
+				purchase_button.setVisibility(View.GONE);
+				premium_versin_text.setVisibility(View.VISIBLE);				
 			}
 		}
 	};
@@ -169,5 +190,16 @@ public class AboutActivity extends Activity {
 		} else {
 			Log.d(TAG, "onActivityResult handled by IABUtil");
 		}
+	}
+	
+	protected void purchasePro(){
+		purchase_button.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				mHelper.launchPurchaseFlow(AboutActivity.this, SKU_PREMIUM, RC_REQUEST, mPurchaseFinishedListener);
+			}
+			
+		});
 	}
 }
