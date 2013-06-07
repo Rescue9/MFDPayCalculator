@@ -38,7 +38,7 @@ public class AboutActivity extends Activity {
 	static final String SKU_PREMIUM = "mfd_pay_calculator_remove_ads";
 	
 	// does user have premium key?
-	boolean mIsPremium = false;
+	boolean isPremium = false;
 	
 	// (arbitrary) tequest code for the purchase flow
 	static final int RC_REQUEST = 12131;
@@ -83,7 +83,7 @@ public class AboutActivity extends Activity {
 		});
 	
 
-
+		if(!isPremium){
 		// create the adview instance
 		ad_view = new AdView(this, AdSize.SMART_BANNER, "a15175ee2ecb52c");
 
@@ -99,7 +99,7 @@ public class AboutActivity extends Activity {
 		ad_request.addTestDevice("E952DED8DFB1CA8350FD5D82F409703A"); // Note 10.1 Test ID
 
 		ad_view.loadAd(ad_request);
-
+}
 		getVersionNumber();
 		purchasePro();
 	}
@@ -144,10 +144,10 @@ public class AboutActivity extends Activity {
 				Log.d(TAG, "Query inventory was successful.");
 				
 				// does the user have the premium upgrade?
-				mIsPremium = inventory.hasPurchase(SKU_PREMIUM);
+				isPremium = inventory.hasPurchase(SKU_PREMIUM);
 				
 				// update UI here
-				if(mIsPremium){
+				if(isPremium){
 					purchase_button.setVisibility(View.GONE);
 					premium_versin_text.setVisibility(View.VISIBLE);
 					
@@ -156,7 +156,7 @@ public class AboutActivity extends Activity {
 					premium_versin_text.setVisibility(View.GONE);
 				}
 				
-				Log.d(TAG, "User is " + (mIsPremium ? "PREMIUM" : "NOT PREMIUM"));
+				Log.d(TAG, "User is " + (isPremium ? "PREMIUM" : "NOT PREMIUM"));
 			}
 			
 			Log.d(TAG, "Initial inventory query finished; enabling main UI");
