@@ -102,6 +102,7 @@ public class AboutActivity extends Activity {
 	@Override
 	public void onDestroy() {
 		if (ad_view != null) {
+			ad_view.removeAllViews();
 			ad_view.destroy();
 		}
 		// destroy billing helper

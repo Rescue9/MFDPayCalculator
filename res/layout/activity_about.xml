@@ -72,7 +72,7 @@
                 android:id="@+id/about_premium_version"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
+                android:gravity="center_vertical|bottom"
                 android:text="@string/premium_version"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:visibility="gone" />
