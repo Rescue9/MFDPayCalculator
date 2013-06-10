@@ -59,15 +59,8 @@ public class AboutActivity extends Activity {
 		premium_versin_text = (TextView) findViewById(R.id.about_premium_version);
 
 		// setup in-app billing
-		String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApMZgB6WstG7wxH5/595qHdO5uo7vQu2wDcwNs4DGgzJVKIbHxafw3lg1RswIMECems9sqoj6bI6aISqLhASx2lX/fCDXI5PSxPymlkgNUTMlS4yd7ZBkQF1UMwbwMSJWJ84FYOjRB26ctXTkhOa9A9oL73OgMvolTNbpuCG7YB9UnoJuhlmu182537Qh5sZAMi6fAM4JfaVKicFczIuIhHXTXSGWUX0d2xPiRGXNDHzTB8D2MT1LmfTrjjC8gsEBg/+Frjk5U6I3gUH9aH2fxKeVvy+KblrZsMVNrv7APPqSJ3CSkBlI3+4FiSBjnyLGfUYdmNRBhPeXi55PJN3A9QIDAQAB"; // FIXME
-																																																																																																													// need
-																																																																																																													// to
-																																																																																																													// pass
-																																																																																																													// this
-																																																																																																													// securely
-																																																																																																													// after
-																																																																																																													// testing
-																																																																																																													// completed
+		String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApMZgB6WstG7wxH5/595qHdO5uo7vQu2wDcwNs4DGgzJVKIbHxafw3lg1RswIMECems9sqoj6bI6aISqLhASx2lX/fCDXI5PSxPymlkgNUTMlS4yd7ZBkQF1UMwbwMSJWJ84FYOjRB26ctXTkhOa9A9oL73OgMvolTNbpuCG7YB9UnoJuhlmu182537Qh5sZAMi6fAM4JfaVKicFczIuIhHXTXSGWUX0d2xPiRGXNDHzTB8D2MT1LmfTrjjC8gsEBg/+Frjk5U6I3gUH9aH2fxKeVvy+KblrZsMVNrv7APPqSJ3CSkBlI3+4FiSBjnyLGfUYdmNRBhPeXi55PJN3A9QIDAQAB"; 
+
 		mHelper = new IabHelper(this, base64EncodedPublicKey);
 
 		Log.d(TAG, "Starting IAB setup");
@@ -86,24 +79,6 @@ public class AboutActivity extends Activity {
 				mHelper.queryInventoryAsync(mGotInventoryListener);
 			}
 		});
-
-		if (!isPremium) {
-			// create the adview instance
-			ad_view = new AdView(this, AdSize.SMART_BANNER, "a15175ee2ecb52c");
-
-			// look up linear layout
-			LinearLayout layout = (LinearLayout) findViewById(R.id.LinearLayoutAbout);
-
-			// add adview to it
-			layout.addView(ad_view, 0);
-
-			// initiate a generic request to load
-			ad_request.addTestDevice(AdRequest.TEST_EMULATOR); // Emulator
-			ad_request.addTestDevice("EFCCE6E324855D892FC4772BE5938406"); // Galaxy S3 Test ID
-			ad_request.addTestDevice("E952DED8DFB1CA8350FD5D82F409703A"); // Note 10.1 Test ID
-
-			ad_view.loadAd(ad_request);
-		}
 		getVersionNumber();
 		purchasePro();
 	}
@@ -155,6 +130,7 @@ public class AboutActivity extends Activity {
 				if (isPremium) {
 					purchase_button.setVisibility(View.GONE);
 					premium_versin_text.setVisibility(View.VISIBLE);
+					displayAd();
 
 				} else {
 					purchase_button.setVisibility(View.VISIBLE);
@@ -206,5 +182,42 @@ public class AboutActivity extends Activity {
 			}
 
 		});
+	}
+	
+	protected boolean premiumPurchased(){
+		// create a boolean variable to hold our return value
+		boolean preference_purchased = false;
+		
+		// lets see if we have a preference for a permium item being purchased
+		PreferencesHandler ph = new PreferencesHandler();
+		if (ph.getBoolPreference("purchased_premium", this)){
+			preference_purchased = true;
+			System.out.println("Should be true: " + preference_purchased);
+			return preference_purchased;
+		}
+		System.out.println("Should be false: " + preference_purchased);
+
+		return preference_purchased;
+	}
+	
+	protected void displayAd(){
+
+		if (!isPremium) {
+			// create the adview instance
+			ad_view = new AdView(this, AdSize.SMART_BANNER, "a15175ee2ecb52c");
+
+			// look up linear layout
+			LinearLayout layout = (LinearLayout) findViewById(R.id.LinearLayoutAbout);
+
+			// add adview to it
+			layout.addView(ad_view, 0);
+
+			// initiate a generic request to load
+			ad_request.addTestDevice(AdRequest.TEST_EMULATOR); // Emulator
+			ad_request.addTestDevice("EFCCE6E324855D892FC4772BE5938406"); // Galaxy S3 Test ID
+			ad_request.addTestDevice("E952DED8DFB1CA8350FD5D82F409703A"); // Note 10.1 Test ID
+
+			ad_view.loadAd(ad_request);
+		}
 	}
 }
