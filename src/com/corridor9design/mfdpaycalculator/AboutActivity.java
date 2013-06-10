@@ -127,16 +127,9 @@ public class AboutActivity extends Activity {
 				isPremium = inventory.hasPurchase(SKU_PREMIUM);
 
 				// update UI here
-				if (isPremium) {
-					purchase_button.setVisibility(View.GONE);
-					premium_versin_text.setVisibility(View.VISIBLE);
-					displayAd();
-
-				} else {
-					purchase_button.setVisibility(View.VISIBLE);
-					premium_versin_text.setVisibility(View.GONE);
-				}
-
+				refreshUi();
+				
+				// tag log with purchase status
 				Log.d(TAG, "User is " + (isPremium ? "PREMIUM" : "NOT PREMIUM"));
 			}
 
@@ -200,7 +193,7 @@ public class AboutActivity extends Activity {
 		return preference_purchased;
 	}
 	
-	protected void displayAd(){
+	protected void refreshUi(){
 
 		if (!isPremium) {
 			// create the adview instance
@@ -218,6 +211,16 @@ public class AboutActivity extends Activity {
 			ad_request.addTestDevice("E952DED8DFB1CA8350FD5D82F409703A"); // Note 10.1 Test ID
 
 			ad_view.loadAd(ad_request);
+			
+			// display button for purchase
+			purchase_button.setVisibility(View.VISIBLE);
+			premium_versin_text.setVisibility(View.GONE);
+
+		} else {
+			//remove purchase button
+			purchase_button.setVisibility(View.GONE);
+			premium_versin_text.setVisibility(View.VISIBLE);
+
 		}
 	}
 }
