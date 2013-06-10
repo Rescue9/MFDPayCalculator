@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.corridor9design.mfdpaycalculator"
-    android:versionCode="17"
-    android:versionName="Ver_0.36_beta3" >
+    android:versionCode="18"
+    android:versionName="Ver_0.37" >
 
     <uses-sdk
         android:minSdkVersion="14"
