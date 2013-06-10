@@ -213,13 +213,13 @@ public class AboutActivity extends Activity {
 			ad_view.loadAd(ad_request);
 			
 			// display button for purchase
-			purchase_button.setVisibility(View.GONE); //TODO Change to VISIBLE on production
+			purchase_button.setVisibility(View.VISIBLE); //TODO Change to VISIBLE on production
 			premium_versin_text.setVisibility(View.GONE);
 
 		} else {
 			//remove purchase button
 			purchase_button.setVisibility(View.GONE);
-			premium_versin_text.setVisibility(View.GONE); //TODO Change to VISIBLE on production
+			premium_versin_text.setVisibility(View.VISIBLE); //TODO Change to VISIBLE on production
 
 		}
 	}
