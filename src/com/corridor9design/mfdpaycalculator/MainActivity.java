@@ -21,7 +21,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-
+	
+	// debug tag for logging
+	static final String TAG = "MFDPayCalc";
+	
 	// gui text elements
 	TextView base_pay_total;
 	TextView gross_pay_total;
@@ -61,7 +64,7 @@ public class MainActivity extends Activity {
 
 		// hide the keyboard until user requests it
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
+		
 		// setup settings defaults
 		PreferenceManager.setDefaultValues(this, R.xml.prefs_layout, false);
 
