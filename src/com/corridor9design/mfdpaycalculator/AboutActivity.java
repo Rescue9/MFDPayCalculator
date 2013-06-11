@@ -178,20 +178,10 @@ public class AboutActivity extends Activity {
 		});
 	}
 	
-	protected boolean premiumPurchased(){
-		// create a boolean variable to hold our return value
-		boolean preference_purchased = false;
-		
+	protected void premiumIsPurchased(){
 		// lets see if we have a preference for a permium item being purchased
 		PreferencesHandler ph = new PreferencesHandler();
-		if (ph.getBoolPreference("purchased_premium", this)){
-			preference_purchased = true;
-			System.out.println("Should be true: " + preference_purchased);
-			return preference_purchased;
-		}
-		System.out.println("Should be false: " + preference_purchased);
-
-		return preference_purchased;
+		ph.setPreferences("is_premium_purchased", "true", this);
 	}
 	
 	protected void refreshUi(){
@@ -221,7 +211,9 @@ public class AboutActivity extends Activity {
 			//remove purchase button
 			purchase_button.setVisibility(View.GONE);
 			premium_versin_text.setVisibility(View.VISIBLE); //TODO Change to VISIBLE on production
-
+			
+			// set premium purchased preference
+			premiumIsPurchased();
 		}
 	}
 }

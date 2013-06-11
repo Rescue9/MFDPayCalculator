@@ -47,6 +47,9 @@ public class MainActivity extends Activity {
 	// gui layout elements
 	LinearLayout simple_layout_container;
 	LinearLayout advanced_layout_container;
+	
+	// is premium version purchased
+	boolean premium_purchased = false;
 
 	private RadioGroup radio_pay_group;
 
@@ -70,6 +73,12 @@ public class MainActivity extends Activity {
 
 		// set valueHandler values from preference handler
 		ph.setValuesFromPreferences(this);
+		
+		// check premium version
+		if (ph.preferenceSet("is_premium_purchased", this)){
+			premium_purchased = ph.getBoolPreference("is_premium_purchased", this);
+			System.out.println(premium_purchased);
+		}
 
 		// setup gui instances & set layout
 		setupGuiInstances();
