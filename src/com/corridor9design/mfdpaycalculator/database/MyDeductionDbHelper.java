@@ -160,5 +160,6 @@ public class MyDeductionDbHelper extends SQLiteOpenHelper {
 		deduction.set_third_payday(cursor.getString(5));
 		
 		return deduction;
+		
 	}
 }
