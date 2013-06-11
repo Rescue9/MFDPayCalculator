@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,10 +22,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	
+
 	// debug tag for logging
 	static final String TAG = "MFDPayCalc";
-	
+
 	// gui text elements
 	TextView base_pay_total;
 	TextView gross_pay_total;
@@ -47,7 +48,7 @@ public class MainActivity extends Activity {
 	// gui layout elements
 	LinearLayout simple_layout_container;
 	LinearLayout advanced_layout_container;
-	
+
 	// is premium version purchased
 	boolean premium_purchased = false;
 
@@ -67,21 +68,12 @@ public class MainActivity extends Activity {
 
 		// hide the keyboard until user requests it
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-		
+
 		// setup settings defaults
 		PreferenceManager.setDefaultValues(this, R.xml.prefs_layout, false);
 
 		// set valueHandler values from preference handler
 		ph.setValuesFromPreferences(this);
-		
-		// check premium version
-		if (ph.preferenceSet("premium_purchased", this)){
-			premium_purchased = ph.getBoolPreference("premium_purchased", this);
-			if (premium_purchased){
-				System.out.println(premium_purchased); // viewed via logcat
-				Toast.makeText(this, "Premium version purchased", Toast.LENGTH_LONG).show();
-			}
-		}
 
 		// setup gui instances & set layout
 		setupGuiInstances();
@@ -115,6 +107,14 @@ public class MainActivity extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
+		// check premium version
+		Log.d(TAG, "Checking premium_purchased...");
+		premium_purchased = ph.getBoolPreference("premium_purchased", this);
+		Log.d(TAG, "premium_purchased = " + premium_purchased);
+		if (premium_purchased) {
+			Toast.makeText(this, "Premium version purchased", Toast.LENGTH_LONG).show();
+		}
+
 		ph.setValuesFromPreferences(this);
 		setupGuiLayout();
 		setupButtonClicks();
@@ -241,7 +241,7 @@ public class MainActivity extends Activity {
 			}
 			gbn.setTextColor(Color.WHITE);
 		}
-		
+
 		return true;
 	}
 
