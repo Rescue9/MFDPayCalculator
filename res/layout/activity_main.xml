@@ -185,7 +185,7 @@
                         android:visibility="visible" />
 
                     <TextView
-                        android:id="@+id/textView1"
+                        android:id="@+id/base_pay_rate_dollar_sign"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -222,7 +222,7 @@
                         android:visibility="visible" />
 
                     <TextView
-                        android:id="@+id/TextView01"
+                        android:id="@+id/overtime1_dollar_sign"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -258,7 +258,7 @@
                         android:visibility="visible" />
 
                     <TextView
-                        android:id="@+id/TextView02"
+                        android:id="@+id/overtime2_dollar_sign"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -299,7 +299,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="@string/dollar_sign"
+                        android:text="@string/number_sign"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
