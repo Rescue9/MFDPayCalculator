@@ -75,9 +75,12 @@ public class MainActivity extends Activity {
 		ph.setValuesFromPreferences(this);
 		
 		// check premium version
-		if (ph.preferenceSet("is_premium_purchased", this)){
-			premium_purchased = ph.getBoolPreference("is_premium_purchased", this);
-			System.out.println(premium_purchased);
+		if (ph.preferenceSet("premium_purchased", this)){
+			premium_purchased = ph.getBoolPreference("premium_purchased", this);
+			if (premium_purchased){
+				System.out.println(premium_purchased); // viewed via logcat
+				Toast.makeText(this, "Premium version purchased", Toast.LENGTH_LONG).show();
+			}
 		}
 
 		// setup gui instances & set layout

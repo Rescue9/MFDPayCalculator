@@ -181,7 +181,7 @@ public class AboutActivity extends Activity {
 	protected void premiumIsPurchased(){
 		// lets see if we have a preference for a permium item being purchased
 		PreferencesHandler ph = new PreferencesHandler();
-		ph.setPreferences("is_premium_purchased", "true", this);
+		ph.setPreferences("premium_purchased", "true", this);
 	}
 	
 	protected void refreshUi(){
