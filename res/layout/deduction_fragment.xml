@@ -13,6 +13,8 @@
         android:id="@+id/deduction_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:inputType="textCapWords"
+        android:selectAllOnFocus="true"
         android:text="@string/deduction_name_holder"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -53,6 +55,8 @@
             android:id="@+id/deduction_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+			android:selectAllOnFocus="true"
             android:text="@string/deduction_amount_holder"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -131,13 +135,15 @@
         android:text="@string/deduction_description_label"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/textView1"
+    <EditText
+        android:id="@+id/EditText1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@drawable/deduction_description_background"
+        android:gravity="center_vertical|top"
+        android:hint="@string/deduction_description"
         android:inputType="textCapSentences|textMultiLine"
         android:padding="5dp"
-        android:text="@string/deduction_description" />
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </LinearLayout>
