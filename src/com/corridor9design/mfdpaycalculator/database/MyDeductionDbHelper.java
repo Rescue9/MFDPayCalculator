@@ -42,10 +42,10 @@ public class MyDeductionDbHelper extends SQLiteOpenHelper {
 			KEY_ID + " INTEGER PRIMARY KEY," +
 			KEY_NAME + " TEXT, " +
 			KEY_AMOUNT + " TEXT, " +
-			KEY_DESCRIPTION + " TEXT " +
+			KEY_DESCRIPTION + " TEXT, " +
 			KEY_PAYDAY1 + " TEXT, " +
 			KEY_PAYDAY2 + " TEXT, " +
-			KEY_PAYDAY3 + " TEXT, " + ")";
+			KEY_PAYDAY3 + " TEXT" + ")";
 	
 	// constructor
 	public MyDeductionDbHelper(Context context){

@@ -105,6 +105,7 @@ public class DeductionActivity extends Activity {
 			public void onClick(View arg0) {
 				getValues();
 				writeValuesToDatabase();
+				finish();
 			}
 			
 		});
