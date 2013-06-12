@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-public class DeductionActivity extends Activity {
+public class DeductionEditActivity extends Activity {
 	
 	// declare variables
 	String deduction_name;

@@ -108,7 +108,7 @@ public class MainActivity extends Activity {
 			return true;
 			// testing deduction layout
 		case R.id.action_deduction:
-			Intent deduction = new Intent(this, DeductionActivity.class);
+			Intent deduction = new Intent(this, DeductionEditActivity.class);
 			startActivity(deduction);
 			return true;
 		default:
