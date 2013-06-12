@@ -106,10 +106,15 @@ public class MainActivity extends Activity {
 			Intent settings = new Intent(this, SettingsActivity.class);
 			startActivity(settings);
 			return true;
-			// testing deduction layout
+		// testing deduction layout
 		case R.id.action_deduction:
 			Intent deduction = new Intent(this, DeductionEditActivity.class);
 			startActivity(deduction);
+			return true;
+		// testing deduction list
+		case R.id.action_deduction_list:
+			Intent deduction_list = new Intent(this, DeductionListActivity.class);
+			startActivity(deduction_list);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

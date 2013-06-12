@@ -43,6 +43,14 @@ public class Deduction {
 		this._deduction_description = description;
 	}
 	
+	public Deduction(int id, String name, String amount){
+		super();
+		this._id = id;
+		this._deduction_name = name;
+		this._deduction_amount = amount;
+
+	}
+	
 	public Deduction(String name, String amount){
 		this._deduction_name = name;
 		this._deduction_amount = amount;
@@ -103,5 +111,9 @@ public class Deduction {
 	public void set_deduction_description(String _deduction_description) {
 		this._deduction_description = _deduction_description;
 	}
-
+	
+	@Override
+	public String toString(){
+		return _deduction_name;
+	}
 }
