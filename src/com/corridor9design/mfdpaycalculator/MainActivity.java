@@ -64,6 +64,9 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// tag logcat for initial start
+		Log.d(TAG, "Starting...");
+		
 		setContentView(R.layout.activity_main);
 
 		// hide the keyboard until user requests it
@@ -112,14 +115,18 @@ public class MainActivity extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		// check premium version
-		Log.d(TAG, "Checking premium_purchased...");
-		premium_purchased = ph.getBoolPreference("premium_purchased", this);
-		Log.d(TAG, "premium_purchased = " + premium_purchased);
-		if (premium_purchased) {
-			Toast.makeText(this, "Premium version purchased", Toast.LENGTH_LONG).show();
-		}
 
+		// check premium version
+		if (!premium_purchased) {
+			Log.d(TAG, "Checking premium_purchased...");
+
+			premium_purchased = ph.getBoolPreference("premium_purchased", this);
+			Log.d(TAG, "premium_purchased = " + premium_purchased);
+			if (premium_purchased) {
+				Toast.makeText(this, "Premium version purchased", Toast.LENGTH_LONG).show();
+				this.premium_purchased = true;
+			}
+		}
 		ph.setValuesFromPreferences(this);
 		setupGuiLayout();
 		setupButtonClicks();

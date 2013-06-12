@@ -9,7 +9,7 @@ public class DeductionActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.deduction_fragment);
+		setContentView(R.layout.activity_deduction);
 	}
 
 	@Override
