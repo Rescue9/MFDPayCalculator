@@ -2,6 +2,10 @@ package com.corridor9design.mfdpaycalculator;
 
 import java.text.DecimalFormat;
 
+import com.corridor9design.mfdpaycalculator.engine.CalcEngine;
+import com.corridor9design.mfdpaycalculator.engine.ValueModifier;
+import com.corridor9design.mfdpaycalculator.engine.ValuesHandler;
+
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;

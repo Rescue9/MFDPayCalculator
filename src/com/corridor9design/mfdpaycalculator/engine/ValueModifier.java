@@ -1,4 +1,4 @@
-package com.corridor9design.mfdpaycalculator;
+package com.corridor9design.mfdpaycalculator.engine;
 
 import android.widget.Button;
 import android.widget.EditText;
