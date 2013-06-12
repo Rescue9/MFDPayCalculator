@@ -34,4 +34,5 @@
     <string name="toast_1st_payday">Longevity included</string>
     <string name="toast_2nd_payday">Incentive included</string>
     <string name="toast_3rd_payday">No Longevity or Incentive</string>
+    <string name="number_sign">#</string>
 </resources>

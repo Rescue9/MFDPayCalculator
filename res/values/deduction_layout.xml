@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="deduction_name">Deduction Name</string>
+    <string name="deduction_name_holder">Deduction Holder</string>
+    <string name="deduction_amount">Deduction Amount</string>
+    <string name="deduction_amount_holder">0.00</string>
+    <string name="deduction_which_paydays">Which paydays should the deduction be taken out?</string>    
+    <string name="deduction_first_payday">First Pay</string>
+    <string name="deduction_second_payday">Second Pay</string>
+    <string name="deduction_third_payday">Third Pay</string>
+    <string name="deduction_description_label">Descrption</string>
+    <string name="deduction_description">Use this area to describe information about your deduction</string>
+</resources>
