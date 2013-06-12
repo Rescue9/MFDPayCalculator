@@ -1,5 +1,8 @@
 package com.corridor9design.mfdpaycalculator;
 
+import com.corridor9design.mfdpaycalculator.engine.ValueModifier;
+import com.corridor9design.mfdpaycalculator.engine.ValuesHandler;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;

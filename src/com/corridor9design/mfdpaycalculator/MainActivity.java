@@ -2,6 +2,10 @@ package com.corridor9design.mfdpaycalculator;
 
 import java.text.DecimalFormat;
 
+import com.corridor9design.mfdpaycalculator.engine.CalcEngine;
+import com.corridor9design.mfdpaycalculator.engine.ValueModifier;
+import com.corridor9design.mfdpaycalculator.engine.ValuesHandler;
+
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
@@ -73,7 +77,7 @@ public class MainActivity extends Activity {
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 		// setup settings defaults
-		PreferenceManager.setDefaultValues(this, R.xml.prefs_layout, false);
+		PreferenceManager.setDefaultValues(this, R.xml.simple_prefs_layout, false);
 
 		// set valueHandler values from preference handler
 		ph.setValuesFromPreferences(this);
@@ -104,7 +108,7 @@ public class MainActivity extends Activity {
 			return true;
 			// testing deduction layout
 		case R.id.action_deduction:
-			Intent deduction = new Intent(this, DeductionActivity.class);
+			Intent deduction = new Intent(this, DeductionEditActivity.class);
 			startActivity(deduction);
 			return true;
 		default:

@@ -20,7 +20,7 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 		super.onCreate(savedInstanceState);
 
 		// load the preferences fragment
-		addPreferencesFromResource(R.xml.prefs_layout);
+		addPreferencesFromResource(R.xml.simple_prefs_layout);
 
 		Preference pref_years_of_service = findPreference(YEARS_OF_SERVICE);
 		pref_years_of_service.setSummary((String) PreferenceManager.getDefaultSharedPreferences(getActivity())

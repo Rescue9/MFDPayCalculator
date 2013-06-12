@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <EditText
-        android:id="@+id/deduction_name"
+    <TextView
+        android:id="@+id/deduction_list_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textCapWords"
-        android:selectAllOnFocus="true"
-        android:text="@string/deduction_name_holder"
+        android:text="@string/deduction_name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/deduction_name_label"
+        android:id="@+id/deduction_list_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="@string/deduction_name"
+        android:text="@string/deduction_name_label"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <View
@@ -33,11 +30,11 @@
         android:background="@android:color/darker_gray" />
 
     <TextView
-        android:id="@+id/deduction_amount_label"
+        android:id="@+id/deduction_list_amount_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="@string/deduction_amount"
+        android:text="@string/deduction_amount_label"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <LinearLayout
@@ -45,51 +42,47 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/deduction_amount_dollar_sign"
+            android:id="@+id/deduction_list_amount_dollar_sign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dollar_sign"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <EditText
-            android:id="@+id/deduction_amount"
+        <TextView
+            android:id="@+id/deduction_list_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-			android:selectAllOnFocus="true"
-            android:text="@string/deduction_amount_holder"
+            android:text="@string/deduction_amount"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/deduction_which_payday"
+        android:id="@+id/deduction_list_which_payday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/deduction_which_paydays"
+        android:text="@string/deduction_list_which_paydays"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" >
+        android:layout_height="wrap_content" >
 
         <CheckBox
-            android:id="@+id/deduction_checkbox_first_payday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".5"
-            android:gravity="center_vertical|start" />
-
-        <CheckBox
-            android:id="@+id/deduction_checkbox_second_payday"
+            android:id="@+id/deduction_list_checkbox_first_payday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".5" />
 
         <CheckBox
-            android:id="@+id/deduction_checkbox_third_payday"
+            android:id="@+id/deduction_list_checkbox_second_payday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5" />
+
+        <CheckBox
+            android:id="@+id/deduction_list_checkbox_third_payday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -100,7 +93,7 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/deduction_label_first_payday"
+            android:id="@+id/deduction_description_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -108,7 +101,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:id="@+id/deduction_label_second_payday"
+            android:id="@+id/deduction_list_label_second_payday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -117,7 +110,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:id="@+id/deduction_label_third_payday"
+            android:id="@+id/deduction_list_label_third_payday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -128,24 +121,18 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/deduction_list_description_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="@string/deduction_description_label"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <EditText
-        android:id="@+id/EditText1"
-        android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/deduction_description_background"
-        android:gravity="center_vertical|top"
-        android:hint="@string/deduction_description"
-        android:inputType="textCapSentences|textMultiLine"
-        android:maxLines="8"
-        android:minLines="4"
-        android:padding="5dp"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:text="@string/deduction_description" />
 
 </LinearLayout>
