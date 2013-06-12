@@ -20,6 +20,7 @@ public class MyDeductionDbHelper extends SQLiteOpenHelper {
 	private static final String KEY_ID = "_id";
 	private static final String KEY_NAME = "name";
 	private static final String KEY_AMOUNT = "amount";
+	private static final String KEY_DESCRIPTION = "description";
 	private static final String KEY_PAYDAY1 = "payday1";
 	private static final String KEY_PAYDAY2 = "payday2";
 	private static final String KEY_PAYDAY3 = "payday3";
@@ -29,6 +30,7 @@ public class MyDeductionDbHelper extends SQLiteOpenHelper {
 			KEY_ID,
 			KEY_NAME,
 			KEY_AMOUNT,
+			KEY_DESCRIPTION,
 			KEY_PAYDAY1,
 			KEY_PAYDAY2,
 			KEY_PAYDAY3
@@ -40,6 +42,7 @@ public class MyDeductionDbHelper extends SQLiteOpenHelper {
 			KEY_ID + " INTEGER PRIMARY KEY," +
 			KEY_NAME + " TEXT, " +
 			KEY_AMOUNT + " TEXT, " +
+			KEY_DESCRIPTION + " TEXT " +
 			KEY_PAYDAY1 + " TEXT, " +
 			KEY_PAYDAY2 + " TEXT, " +
 			KEY_PAYDAY3 + " TEXT, " + ")";
@@ -71,6 +74,7 @@ public class MyDeductionDbHelper extends SQLiteOpenHelper {
 		ContentValues values = new ContentValues();
 		values.put(KEY_NAME, deduction.get_deduction_name());
 		values.put(KEY_AMOUNT, deduction.get_deduction_amount());
+		values.put(KEY_DESCRIPTION, deduction.get_deduction_description());
 		values.put(KEY_PAYDAY1, deduction.get_first_payday());
 		values.put(KEY_PAYDAY2, deduction.get_second_payday());
 		values.put(KEY_PAYDAY3, deduction.get_third_payday());
@@ -85,14 +89,14 @@ public class MyDeductionDbHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getReadableDatabase();
 		
 		Cursor cursor  = db.query(TABLE_DEDUCTIONS, new String[] {
-				KEY_ID, KEY_NAME, KEY_AMOUNT, KEY_PAYDAY1, KEY_PAYDAY2, KEY_PAYDAY3 },
+				KEY_ID, KEY_NAME, KEY_AMOUNT, KEY_DESCRIPTION, KEY_PAYDAY1, KEY_PAYDAY2, KEY_PAYDAY3 },
 				KEY_ID + "=?", new String[] {String.valueOf(id)}, null, null, null, null);
 		
 		if(cursor != null)
 			cursor.moveToFirst();
 		
 		Deduction deduction = new Deduction(Integer.parseInt(cursor.getString(0)), cursor.getString(1),
-				cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+				cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
 		
 		// return deduction
 		return deduction;
@@ -134,6 +138,7 @@ public class MyDeductionDbHelper extends SQLiteOpenHelper {
 		ContentValues values = new ContentValues();
 		values.put(KEY_NAME, deduction.get_deduction_name());
 		values.put(KEY_AMOUNT, deduction.get_deduction_amount());
+		values.put(KEY_DESCRIPTION, deduction.get_deduction_description());
 		values.put(KEY_PAYDAY1, deduction.get_first_payday());
 		values.put(KEY_PAYDAY2, deduction.get_second_payday());
 		values.put(KEY_PAYDAY3, deduction.get_third_payday());
@@ -155,9 +160,10 @@ public class MyDeductionDbHelper extends SQLiteOpenHelper {
 		deduction.set_id(Integer.parseInt(cursor.getString(0)));
 		deduction.set_deduction_name(cursor.getString(1));
 		deduction.set_deduction_amount(cursor.getString(2));
-		deduction.set_first_payday(cursor.getString(3));
-		deduction.set_second_payday(cursor.getString(4));
-		deduction.set_third_payday(cursor.getString(5));
+		deduction.set_deduction_description(cursor.getString(3));
+		deduction.set_first_payday(cursor.getString(4));
+		deduction.set_second_payday(cursor.getString(5));
+		deduction.set_third_payday(cursor.getString(6));
 		
 		return deduction;
 		
