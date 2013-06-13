@@ -36,6 +36,13 @@ public class MyDeductionDbHelper extends SQLiteOpenHelper {
 			KEY_PAYDAY3
 	};
 	
+	// simpleColumns for simple list
+	private String simpleColumns[] = {
+			KEY_ID,
+			KEY_NAME,
+			KEY_AMOUNT
+	};
+	
 	// create deduction table
 	private static final String CREATE_DEDUCTIONS_TABLE = 
 			"CREATE TABLE " + TABLE_DEDUCTIONS + " (" +
@@ -104,7 +111,7 @@ public class MyDeductionDbHelper extends SQLiteOpenHelper {
 	
 	// get all deductions
 	public List<Deduction> getAllDeductions(){
-		List<Deduction> deductionList = new ArrayList<Deduction>();
+		List<Deduction> deduction_list = new ArrayList<Deduction>();
 		
 		SQLiteDatabase db = this.getWritableDatabase();
 		
@@ -113,11 +120,22 @@ public class MyDeductionDbHelper extends SQLiteOpenHelper {
 		cursor.moveToFirst();
 		while(!cursor.isAfterLast()){
 			Deduction deduction = deductionFromCursor(cursor);
-			deductionList.add(deduction);
+			deduction_list.add(deduction);
 			cursor.moveToNext();
 		}
 		cursor.close();
-		return deductionList;
+		return deduction_list;
+	}
+	
+	public Cursor getDeductionList(){
+		SQLiteDatabase db = this.getReadableDatabase();
+		
+		Cursor cursor = db.query(TABLE_DEDUCTIONS, simpleColumns, null, null, null, null, KEY_ID);
+		
+		if(cursor != null){
+			cursor.moveToFirst();
+		}
+		return cursor;
 	}
 	
 	// get count of deductions
