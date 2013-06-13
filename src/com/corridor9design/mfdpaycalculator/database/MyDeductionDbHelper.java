@@ -127,21 +127,15 @@ public class MyDeductionDbHelper extends SQLiteOpenHelper {
 		return deduction_list;
 	}
 	
-	public List<Deduction> getDeductionList(){
-		List<Deduction> deduction_list = new ArrayList<Deduction>();
-		
+	public Cursor getDeductionList(){
 		SQLiteDatabase db = this.getReadableDatabase();
 		
 		Cursor cursor = db.query(TABLE_DEDUCTIONS, simpleColumns, null, null, null, null, KEY_ID);
 		
-		cursor.moveToFirst();
-		while (!cursor.isAfterLast()){
-			Deduction deduction = new Deduction(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
-			deduction_list.add(deduction);
-			cursor.moveToNext();
+		if(cursor != null){
+			cursor.moveToFirst();
 		}
-		cursor.close();
-		return deduction_list;
+		return cursor;
 	}
 	
 	// get count of deductions

@@ -129,7 +129,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/deduction_listing_deduction_name_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/deduction_description_background"
