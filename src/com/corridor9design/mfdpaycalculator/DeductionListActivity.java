@@ -24,10 +24,6 @@ public class DeductionListActivity extends ListActivity {
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.deduction_listings,
 				cursor, columns, to, 0);
 
-		//SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
-        //        android.R.layout.simple_list_item_2, cursor,
-        //        columns,
-        //        new int[] { android.R.id.text1, android.R.id.text2 }, 0);
 		ListView listview = (ListView) findViewById(android.R.id.list);
 		listview.setAdapter(adapter);
 		
