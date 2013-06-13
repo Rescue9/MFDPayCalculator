@@ -19,7 +19,7 @@ public class DeductionListActivity extends ListActivity {
 		int[] to = new int[] { R.id.deduction_listing_deduction_name, R.id.deduction_listing_deduction_amount };
 
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.deduction_listings,
-				db.getDeductionList(), columns, to);
+				db.getDeductionList(), columns, to, 0);
 
 		ListView listview = (ListView) findViewById(android.R.id.list);
 		listview.setAdapter(adapter);
