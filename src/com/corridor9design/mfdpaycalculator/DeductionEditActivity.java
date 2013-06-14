@@ -7,7 +7,6 @@ import com.corridor9design.mfdpaycalculator.database.MyDeductionDbHelper;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.view.Menu;
 import android.view.View;
@@ -164,7 +163,7 @@ public class DeductionEditActivity extends Activity {
 		values.put(Deduction.COLUMN_PAYDAY2, second_payday);
 		values.put(Deduction.COLUMN_PAYDAY3, third_payday);
 
-		Uri uri = ContentUris.withAppendedId(contentUri, id)
+		
 	}
 
 }
