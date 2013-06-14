@@ -33,6 +33,9 @@
         <activity
             android:name="com.google.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+        <provider
+            android:name=".contentprovider.DeductionContentProvider"
+            android:authorities="com.corridor9design.mfdpaycalculator.deduction.contentprovider"></provider>
     </application>
 
 </manifest>
