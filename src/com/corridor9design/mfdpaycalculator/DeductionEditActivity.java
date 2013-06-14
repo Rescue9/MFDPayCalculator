@@ -7,6 +7,7 @@ import com.corridor9design.mfdpaycalculator.database.MyDeductionDbHelper;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.view.Menu;
 import android.view.View;
@@ -37,6 +38,8 @@ public class DeductionEditActivity extends Activity {
 	Button deduction_clear_button;
 
 	MyDeductionDbHelper db = new MyDeductionDbHelper(this);
+	ContentValues values = new ContentValues();
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +110,7 @@ public class DeductionEditActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				getValues();
-				writeValuesToDatabase();
+				createDeductionItem();
 				finish();
 			}
 
@@ -130,11 +133,13 @@ public class DeductionEditActivity extends Activity {
 		});
 	}
 
-	private void writeValuesToDatabase() {
+	private void createDeductionItem() {
 		// create a resolver to connect to the content provider
 		ContentResolver resolver = getContentResolver();
-
-		ContentValues values = new ContentValues();
+		
+		// clear teh ContentValues object; values
+		values.clear();
+		
 		values.put(Deduction.COLUMN_AMOUNT, deduction_amount);
 		values.put(Deduction.COLUMN_DESCRIPTION, deduction_description);
 		values.put(Deduction.COLUMN_NAME, deduction_name);
@@ -143,6 +148,23 @@ public class DeductionEditActivity extends Activity {
 		values.put(Deduction.COLUMN_PAYDAY3, third_payday);
 
 		resolver.insert(DeductionContentProvider.CONTENT_URI, values);
+	}
+	
+	private void updateDeductionItem(){
+		// creaet a resolver to connect to the content provider
+		ContentResolver resolver = getContentResolver();
+		
+		// clear values
+		values.clear();
+		
+		values.put(Deduction.COLUMN_AMOUNT, deduction_amount);
+		values.put(Deduction.COLUMN_DESCRIPTION, deduction_description);
+		values.put(Deduction.COLUMN_NAME, deduction_name);
+		values.put(Deduction.COLUMN_PAYDAY1, first_payday);
+		values.put(Deduction.COLUMN_PAYDAY2, second_payday);
+		values.put(Deduction.COLUMN_PAYDAY3, third_payday);
+
+		Uri uri = ContentUris.withAppendedId(contentUri, id)
 	}
 
 }

@@ -1,8 +1,9 @@
 package com.corridor9design.mfdpaycalculator.database;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.BaseColumns;
 
-public class Deduction {
+public class Deduction implements BaseColumns {
 
 	// deductions table column names
 	public static final String TABLE_DEDUCTION = "deduction"; // table name
