@@ -28,14 +28,16 @@
         </activity>
         <activity android:name="com.corridor9design.mfdpaycalculator.AboutActivity" />
         <activity android:name="com.corridor9design.mfdpaycalculator.SettingsActivity" />
-        <activity android:name="com.corridor9design.mfdpaycalculator.DeductionEditActivity"/>
-        <activity android:name="com.corridor9design.mfdpaycalculator.DeductionListActivity"/>
+        <activity android:name="com.corridor9design.mfdpaycalculator.DeductionEditActivity" />
+        <activity android:name="com.corridor9design.mfdpaycalculator.DeductionListActivity" />
         <activity
             android:name="com.google.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+
         <provider
-            android:name=".contentprovider.DeductionContentProvider"
-            android:authorities="com.corridor9design.mfdpaycalculator.deduction.contentprovider"></provider>
+            android:name=".database.DeductionContentProvider"
+            android:authorities="com.corridor9design.mfdpaycalculator.database.deductioncontentprovider" >
+        </provider>
     </application>
 
 </manifest>
