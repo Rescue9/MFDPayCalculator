@@ -10,6 +10,9 @@ import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentResolver;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -21,7 +24,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-public class DeductionListDialog extends DialogFragment implements LoaderCallbacks<Cursor> {
+public class DeductionListDialog extends DialogFragment implements LoaderCallbacks<Cursor>, OnClickListener {
 
 	// set the projection as static
 	private static final String[] PROJECTION = new String[] { "_id", "name", "amount" };
@@ -71,6 +74,8 @@ public class DeductionListDialog extends DialogFragment implements LoaderCallbac
 
 		alertDialogBuilder.setView(view);
 		alertDialogBuilder.setTitle("Deductions: ");
+		alertDialogBuilder.setPositiveButton("Ok" , this);
+		alertDialogBuilder.setNegativeButton("Add", this);
 
 		// The Activity (which implements the LoaderCallbacks<Cursor> interface) is the callbacks object through which
 		// we will interact with the LoaderManager. The LoaderManager uses this object to instantiate the Loader and to
@@ -124,6 +129,21 @@ public class DeductionListDialog extends DialogFragment implements LoaderCallbac
 		String[] selectionArgs = {id+""};
 		ContentResolver resolver = getActivity().getContentResolver();
 		resolver.delete(DeductionContentProvider.CONTENT_URI, Deduction.COLUMN_ID+"=?", selectionArgs);
+	}
+
+	@Override
+	public void onClick(DialogInterface dialog, int which) {
+		// Toast.makeText(getActivity(), which+"", Toast.LENGTH_SHORT).show(); // used to determine which button was pressed.
+		switch (which){
+		case -2: 
+			// begin deductionedit activity to add new deduction
+			Intent deduction = new Intent(getActivity(), DeductionEditActivity.class);
+			startActivity(deduction);
+			break;
+		case -1:
+			return;			
+		}
+		
 	}
 
 }

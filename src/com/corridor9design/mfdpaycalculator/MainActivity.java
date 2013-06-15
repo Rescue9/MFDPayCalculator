@@ -106,12 +106,6 @@ public class MainActivity extends Activity {
 			Intent settings = new Intent(this, SettingsActivity.class);
 			startActivity(settings);
 			return true;
-		// testing deduction layout
-		case R.id.action_deduction:
-			Intent deduction = new Intent(this, DeductionEditActivity.class);
-			startActivity(deduction);
-			return true;
-		// testing deduction list
 		case R.id.action_deduction_list:
 			DialogFragment newFragment = new DeductionListDialog();
 			newFragment.show(getFragmentManager(), "dialog");
