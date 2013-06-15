@@ -3,6 +3,7 @@ package com.corridor9design.mfdpaycalculator;
 import com.corridor9design.mfdpaycalculator.database.DeductionContentProvider;
 import com.corridor9design.mfdpaycalculator.database.MyDeductionDbHelper;
 
+import android.app.DialogFragment;
 import android.app.ListActivity;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -18,7 +19,16 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-public class DeductionListActivity extends ListActivity implements LoaderCallbacks<Cursor> {
+public class DeductionListActivity extends ListActivity{
+
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		// display the preferences fragment
+	}
+	
+	/*
+	 * 
 
 	// set the projection as static
 	private static final String[] PROJECTION = new String[] { "_id", "name", "amount" };
@@ -101,5 +111,6 @@ public class DeductionListActivity extends ListActivity implements LoaderCallbac
 		// it with a null Cursor
 		madapter.swapCursor(null);
 	}
+	*/
 
 }
