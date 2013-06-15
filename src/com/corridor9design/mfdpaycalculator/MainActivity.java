@@ -113,8 +113,8 @@ public class MainActivity extends Activity {
 			return true;
 		// testing deduction list
 		case R.id.action_deduction_list:
-			Intent deduction_list = new Intent(this, DeductionListActivity.class);
-			startActivity(deduction_list);
+			DialogFragment newFragment = new DeductionListDialog();
+			newFragment.show(getFragmentManager(), "dialog");
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
