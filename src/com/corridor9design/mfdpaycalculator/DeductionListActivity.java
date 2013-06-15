@@ -10,8 +10,13 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 public class DeductionListActivity extends ListActivity implements LoaderCallbacks<Cursor> {
 
@@ -50,6 +55,24 @@ public class DeductionListActivity extends ListActivity implements LoaderCallbac
 		// report this new data back to the 'mCallbacks' object.
 		LoaderManager lm = getLoaderManager();
 		lm.initLoader(LOADER_ID, null, mCallbacks);
+		
+		listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Toast.makeText(getApplication(), "Item pressed was: " + id, Toast.LENGTH_SHORT).show();
+				
+			}
+		});
+		
+		listview.setOnItemLongClickListener(new OnItemLongClickListener() {
+			
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				Toast.makeText(getApplication(), "Item pressed was: " + id + " long.", Toast.LENGTH_SHORT).show();
+				return false;
+			}
+		});
 	}
 
 	@Override
