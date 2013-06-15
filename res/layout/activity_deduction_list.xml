@@ -17,14 +17,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/deduction_name_label"
+            android:text="@string/deduction_name_short"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
             android:id="@+id/deduction_listing_deduction_amount_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/deduction_amount_label"
+            android:text="@string/deduction_amount_short"
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </LinearLayout>
 

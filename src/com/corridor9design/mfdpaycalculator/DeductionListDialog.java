@@ -1,5 +1,6 @@
 package com.corridor9design.mfdpaycalculator;
 
+import com.corridor9design.mfdpaycalculator.database.Deduction;
 import com.corridor9design.mfdpaycalculator.database.DeductionContentProvider;
 
 import android.app.AlertDialog;
@@ -7,6 +8,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.ContentResolver;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
@@ -52,7 +54,7 @@ public class DeductionListDialog extends DialogFragment implements LoaderCallbac
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Toast.makeText(getActivity(), "Item pressed was: " + id, Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity(), "Item " + id + " was pressed. Not implemented.", Toast.LENGTH_SHORT).show();
 
 			}
 		});
@@ -60,15 +62,15 @@ public class DeductionListDialog extends DialogFragment implements LoaderCallbac
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-				Toast.makeText(getActivity(), "Item pressed was: " + id + " long.", Toast.LENGTH_SHORT).show();
-				return false;
+				deleteItem(id);
+				return true;
 			}
 		});
 
 		listview.setAdapter(mAdapter);
 
 		alertDialogBuilder.setView(view);
-		alertDialogBuilder.setTitle("Testing");
+		alertDialogBuilder.setTitle("Deductions: ");
 
 		// The Activity (which implements the LoaderCallbacks<Cursor> interface) is the callbacks object through which
 		// we will interact with the LoaderManager. The LoaderManager uses this object to instantiate the Loader and to
@@ -84,6 +86,12 @@ public class DeductionListDialog extends DialogFragment implements LoaderCallbac
 
 		return alertDialogBuilder.create();
 
+	}
+	
+	public void onResume(){
+		super.onResume();
+		LoaderManager lm = getLoaderManager();
+		lm.initLoader(LOADER_ID, null, mCallbacks);
 	}
 
 	@Override
@@ -110,6 +118,12 @@ public class DeductionListDialog extends DialogFragment implements LoaderCallbac
 		// for whatever reason, the loader's data is now unavailable. remove any references to the old data by replacing
 		// it with a null Cursor
 		mAdapter.swapCursor(null);
+	}
+	
+	public void deleteItem(long id){
+		String[] selectionArgs = {id+""};
+		ContentResolver resolver = getActivity().getContentResolver();
+		resolver.delete(DeductionContentProvider.CONTENT_URI, Deduction.COLUMN_ID+"=?", selectionArgs);
 	}
 
 }
