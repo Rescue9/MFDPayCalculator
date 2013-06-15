@@ -1,10 +1,10 @@
 package com.corridor9design.mfdpaycalculator;
 
 import com.corridor9design.mfdpaycalculator.database.DeductionContentProvider;
-import com.corridor9design.mfdpaycalculator.database.MyDeductionDbHelper;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.ListActivity;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
@@ -19,16 +19,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-public class DeductionListActivity extends ListActivity{
-
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		// display the preferences fragment
-	}
-	
-	/*
-	 * 
+public class DeductionListDialog extends DialogFragment implements LoaderCallbacks<Cursor> {
 
 	// set the projection as static
 	private static final String[] PROJECTION = new String[] { "_id", "name", "amount" };
@@ -40,19 +31,44 @@ public class DeductionListActivity extends ListActivity{
 	private LoaderCallbacks<Cursor> mCallbacks;
 
 	// the adapter that binds data to our listview
-	private SimpleCursorAdapter madapter;
+	private SimpleCursorAdapter mAdapter;
 
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_deduction_list);
+	public DeductionListDialog() {
+		// TODO Auto-generated constructor stub
+	}
 
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		String[] DataColumns = new String[] { "name", "amount" };
 		int[] viewIDs = new int[] { R.id.deduction_listing_deduction_name, R.id.deduction_listing_deduction_amount };
 
-		madapter = new SimpleCursorAdapter(this, R.layout.deduction_listings, null, DataColumns, viewIDs, 0);
+		mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.deduction_listings, null, DataColumns, viewIDs, 0);
 
-		ListView listview = (ListView) findViewById(android.R.id.list);
-		listview.setAdapter(madapter);
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+
+		View view = getActivity().getLayoutInflater().inflate(R.layout.activity_deduction_list, null);
+
+		ListView listview = (ListView) view.findViewById(android.R.id.list);
+		listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Toast.makeText(getActivity(), "Item pressed was: " + id, Toast.LENGTH_SHORT).show();
+
+			}
+		});
+		listview.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				Toast.makeText(getActivity(), "Item pressed was: " + id + " long.", Toast.LENGTH_SHORT).show();
+				return false;
+			}
+		});
+
+		listview.setAdapter(mAdapter);
+
+		alertDialogBuilder.setView(view);
+		alertDialogBuilder.setTitle("Testing");
 
 		// The Activity (which implements the LoaderCallbacks<Cursor> interface) is the callbacks object through which
 		// we will interact with the LoaderManager. The LoaderManager uses this object to instantiate the Loader and to
@@ -65,31 +81,15 @@ public class DeductionListActivity extends ListActivity{
 		// report this new data back to the 'mCallbacks' object.
 		LoaderManager lm = getLoaderManager();
 		lm.initLoader(LOADER_ID, null, mCallbacks);
-		
-		listview.setOnItemClickListener(new OnItemClickListener() {
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Toast.makeText(getApplication(), "Item pressed was: " + id, Toast.LENGTH_SHORT).show();
-				
-			}
-		});
-		
-		listview.setOnItemLongClickListener(new OnItemLongClickListener() {
-			
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-				Toast.makeText(getApplication(), "Item pressed was: " + id + " long.", Toast.LENGTH_SHORT).show();
-				return false;
-			}
-		});
+		return alertDialogBuilder.create();
+
 	}
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// create a new CursorLoader with the following query parameters
-		return new CursorLoader(DeductionListActivity.this, DeductionContentProvider.CONTENT_URI, PROJECTION, null,
-				null, null);
+		return new CursorLoader(getActivity(), DeductionContentProvider.CONTENT_URI, PROJECTION, null, null, null);
 	}
 
 	@Override
@@ -99,7 +99,7 @@ public class DeductionListActivity extends ListActivity{
 		case LOADER_ID:
 			// the asyncronous load is complete and the data is now available for use. Only now can we associate the
 			// query Cursor with the SimpleCursoeAdapter
-			madapter.swapCursor(cursor);
+			mAdapter.swapCursor(cursor);
 			break;
 		}
 		// the listview now displays the queried data
@@ -109,8 +109,7 @@ public class DeductionListActivity extends ListActivity{
 	public void onLoaderReset(Loader<Cursor> loader) {
 		// for whatever reason, the loader's data is now unavailable. remove any references to the old data by replacing
 		// it with a null Cursor
-		madapter.swapCursor(null);
+		mAdapter.swapCursor(null);
 	}
-	*/
 
 }

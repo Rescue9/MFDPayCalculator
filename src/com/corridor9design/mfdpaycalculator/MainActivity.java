@@ -113,7 +113,7 @@ public class MainActivity extends Activity {
 			return true;
 		// testing deduction list
 		case R.id.action_deduction_list:
-			DialogFragment newFragment = new DeductionListDialogFragment();
+			DialogFragment newFragment = new DeductionListDialog();
 			newFragment.show(getFragmentManager(), "dialog");
 			return true;
 		default:
