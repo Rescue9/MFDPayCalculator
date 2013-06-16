@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.view.Menu;
 import android.view.View;
@@ -27,6 +28,7 @@ public class DeductionEditActivity extends Activity {
 	String first_payday;
 	String second_payday;
 	String third_payday;
+	long database_id;
 
 	// declare gui elements
 	EditText deduction_name_edit;
@@ -105,12 +107,13 @@ public class DeductionEditActivity extends Activity {
 
 	private void editDeduction(long id) {
 		// setup resolver to get from content provider
+		database_id = id;
 		ContentResolver resolver = getContentResolver();
-		
+
 		// set arrays for querying database
 		String[] projection = new String[] { "_id", "name", "amount", "description", "payday1", "payday2", "payday3" };
 		String[] selectionArgs = new String[] { id + "" };
-		
+
 		// clear previous values
 		values.clear();
 
@@ -125,7 +128,7 @@ public class DeductionEditActivity extends Activity {
 
 		// we want a singular row, so we'll create a new URI with the row id
 		Uri singleUri = ContentUris.withAppendedId(DeductionContentProvider.CONTENT_URI, id);
-		
+
 		// get the row from the content provider into a cursor
 		Cursor cursor = resolver.query(singleUri, projection, Deduction.COLUMN_ID + "=?", selectionArgs, null);
 		cursor.moveToFirst();
@@ -145,9 +148,27 @@ public class DeductionEditActivity extends Activity {
 		if (cursor.getString(6).equals("true")) {
 			deduction_third_pay_checkbox.setChecked(true);
 		}
-		
+
 		// change the names of the buttons since we're not adding a new item
 		deduction_positive_button.setText(R.string.deduction_button_update);
+		deduction_positive_button.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				updateDeductionItem();
+				finish();
+			}
+
+		});
+		deduction_neutral_button.setText(R.string.deduction_button_delete);
+		deduction_neutral_button.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				deleteDeductionItem();
+				finish();
+			}
+		});
 	}
 
 	private void clearValues() {
@@ -168,6 +189,7 @@ public class DeductionEditActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
+				System.out.println("Add");
 				getValues();
 				createDeductionItem();
 				finish();
@@ -196,7 +218,7 @@ public class DeductionEditActivity extends Activity {
 		// create a resolver to connect to the content provider
 		ContentResolver resolver = getContentResolver();
 
-		// clear teh ContentValues object; values
+		// clear the ContentValues object; values
 		values.clear();
 
 		values.put(Deduction.COLUMN_AMOUNT, deduction_amount);
@@ -210,8 +232,11 @@ public class DeductionEditActivity extends Activity {
 	}
 
 	private void updateDeductionItem() {
-		// creaet a resolver to connect to the content provider
+		// get values from gui
+		getValues();
+		// create a resolver to connect to the content provider
 		ContentResolver resolver = getContentResolver();
+		String[] selectionArgs = new String[] { database_id + "" };
 
 		// clear values
 		values.clear();
@@ -223,6 +248,14 @@ public class DeductionEditActivity extends Activity {
 		values.put(Deduction.COLUMN_PAYDAY2, second_payday);
 		values.put(Deduction.COLUMN_PAYDAY3, third_payday);
 
+		resolver.update(DeductionContentProvider.CONTENT_URI, values, Deduction.COLUMN_ID + "=?", selectionArgs);
 	}
+	
+	private void deleteDeductionItem(){
+		// create a resolver to connect to the content provider
+		ContentResolver resolver = getContentResolver();
+		String[] selectionArgs = new String[] { database_id + "" };
 
+		resolver.delete(DeductionContentProvider.CONTENT_URI, Deduction.COLUMN_ID + "=?", selectionArgs);
+	}
 }
