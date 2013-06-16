@@ -13,8 +13,10 @@
     <string name="deduction_description_label">Descrption</string>
     <string name="deduction_description">This area is for describing information about your deduction.</string>
     <string name="deduction_list_which_paydays">This deduction is currently set to be taken out on the following paydays:</string>
-    <string name="deduction_accept_button">Accept</string>
-    <string name="deduction_cancel_button">Cancel</string>
-    <string name="deduction_clear_button">Clear</string>
+    <string name="deduction_button_accept">Accept</string>
+    <string name="deduction_button_cancel">Cancel</string>
+    <string name="deduction_button_clear">Clear</string>
+    <string name="deduction_button_update">Update</string>
+    <string name="deduction_button_delete">Delete</string>
     <string name="deduction_list">Current Deductions</string>
 </resources>

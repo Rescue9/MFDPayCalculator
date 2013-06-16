@@ -156,28 +156,28 @@
         android:layout_marginTop="10dp" >
 
         <Button
-            android:id="@+id/deduction_cancel_button"
+            android:id="@+id/deduction_positive_button"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
-            android:text="@string/deduction_cancel_button" />
+            android:text="@string/deduction_button_accept" />
 
         <Button
-            android:id="@+id/deduction_clear_button"
+            android:id="@+id/deduction_neutral_button"
             style="?android:attr/buttonBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
-            android:text="@string/deduction_clear_button" />
+            android:text="@string/deduction_button_clear" />
 
         <Button
-            android:id="@+id/deduction_accept_button"
+            android:id="@+id/deduction_negative_button"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
-            android:text="@string/deduction_accept_button" />
+            android:text="@string/deduction_button_cancel" />
 
     </LinearLayout>
 

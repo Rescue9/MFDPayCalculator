@@ -17,7 +17,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class DeductionEditActivity extends Activity {
 
@@ -36,9 +35,9 @@ public class DeductionEditActivity extends Activity {
 	CheckBox deduction_first_pay_checkbox;
 	CheckBox deduction_second_pay_checkbox;
 	CheckBox deduction_third_pay_checkbox;
-	Button deduction_accept_button;
-	Button deduction_cancel_button;
-	Button deduction_clear_button;
+	Button deduction_positive_button;
+	Button deduction_negative_button;
+	Button deduction_neutral_button;
 
 	MyDeductionDbHelper db = new MyDeductionDbHelper(this);
 	ContentValues values = new ContentValues();
@@ -59,7 +58,7 @@ public class DeductionEditActivity extends Activity {
 		long db_id = getIntent().getLongExtra("database_id", -1);
 
 		if (db_id > -1) {
-			fillValuesFromDatabase(db_id);
+			editDeduction(db_id);
 		}
 	}
 
@@ -77,9 +76,9 @@ public class DeductionEditActivity extends Activity {
 		deduction_first_pay_checkbox = (CheckBox) findViewById(R.id.deduction_checkbox_first_payday);
 		deduction_second_pay_checkbox = (CheckBox) findViewById(R.id.deduction_checkbox_second_payday);
 		deduction_third_pay_checkbox = (CheckBox) findViewById(R.id.deduction_checkbox_third_payday);
-		deduction_accept_button = (Button) findViewById(R.id.deduction_accept_button);
-		deduction_cancel_button = (Button) findViewById(R.id.deduction_cancel_button);
-		deduction_clear_button = (Button) findViewById(R.id.deduction_clear_button);
+		deduction_positive_button = (Button) findViewById(R.id.deduction_positive_button);
+		deduction_negative_button = (Button) findViewById(R.id.deduction_negative_button);
+		deduction_neutral_button = (Button) findViewById(R.id.deduction_neutral_button);
 	}
 
 	private void getValues() {
@@ -104,13 +103,18 @@ public class DeductionEditActivity extends Activity {
 			third_payday = "false";
 	}
 
-	private void fillValuesFromDatabase(long id) {
+	private void editDeduction(long id) {
+		// setup resolver to get from content provider
 		ContentResolver resolver = getContentResolver();
+		
+		// set arrays for querying database
 		String[] projection = new String[] { "_id", "name", "amount", "description", "payday1", "payday2", "payday3" };
 		String[] selectionArgs = new String[] { id + "" };
-
+		
+		// clear previous values
 		values.clear();
 
+		// get these columns into the content values object
 		values.get(Deduction.COLUMN_AMOUNT);
 		values.get(Deduction.COLUMN_DESCRIPTION);
 		values.get(Deduction.COLUMN_ID);
@@ -119,26 +123,31 @@ public class DeductionEditActivity extends Activity {
 		values.get(Deduction.COLUMN_PAYDAY2);
 		values.get(Deduction.COLUMN_PAYDAY3);
 
+		// we want a singular row, so we'll create a new URI with the row id
 		Uri singleUri = ContentUris.withAppendedId(DeductionContentProvider.CONTENT_URI, id);
+		
+		// get the row from the content provider into a cursor
 		Cursor cursor = resolver.query(singleUri, projection, Deduction.COLUMN_ID + "=?", selectionArgs, null);
 		cursor.moveToFirst();
 
+		// set the edittext areas to the cursor strings from the database
 		deduction_name_edit.setText(cursor.getString(1));
 		deduction_amount_edit.setText(cursor.getString(2));
 		deduction_description_edit.setText(cursor.getString(3));
 
+		// use these if statements to check boxes as return results are strings
 		if (cursor.getString(4).equals("true")) {
 			deduction_first_pay_checkbox.setChecked(true);
 		}
-
 		if (cursor.getString(5).equals("true")) {
 			deduction_second_pay_checkbox.setChecked(true);
 		}
-
 		if (cursor.getString(6).equals("true")) {
 			deduction_third_pay_checkbox.setChecked(true);
 		}
-
+		
+		// change the names of the buttons since we're not adding a new item
+		deduction_positive_button.setText(R.string.deduction_button_update);
 	}
 
 	private void clearValues() {
@@ -155,7 +164,7 @@ public class DeductionEditActivity extends Activity {
 	}
 
 	private void startListening() {
-		deduction_accept_button.setOnClickListener(new OnClickListener() {
+		deduction_positive_button.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
@@ -166,7 +175,7 @@ public class DeductionEditActivity extends Activity {
 
 		});
 
-		deduction_cancel_button.setOnClickListener(new OnClickListener() {
+		deduction_negative_button.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -174,7 +183,7 @@ public class DeductionEditActivity extends Activity {
 			}
 		});
 
-		deduction_clear_button.setOnClickListener(new OnClickListener() {
+		deduction_neutral_button.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
