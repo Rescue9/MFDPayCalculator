@@ -10,7 +10,6 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.view.Menu;
 import android.view.View;
@@ -162,7 +161,7 @@ public class DeductionEditActivity extends Activity {
 		});
 		deduction_neutral_button.setText(R.string.deduction_button_delete);
 		deduction_neutral_button.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				deleteDeductionItem();
@@ -250,8 +249,8 @@ public class DeductionEditActivity extends Activity {
 
 		resolver.update(DeductionContentProvider.CONTENT_URI, values, Deduction.COLUMN_ID + "=?", selectionArgs);
 	}
-	
-	private void deleteDeductionItem(){
+
+	private void deleteDeductionItem() {
 		// create a resolver to connect to the content provider
 		ContentResolver resolver = getContentResolver();
 		String[] selectionArgs = new String[] { database_id + "" };
