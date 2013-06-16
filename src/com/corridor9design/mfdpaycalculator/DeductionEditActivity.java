@@ -4,16 +4,20 @@ import com.corridor9design.mfdpaycalculator.database.Deduction;
 import com.corridor9design.mfdpaycalculator.database.DeductionContentProvider;
 import com.corridor9design.mfdpaycalculator.database.MyDeductionDbHelper;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class DeductionEditActivity extends Activity {
 
@@ -39,7 +43,6 @@ public class DeductionEditActivity extends Activity {
 	MyDeductionDbHelper db = new MyDeductionDbHelper(this);
 	ContentValues values = new ContentValues();
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,6 +50,17 @@ public class DeductionEditActivity extends Activity {
 
 		setupGuiInstances();
 		startListening();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		long db_id = getIntent().getLongExtra("database_id", -1);
+
+		if (db_id > -1) {
+			fillValuesFromDatabase(db_id);
+		}
 	}
 
 	@Override
@@ -88,6 +102,43 @@ public class DeductionEditActivity extends Activity {
 			third_payday = "true";
 		} else
 			third_payday = "false";
+	}
+
+	private void fillValuesFromDatabase(long id) {
+		ContentResolver resolver = getContentResolver();
+		String[] projection = new String[] { "_id", "name", "amount", "description", "payday1", "payday2", "payday3" };
+		String[] selectionArgs = new String[] { id + "" };
+
+		values.clear();
+
+		values.get(Deduction.COLUMN_AMOUNT);
+		values.get(Deduction.COLUMN_DESCRIPTION);
+		values.get(Deduction.COLUMN_ID);
+		values.get(Deduction.COLUMN_NAME);
+		values.get(Deduction.COLUMN_PAYDAY1);
+		values.get(Deduction.COLUMN_PAYDAY2);
+		values.get(Deduction.COLUMN_PAYDAY3);
+
+		Uri singleUri = ContentUris.withAppendedId(DeductionContentProvider.CONTENT_URI, id);
+		Cursor cursor = resolver.query(singleUri, projection, Deduction.COLUMN_ID + "=?", selectionArgs, null);
+		cursor.moveToFirst();
+
+		deduction_name_edit.setText(cursor.getString(1));
+		deduction_amount_edit.setText(cursor.getString(2));
+		deduction_description_edit.setText(cursor.getString(3));
+
+		if (cursor.getString(4).equals("true")) {
+			deduction_first_pay_checkbox.setChecked(true);
+		}
+
+		if (cursor.getString(5).equals("true")) {
+			deduction_second_pay_checkbox.setChecked(true);
+		}
+
+		if (cursor.getString(6).equals("true")) {
+			deduction_third_pay_checkbox.setChecked(true);
+		}
+
 	}
 
 	private void clearValues() {
@@ -135,10 +186,10 @@ public class DeductionEditActivity extends Activity {
 	private void createDeductionItem() {
 		// create a resolver to connect to the content provider
 		ContentResolver resolver = getContentResolver();
-		
+
 		// clear teh ContentValues object; values
 		values.clear();
-		
+
 		values.put(Deduction.COLUMN_AMOUNT, deduction_amount);
 		values.put(Deduction.COLUMN_DESCRIPTION, deduction_description);
 		values.put(Deduction.COLUMN_NAME, deduction_name);
@@ -148,14 +199,14 @@ public class DeductionEditActivity extends Activity {
 
 		resolver.insert(DeductionContentProvider.CONTENT_URI, values);
 	}
-	
-	private void updateDeductionItem(){
+
+	private void updateDeductionItem() {
 		// creaet a resolver to connect to the content provider
 		ContentResolver resolver = getContentResolver();
-		
+
 		// clear values
 		values.clear();
-		
+
 		values.put(Deduction.COLUMN_AMOUNT, deduction_amount);
 		values.put(Deduction.COLUMN_DESCRIPTION, deduction_description);
 		values.put(Deduction.COLUMN_NAME, deduction_name);
@@ -163,7 +214,6 @@ public class DeductionEditActivity extends Activity {
 		values.put(Deduction.COLUMN_PAYDAY2, second_payday);
 		values.put(Deduction.COLUMN_PAYDAY3, third_payday);
 
-		
 	}
 
 }

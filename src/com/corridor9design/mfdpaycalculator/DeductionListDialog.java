@@ -57,7 +57,8 @@ public class DeductionListDialog extends DialogFragment implements LoaderCallbac
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Toast.makeText(getActivity(), "Item " + id + " was pressed. Not implemented.", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity(), "Item " + id + " was pressed. Not implemented.", Toast.LENGTH_SHORT)
+						.show();
 
 			}
 		});
@@ -65,7 +66,9 @@ public class DeductionListDialog extends DialogFragment implements LoaderCallbac
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-				deleteItem(id);
+				Intent deduction_edit_intent = new Intent(getActivity(), DeductionEditActivity.class);
+				deduction_edit_intent.putExtra("database_id", id);
+				startActivity(deduction_edit_intent);
 				return true;
 			}
 		});
@@ -74,7 +77,7 @@ public class DeductionListDialog extends DialogFragment implements LoaderCallbac
 
 		alertDialogBuilder.setView(view);
 		alertDialogBuilder.setTitle("Deductions: ");
-		alertDialogBuilder.setPositiveButton("Ok" , this);
+		alertDialogBuilder.setPositiveButton("Ok", this);
 		alertDialogBuilder.setNegativeButton("Add", this);
 
 		// The Activity (which implements the LoaderCallbacks<Cursor> interface) is the callbacks object through which
@@ -92,8 +95,8 @@ public class DeductionListDialog extends DialogFragment implements LoaderCallbac
 		return alertDialogBuilder.create();
 
 	}
-	
-	public void onResume(){
+
+	public void onResume() {
 		super.onResume();
 		LoaderManager lm = getLoaderManager();
 		lm.initLoader(LOADER_ID, null, mCallbacks);
@@ -102,7 +105,8 @@ public class DeductionListDialog extends DialogFragment implements LoaderCallbac
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// create a new CursorLoader with the following query parameters
-		return new CursorLoader(getActivity(), DeductionContentProvider.CONTENT_URI, PROJECTION, null, null, null);
+		return new CursorLoader(getActivity(), DeductionContentProvider.CONTENT_URI, PROJECTION, null, null,
+				Deduction.COLUMN_NAME + " ASC");
 	}
 
 	@Override
@@ -124,26 +128,21 @@ public class DeductionListDialog extends DialogFragment implements LoaderCallbac
 		// it with a null Cursor
 		mAdapter.swapCursor(null);
 	}
-	
-	public void deleteItem(long id){
-		String[] selectionArgs = {id+""};
-		ContentResolver resolver = getActivity().getContentResolver();
-		resolver.delete(DeductionContentProvider.CONTENT_URI, Deduction.COLUMN_ID+"=?", selectionArgs);
-	}
 
 	@Override
 	public void onClick(DialogInterface dialog, int which) {
-		// Toast.makeText(getActivity(), which+"", Toast.LENGTH_SHORT).show(); // used to determine which button was pressed.
-		switch (which){
-		case -2: 
+		// Toast.makeText(getActivity(), which+"", Toast.LENGTH_SHORT).show(); // used to determine which button was
+		// pressed.
+		switch (which) {
+		case -2:
 			// begin deductionedit activity to add new deduction
 			Intent deduction = new Intent(getActivity(), DeductionEditActivity.class);
 			startActivity(deduction);
 			break;
 		case -1:
-			return;			
+			return;
 		}
-		
+
 	}
 
 }
