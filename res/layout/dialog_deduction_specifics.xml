@@ -9,31 +9,9 @@
     android:paddingTop="@dimen/activity_vertical_margin" >
 
     <TextView
-        android:id="@+id/deduction_list_name"
+        android:id="@+id/deduction_specific_amount_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/deduction_name"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/deduction_list_name_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="@string/deduction_name_label"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <View
-        android:id="@+id/view1"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray" />
-
-    <TextView
-        android:id="@+id/deduction_list_amount_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:text="@string/deduction_amount_label"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -42,14 +20,15 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/deduction_list_amount_dollar_sign"
+            android:id="@+id/deduction_specific_amount_dollar_sign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:text="@string/dollar_sign"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-            android:id="@+id/deduction_list_amount"
+            android:id="@+id/deduction_specific_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/deduction_amount"
@@ -58,11 +37,11 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/deduction_list_which_payday"
+        android:id="@+id/deduction_specific_which_payday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/deduction_list_which_paydays"
+        android:text="@string/deduction_specific_paydays"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <LinearLayout
@@ -70,21 +49,24 @@
         android:layout_height="wrap_content" >
 
         <CheckBox
-            android:id="@+id/deduction_list_checkbox_first_payday"
+            android:id="@+id/deduction_specific_checkbox_first_payday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight=".5" />
+            android:layout_weight=".5"
+            android:enabled="false" />
 
         <CheckBox
-            android:id="@+id/deduction_list_checkbox_second_payday"
+            android:id="@+id/deduction_specific_checkbox_second_payday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight=".5" />
+            android:layout_weight=".5"
+            android:enabled="false" />
 
         <CheckBox
-            android:id="@+id/deduction_list_checkbox_third_payday"
+            android:id="@+id/deduction_specific_checkbox_third_payday"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:enabled="false" />
 
     </LinearLayout>
 
@@ -101,7 +83,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:id="@+id/deduction_list_label_second_payday"
+            android:id="@+id/deduction_specific_label_second_payday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -110,7 +92,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:id="@+id/deduction_list_label_third_payday"
+            android:id="@+id/deduction_specific_label_third_payday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -121,7 +103,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/deduction_list_description_label"
+        android:id="@+id/deduction_specific_description_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -129,10 +111,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/deduction_listing_deduction_name_label"
+        android:id="@+id/deduction_specific_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/deduction_description_background"
+        android:layout_marginLeft="10dp"
         android:text="@string/deduction_description" />
 
 </LinearLayout>

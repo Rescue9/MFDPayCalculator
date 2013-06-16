@@ -6,9 +6,9 @@ import com.corridor9design.mfdpaycalculator.database.DeductionContentProvider;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.ContentResolver;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -50,16 +50,19 @@ public class DeductionListDialog extends DialogFragment implements LoaderCallbac
 
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
 
-		View view = getActivity().getLayoutInflater().inflate(R.layout.activity_deduction_list, null);
+		View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_deduction_list, null);
 
 		ListView listview = (ListView) view.findViewById(android.R.id.list);
 		listview.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Toast.makeText(getActivity(), "Item " + id + " was pressed. Not implemented.", Toast.LENGTH_SHORT)
-						.show();
+				DialogFragment deduction_specifics = new DeductionSpecificsDialog();
 
+				Bundle arguments = new Bundle();
+				arguments.putLong("database_row", id);
+				deduction_specifics.setArguments(arguments);
+				deduction_specifics.show(getFragmentManager(), "dialog");
 			}
 		});
 		listview.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -77,6 +80,7 @@ public class DeductionListDialog extends DialogFragment implements LoaderCallbac
 
 		alertDialogBuilder.setView(view);
 		alertDialogBuilder.setTitle("Deductions: ");
+		alertDialogBuilder.setMessage("Long press to update or delete");
 		alertDialogBuilder.setPositiveButton("Ok", this);
 		alertDialogBuilder.setNegativeButton("Add", this);
 
@@ -131,8 +135,6 @@ public class DeductionListDialog extends DialogFragment implements LoaderCallbac
 
 	@Override
 	public void onClick(DialogInterface dialog, int which) {
-		// Toast.makeText(getActivity(), which+"", Toast.LENGTH_SHORT).show(); // used to determine which button was
-		// pressed.
 		switch (which) {
 		case -2:
 			// begin deductionedit activity to add new deduction

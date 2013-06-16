@@ -70,7 +70,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		// tag logcat for initial start
 		Log.d(TAG, "Starting...");
-		
+
 		setContentView(R.layout.activity_main);
 
 		// hide the keyboard until user requests it
