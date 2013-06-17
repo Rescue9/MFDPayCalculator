@@ -23,45 +23,43 @@ import com.google.ads.AdView;
 
 public class AboutActivity extends Activity {
 
+	// declare the google ads display
 	AdRequest ad_request = new AdRequest();
 	private AdView ad_view;
 
-	// objects
+	// declare button & text for premium purchasing
 	Button purchase_button;
 	TextView premium_versin_text;
 
 	// debug tag for logging
 	static final String TAG = "MFDPayCalc";
 
-	// SKU for our products:
-	static final String SKU_PREMIUM = "mfd_pay_calculator_remove_ads";
-
-	// does user have premium key?
-	boolean isPremium = false;
-
-	// (arbitrary) tequest code for the purchase flow
-	static final int RC_REQUEST = 12131;
-
-	// create an IAB helper object
-	IabHelper mHelper;
-
-	public AboutActivity() {
-		// TODO Auto-generated constructor stub
-	}
+	// GOOGLE ADS & BILLING
+	static final String SKU_PREMIUM = "mfd_pay_calculator_remove_ads"; // SKU for our products:
+	boolean isPremium = false; // does user have premium key?
+	static final int RC_REQUEST = 6800293; // (arbitrary) request code for the purchase flow	
+	IabHelper mHelper; // create an In-App Billing helper object
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE); // remove title from window
 		setContentView(R.layout.activity_about);
 
 		purchase_button = (Button) findViewById(R.id.about_premium_purchase_button);
 		premium_versin_text = (TextView) findViewById(R.id.about_premium_version);
 
-		// setup in-app billing
-		String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApMZgB6WstG7wxH5/595qHdO5uo7vQu2wDcwNs4DGgzJVKIbHxafw3lg1RswIMECems9sqoj6bI6aISqLhASx2lX/fCDXI5PSxPymlkgNUTMlS4yd7ZBkQF1UMwbwMSJWJ84FYOjRB26ctXTkhOa9A9oL73OgMvolTNbpuCG7YB9UnoJuhlmu182537Qh5sZAMi6fAM4JfaVKicFczIuIhHXTXSGWUX0d2xPiRGXNDHzTB8D2MT1LmfTrjjC8gsEBg/+Frjk5U6I3gUH9aH2fxKeVvy+KblrZsMVNrv7APPqSJ3CSkBlI3+4FiSBjnyLGfUYdmNRBhPeXi55PJN3A9QIDAQAB"; 
+		// setup in-app billing public key substrings
+		String myB = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApMZgB6WstG7w";
+		String asE = "xH5/595qHdO5uo7vQu2wDcwNs4DGgzJVKIbHxafw3lg1RswIMECems9s";
+		String enC = "qoj6bI6aISqLhASx2lX/fCDXI5PSxPymlkgNUTMlS4yd7ZBkQF1UMwbw";
+		String odE = "MSJWJ84FYOjRB26ctXTkhOa9A9oL73OgMvolTNbpuCG7YB9UnoJuhlmu";
+		String dpU = "182537Qh5sZAMi6fAM4JfaVKicFczIuIhHXTXSGWUX0d2xPiRGXNDHzT";
+		String bkE = "B8D2MT1LmfTrjjC8gsEBg/+Frjk5U6I3gUH9aH2fxKeVvy+KblrZsMVN";
+		String y64 = "rv7APPqSJ3CSkBlI3+4FiSBjnyLGfUYdmNRBhPeXi55PJN3A9QIDAQAB";
+		String myBaseEncodedPubKey64 = myB + asE + enC + odE + dpU + bkE + y64; 
 
-		mHelper = new IabHelper(this, base64EncodedPublicKey);
+		mHelper = new IabHelper(this, myBaseEncodedPubKey64);
 
 		Log.d(TAG, "Starting IAB setup");
 		mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
