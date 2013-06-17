@@ -1,5 +1,8 @@
-package com.corridor9design.mfdpaycalculator;
+package com.corridor9design.mfdpaycalculator.deductions;
 
+import com.corridor9design.mfdpaycalculator.R;
+import com.corridor9design.mfdpaycalculator.R.id;
+import com.corridor9design.mfdpaycalculator.R.layout;
 import com.corridor9design.mfdpaycalculator.database.Deduction;
 import com.corridor9design.mfdpaycalculator.database.DeductionContentProvider;
 

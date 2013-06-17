@@ -7,7 +7,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-public class PreferencesHandler extends Activity {
+public class PreferencesHandler {
 
 	ValuesHandler vh = new ValuesHandler();
 

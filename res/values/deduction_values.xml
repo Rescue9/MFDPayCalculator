@@ -18,5 +18,4 @@
     <string name="deduction_button_clear">Clear</string>
     <string name="deduction_button_update">Update</string>
     <string name="deduction_button_delete">Delete</string>
-    <string name="deduction_list">Current Deductions</string>
 </resources>

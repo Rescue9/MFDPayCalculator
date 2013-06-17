@@ -2,6 +2,7 @@ package com.corridor9design.mfdpaycalculator;
 
 import java.text.DecimalFormat;
 
+import com.corridor9design.mfdpaycalculator.deductions.DeductionListDialog;
 import com.corridor9design.mfdpaycalculator.engine.CalcEngine;
 import com.corridor9design.mfdpaycalculator.engine.ValueModifier;
 import com.corridor9design.mfdpaycalculator.engine.ValuesHandler;

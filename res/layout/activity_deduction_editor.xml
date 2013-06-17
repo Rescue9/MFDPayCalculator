@@ -161,7 +161,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
-            android:text="@string/deduction_button_accept" />
+            android:text="@string/deduction_button_cancel" />
 
         <Button
             android:id="@+id/deduction_neutral_button"
@@ -177,7 +177,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
-            android:text="@string/deduction_button_cancel" />
+            android:text="@string/deduction_button_accept" />
 
     </LinearLayout>
 
