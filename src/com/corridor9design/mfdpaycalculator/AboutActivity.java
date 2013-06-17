@@ -1,3 +1,12 @@
+/**
+ * Program: AboutActivity.java
+ * Programmer: Andrew Buskov
+ * Date: Jun 17, 2013
+ * Purpose: To create an activity that will display information about
+ *  this program and provide the user with a way to purchase a premium
+ *  version.
+ */
+
 package com.corridor9design.mfdpaycalculator;
 
 import android.app.Activity;
@@ -99,6 +108,7 @@ public class AboutActivity extends Activity {
 
 	@Override
 	public void onDestroy() {
+		// remove all ad views
 		if (ad_view != null) {
 			ad_view.removeAllViews();
 			ad_view.destroy();
@@ -122,7 +132,7 @@ public class AboutActivity extends Activity {
 			} else {
 				Log.d(TAG, "Query inventory was successful.");
 
-				// does the user have the premium upgrade?
+				// check for a premium upgrade?
 				isPremium = inventory.hasPurchase(SKU_PREMIUM);
 
 				// update UI here

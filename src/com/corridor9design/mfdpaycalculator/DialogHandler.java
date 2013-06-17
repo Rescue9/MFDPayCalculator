@@ -1,3 +1,11 @@
+/**
+ * Program: DialogHandler.java
+ * Programmer: Andrew Buskov
+ * Date: Jun 17, 2013
+ * Purpose: To create handler for various fragments that will 
+ *  gather information to be used in the calculation formula.
+ */
+
 package com.corridor9design.mfdpaycalculator;
 
 import com.corridor9design.mfdpaycalculator.engine.ValueModifier;
@@ -15,30 +23,27 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.EditText;
 
 public class DialogHandler extends DialogFragment {
-
+	// create value handling objects
 	ValuesHandler vh = new ValuesHandler();
 	ValueModifier vm = new ValueModifier();
 
+	// declare objects for getting the specific dialog selected
+	// and viewing elements
 	EditText dialog_edittext_value;
 	int value;
 	View view;
-
-	public DialogHandler() {
-		// empty constructor
-	}
 
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		// get arguments from bundle
 		value = getArguments().getInt("key");
 
-		// System.out.println(value); //TESTING used to check value passed during dialog creation
-
+		// create a dialog builder for easier dialog handling
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		// Get the layout inflater
-		LayoutInflater inflater = getActivity().getLayoutInflater();
-		view = inflater.inflate(R.layout.dialog_fragment, null);
 
-		// create switch statement for dialog message display per button
+		// inflate the doalog fragment into this view
+		view = getActivity().getLayoutInflater().inflate(R.layout.dialog_fragment, null);
+
+		// dialog display message chosen by switch statement based upon key
 		String dialogMessage = null;
 		switch (value) {
 		case 0:
@@ -54,51 +59,53 @@ public class DialogHandler extends DialogFragment {
 		}
 		builder.setMessage(dialogMessage);
 
-		// Inflate and set the layout for the dialog
-		// Pass null as the parent view because its going in the dialog layout
-		builder.setView(view)
-		// Add action buttons
-				.setPositiveButton(R.string.dialog_button_accept, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int id) {
-						dialog_edittext_value = (EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_edittext1);
+		// set the view to be inflated by the builder
+		builder.setView(view);
 
-						// check entry for empty
-						if (dialog_edittext_value.getText().length() == 0) {
-							dialog_edittext_value.setText("0");
-						}
+		// Add positive action button
+		builder.setPositiveButton(R.string.dialog_button_accept, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int id) {
+				dialog_edittext_value = (EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_edittext1);
 
-						// check for int
-						// FIXME START HERE!!!! CHECK FOR INT in edittext vox
+				// set value to 0 if empty
+				if (dialog_edittext_value.getText().length() == 0) {
+					dialog_edittext_value.setText("0");
+				}
 
-						// check for double
-						// FIXME Then check for double!
+				// set the values for the calc engine based upon which button pressed
+				switch (value) {
+				case 0:
+					vh.setHolidays_during_pay(Integer.parseInt(dialog_edittext_value.getText().toString()));
+					break;
+				case 1:
+					vh.setOvertime_hours(Double.parseDouble(dialog_edittext_value.getText().toString()));
+					break;
+				case 2:
+					vh.setScheduled_days(Integer.parseInt(dialog_edittext_value.getText().toString()));
+					break;
 
-						switch (value) {
-						case 0:
-							vh.setHolidays_during_pay(Integer.parseInt(dialog_edittext_value.getText().toString()));
-							break;
-						case 1:
-							vh.setOvertime_hours(Double.parseDouble(dialog_edittext_value.getText().toString()));
-							break;
-						case 2:
-							vh.setScheduled_days(Integer.parseInt(dialog_edittext_value.getText().toString()));
-							break;
+				}
+			}
+		});
 
-						}
-					}
-				}).setNegativeButton(R.string.dialog_button_cancel, new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						DialogHandler.this.getDialog().cancel();
-					}
-				});
+		// add negative action button
+		builder.setNegativeButton(R.string.dialog_button_cancel, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				DialogHandler.this.getDialog().cancel();
+			}
+		});
+
+		// create the dialog
 		return builder.create();
 	}
 
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		
+		// instantiate text entry field
 		dialog_edittext_value = (EditText) view.findViewById(R.id.dialog_edittext1);
-		dialog_edittext_value.clearFocus();
+		//dialog_edittext_value.clearFocus();
 		getDialog().getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
 		switch (value) {
