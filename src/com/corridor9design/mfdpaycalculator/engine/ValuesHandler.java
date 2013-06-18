@@ -1,3 +1,11 @@
+/**
+ * Program: ValuesHandler.java
+ * Programmer: Andrew Buskov
+ * Date: Jun 17, 2013
+ * Purpose: To create a handler class for manipulating values
+ *  throughout the entire application.
+ */
+
 package com.corridor9design.mfdpaycalculator.engine;
 
 public class ValuesHandler {
@@ -20,9 +28,6 @@ public class ValuesHandler {
 	private static double callback_hours;
 	private static int years_worked;
 	private static int holidays_during_pay;
-
-	public ValuesHandler() {
-	}
 
 	public double getIncentive() {
 		return INCENTIVE;
@@ -116,6 +121,8 @@ public class ValuesHandler {
 		ValuesHandler.holidays_during_pay = holidays_worked;
 	}
 
+	// use these values when simple layout is selected
+	// values updated 03/2013
 	public void setupSimpleValues(int rank) {
 		switch (rank) {
 		case 0:
