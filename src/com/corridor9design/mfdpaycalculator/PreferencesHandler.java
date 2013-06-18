@@ -1,8 +1,14 @@
+/**
+ * Program: PreferencesHandler.java
+ * Programmer: Andrew Buskov
+ * Date: Jun 17, 2013
+ * Purpose: To create a handler class for getting & setting values.
+ */
+
 package com.corridor9design.mfdpaycalculator;
 
 import com.corridor9design.mfdpaycalculator.engine.ValuesHandler;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -14,6 +20,7 @@ public class PreferencesHandler {
 	public PreferencesHandler() {
 	}
 
+	// set some preference as passed to method
 	public void setPreferences(String key, String value, Context context) {
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 		SharedPreferences.Editor editor = preferences.edit();
@@ -22,32 +29,38 @@ public class PreferencesHandler {
 		editor.commit();
 	}
 
+	// get preference of type String
 	public String getPreferences(String key, Context context) {
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 		return preferences.getString(key, "0");
 	}
 
+	// get preference of type Double
 	public double getDoublePreference(String key, Context context) {
 		double pref = Double.parseDouble(getPreferences(key, context));
 		return pref;
 
 	}
 
+	// get preference of type Integer
 	public int getIntPreference(String key, Context context) {
 		int pref = Integer.parseInt(getPreferences(key, context));
 		return pref;
 	}
 
+	// get preference of type Boolean
 	public boolean getBoolPreference(String key, Context context) {
 		boolean pref = Boolean.parseBoolean(getPreferences(key, context));
 		return pref;
 	}
 
+	// check to see if a preference is set
 	public boolean preferenceSet(String key, Context context) {
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 		return preferences.getBoolean(key, false);
 	}
 
+	// set values from their respective shared preference saves
 	public void setValuesFromPreferences(Context context) {
 		// set values for totals from previous run
 		vh.setBase_pay_total(this.getDoublePreference("base_pay_total", context));
@@ -67,6 +80,7 @@ public class PreferencesHandler {
 		vh.setHolidays_during_pay(this.getIntPreference("holidays_worked", context));
 	}
 
+	// save values to their respective shared preference saves
 	public void saveValuesToPreferences(Context context) {
 		// save values in total fields
 		setPreferences("base_pay_total", vh.getBase_pay_total() + "", context);

@@ -50,7 +50,7 @@ public class CalcEngine {
 		vh.setTaxes_total(taxable / 3);
 	}
 
-	public void calculateDeposti(double deposit) {
+	public void calculateDeposit(double deposit) {
 		vh.setDeposit_total(deposit * 2);
 	}
 }
