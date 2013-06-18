@@ -1,15 +1,20 @@
+/**
+ * Program: DeductionSpecificsDialog.java
+ * Programmer: Andrew Buskov
+ * Date: Jun 17, 2013
+ * Purpose: To create a dialog fragment for displaying
+ *  the specific information about a selected deduction.
+ */
+
 package com.corridor9design.mfdpaycalculator.deductions;
 
 import com.corridor9design.mfdpaycalculator.R;
-import com.corridor9design.mfdpaycalculator.R.id;
-import com.corridor9design.mfdpaycalculator.R.layout;
 import com.corridor9design.mfdpaycalculator.database.Deduction;
 import com.corridor9design.mfdpaycalculator.database.DeductionContentProvider;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -42,10 +47,6 @@ public class DeductionSpecificsDialog extends DialogFragment {
 
 	View view;
 
-	public DeductionSpecificsDialog() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		database_id = getArguments().getLong("database_row");
@@ -59,18 +60,18 @@ public class DeductionSpecificsDialog extends DialogFragment {
 
 		alertDialogBuilder.setTitle(deduction_name);
 		alertDialogBuilder.setView(view);
-		alertDialogBuilder.setPositiveButton("Delete", new OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				deleteDeductionItem();
-			}
-		});
-		alertDialogBuilder.setNegativeButton("Ok", new OnClickListener() {
+		alertDialogBuilder.setPositiveButton(R.string.deduction_button_ok, new OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				return;
+			}
+		});
+		alertDialogBuilder.setNegativeButton(R.string.deduction_button_delete, new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				deleteDeductionItem();
 			}
 		});
 		return alertDialogBuilder.create();

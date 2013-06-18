@@ -1,9 +1,14 @@
+/**
+ * Program: DeductionEditActivity.java
+ * Programmer: Andrew Buskov
+ * Date: Jun 17, 2013
+ * Purpose: To create a deduction activity for entering deduction information.
+ *  An activity is used versus a fragment for ease of use.
+ */
+
 package com.corridor9design.mfdpaycalculator.deductions;
 
 import com.corridor9design.mfdpaycalculator.R;
-import com.corridor9design.mfdpaycalculator.R.id;
-import com.corridor9design.mfdpaycalculator.R.layout;
-import com.corridor9design.mfdpaycalculator.R.string;
 import com.corridor9design.mfdpaycalculator.database.Deduction;
 import com.corridor9design.mfdpaycalculator.database.DeductionContentProvider;
 import com.corridor9design.mfdpaycalculator.database.MyDeductionDbHelper;
@@ -153,22 +158,22 @@ public class DeductionEditActivity extends Activity {
 		}
 
 		// change the names of the buttons since we're not adding a new item
-		deduction_positive_button.setText(R.string.deduction_button_update);
+		deduction_positive_button.setText(R.string.deduction_button_delete);
 		deduction_positive_button.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				updateDeductionItem();
+				deleteDeductionItem();
 				finish();
 			}
 
 		});
-		deduction_neutral_button.setText(R.string.deduction_button_delete);
+		deduction_neutral_button.setText(R.string.deduction_button_update);
 		deduction_neutral_button.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				deleteDeductionItem();
+				updateDeductionItem();
 				finish();
 			}
 		});
@@ -191,11 +196,8 @@ public class DeductionEditActivity extends Activity {
 		deduction_positive_button.setOnClickListener(new OnClickListener() {
 
 			@Override
-			public void onClick(View arg0) {
-				System.out.println("Add");
-				getValues();
-				createDeductionItem();
-				finish();
+			public void onClick(View v) {
+				cancelThis();
 			}
 
 		});
@@ -203,8 +205,11 @@ public class DeductionEditActivity extends Activity {
 		deduction_negative_button.setOnClickListener(new OnClickListener() {
 
 			@Override
-			public void onClick(View v) {
-				cancelThis();
+			public void onClick(View arg0) {
+				System.out.println("Add");
+				getValues();
+				createDeductionItem();
+				finish();
 			}
 		});
 
