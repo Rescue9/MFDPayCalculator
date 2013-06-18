@@ -17,7 +17,6 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager.LayoutParams;
 import android.widget.EditText;
@@ -40,7 +39,7 @@ public class DialogHandler extends DialogFragment {
 		// create a dialog builder for easier dialog handling
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-		// inflate the doalog fragment into this view
+		// inflate the dialog fragment into this view
 		view = getActivity().getLayoutInflater().inflate(R.layout.dialog_fragment, null);
 
 		// dialog display message chosen by switch statement based upon key
@@ -102,12 +101,12 @@ public class DialogHandler extends DialogFragment {
 
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		
+
 		// instantiate text entry field
 		dialog_edittext_value = (EditText) view.findViewById(R.id.dialog_edittext1);
-		//dialog_edittext_value.clearFocus();
-		getDialog().getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+		getDialog().getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE); // force soft keyboard visible
 
+		// execute code based upon which button pressed
 		switch (value) {
 		case 0:
 			if (vh.getHolidays_during_pay() != 0) {
@@ -115,7 +114,6 @@ public class DialogHandler extends DialogFragment {
 			}
 			dialog_edittext_value.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
 			dialog_edittext_value.selectAll();
-			dialog_edittext_value.requestFocus();
 			break;
 		case 1:
 			if (vh.getCallback_hours() != 0) {
@@ -123,7 +121,6 @@ public class DialogHandler extends DialogFragment {
 			}
 			dialog_edittext_value.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 			dialog_edittext_value.selectAll();
-			dialog_edittext_value.requestFocus();
 			break;
 		case 2:
 			if (vh.getScheduled_days() != 0) {
@@ -131,7 +128,6 @@ public class DialogHandler extends DialogFragment {
 			}
 			dialog_edittext_value.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
 			dialog_edittext_value.selectAll();
-			dialog_edittext_value.requestFocus();
 			break;
 
 		}
@@ -140,6 +136,8 @@ public class DialogHandler extends DialogFragment {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
+		// refresh the main activity window on closing the dialog
+		// this force refreshes the button text based upon values entered in the dialog
 		MainActivity ma = (MainActivity) getActivity();
 		ma.refreshGui();
 	}

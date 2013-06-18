@@ -46,7 +46,7 @@ public class AboutActivity extends Activity {
 	// GOOGLE ADS & BILLING
 	static final String SKU_PREMIUM = "mfd_pay_calculator_remove_ads"; // SKU for our products:
 	boolean isPremium = false; // does user have premium key?
-	static final int RC_REQUEST = 6800293; // (arbitrary) request code for the purchase flow	
+	static final int RC_REQUEST = 6800293; // (arbitrary) request code for the purchase flow
 	IabHelper mHelper; // create an In-App Billing helper object
 
 	@Override
@@ -66,7 +66,7 @@ public class AboutActivity extends Activity {
 		String dpU = "182537Qh5sZAMi6fAM4JfaVKicFczIuIhHXTXSGWUX0d2xPiRGXNDHzT";
 		String bkE = "B8D2MT1LmfTrjjC8gsEBg/+Frjk5U6I3gUH9aH2fxKeVvy+KblrZsMVN";
 		String y64 = "rv7APPqSJ3CSkBlI3+4FiSBjnyLGfUYdmNRBhPeXi55PJN3A9QIDAQAB";
-		String myBaseEncodedPubKey64 = myB + asE + enC + odE + dpU + bkE + y64; 
+		String myBaseEncodedPubKey64 = myB + asE + enC + odE + dpU + bkE + y64;
 
 		mHelper = new IabHelper(this, myBaseEncodedPubKey64);
 
@@ -137,7 +137,7 @@ public class AboutActivity extends Activity {
 
 				// update UI here
 				refreshUi();
-				
+
 				// tag log with purchase status
 				Log.d(TAG, "User is " + (isPremium ? "PREMIUM" : "NOT PREMIUM"));
 			}
@@ -185,14 +185,14 @@ public class AboutActivity extends Activity {
 
 		});
 	}
-	
-	protected void premiumIsPurchased(){
+
+	protected void premiumIsPurchased() {
 		// lets see if we have a preference for a permium item being purchased
 		PreferencesHandler ph = new PreferencesHandler();
 		ph.setPreferences("premium_purchased", "true", this);
 	}
-	
-	protected void refreshUi(){
+
+	protected void refreshUi() {
 
 		if (!isPremium) {
 			// create the adview instance
@@ -210,16 +210,16 @@ public class AboutActivity extends Activity {
 			ad_request.addTestDevice("E952DED8DFB1CA8350FD5D82F409703A"); // Note 10.1 Test ID
 
 			ad_view.loadAd(ad_request);
-			
+
 			// display button for purchase
-			purchase_button.setVisibility(View.VISIBLE); //TODO Change to VISIBLE on production
+			purchase_button.setVisibility(View.VISIBLE); // TODO Change to VISIBLE on production
 			premium_versin_text.setVisibility(View.GONE);
 
 		} else {
-			//remove purchase button
+			// remove purchase button
 			purchase_button.setVisibility(View.GONE);
-			premium_versin_text.setVisibility(View.VISIBLE); //TODO Change to VISIBLE on production
-			
+			premium_versin_text.setVisibility(View.VISIBLE); // TODO Change to VISIBLE on production
+
 			// set premium purchased preference
 			premiumIsPurchased();
 		}
