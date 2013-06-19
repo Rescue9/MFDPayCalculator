@@ -80,14 +80,24 @@
             android:id="@+id/deduction_checkbox_first_payday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight=".5"
             android:gravity="center_vertical|start" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <CheckBox
             android:id="@+id/deduction_checkbox_second_payday"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".5" />
+            android:layout_height="wrap_content" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <CheckBox
             android:id="@+id/deduction_checkbox_third_payday"
