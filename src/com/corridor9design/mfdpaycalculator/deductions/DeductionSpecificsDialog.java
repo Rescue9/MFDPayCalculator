@@ -49,9 +49,11 @@ public class DeductionSpecificsDialog extends DialogFragment {
 
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// find out what row we're looking for from the bundle
 		database_id = getArguments().getLong("database_row");
 
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+		// specify the base view that we want out info to populate
 		view = getActivity().getLayoutInflater().inflate(R.layout.dialog_deduction_specifics, null);
 
 		// setup gui
@@ -67,6 +69,7 @@ public class DeductionSpecificsDialog extends DialogFragment {
 				return;
 			}
 		});
+		// we want have a delete button 
 		alertDialogBuilder.setNegativeButton(R.string.deduction_button_delete, new OnClickListener() {
 
 			@Override
@@ -79,7 +82,6 @@ public class DeductionSpecificsDialog extends DialogFragment {
 
 	public void onResume() {
 		super.onResume();
-
 	}
 
 	public void setupGuiElements() {

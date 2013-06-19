@@ -65,8 +65,10 @@ public class DeductionEditActivity extends Activity {
 	public void onResume() {
 		super.onResume();
 
+		// get the database id
 		long db_id = getIntent().getLongExtra("database_id", -1);
 
+		// if the id isn't negative, then we edit ti
 		if (db_id > -1) {
 			editDeduction(db_id);
 		}
@@ -166,8 +168,8 @@ public class DeductionEditActivity extends Activity {
 				deleteDeductionItem();
 				finish();
 			}
-
 		});
+
 		deduction_neutral_button.setText(R.string.deduction_button_update);
 		deduction_neutral_button.setOnClickListener(new OnClickListener() {
 
@@ -179,6 +181,7 @@ public class DeductionEditActivity extends Activity {
 		});
 	}
 
+	// clear all the values so the user can input new information
 	private void clearValues() {
 		deduction_name_edit.setText("");
 		deduction_amount_edit.setText("");
@@ -188,18 +191,13 @@ public class DeductionEditActivity extends Activity {
 		deduction_third_pay_checkbox.setChecked(false);
 	}
 
-	private void cancelThis() {
-		finish();
-	}
-
 	private void startListening() {
 		deduction_positive_button.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				cancelThis();
+				finish();
 			}
-
 		});
 
 		deduction_negative_button.setOnClickListener(new OnClickListener() {
@@ -222,6 +220,7 @@ public class DeductionEditActivity extends Activity {
 		});
 	}
 
+	// create the deduction item and insert it
 	private void createDeductionItem() {
 		// create a resolver to connect to the content provider
 		ContentResolver resolver = getContentResolver();
@@ -239,6 +238,7 @@ public class DeductionEditActivity extends Activity {
 		resolver.insert(DeductionContentProvider.CONTENT_URI, values);
 	}
 
+	// update the deduction item and insert it
 	private void updateDeductionItem() {
 		// get values from gui
 		getValues();
@@ -259,6 +259,7 @@ public class DeductionEditActivity extends Activity {
 		resolver.update(DeductionContentProvider.CONTENT_URI, values, Deduction.COLUMN_ID + "=?", selectionArgs);
 	}
 
+	// delete the deduction item from the database
 	private void deleteDeductionItem() {
 		// create a resolver to connect to the content provider
 		ContentResolver resolver = getContentResolver();

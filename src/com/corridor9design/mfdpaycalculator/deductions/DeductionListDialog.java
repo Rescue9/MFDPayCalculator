@@ -29,7 +29,7 @@ import android.widget.Toast;
 
 public class DeductionListDialog extends DialogFragment implements LoaderCallbacks<Cursor>, OnClickListener {
 
-	// set the projection as static
+	// set the projection (what we're wanting from the database) to pass to the method
 	private static final String[] PROJECTION = new String[] { "_id", "name", "amount" };
 
 	// set the loader's unique id. loader id's are specific to the Activity or Fragment in which they reside
@@ -41,35 +41,41 @@ public class DeductionListDialog extends DialogFragment implements LoaderCallbac
 	// the adapter that binds data to our listview
 	private SimpleCursorAdapter mAdapter;
 
-	public DeductionListDialog() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		// the names of the columns we want to pass to the views
 		String[] DataColumns = new String[] { "name", "amount" };
+		// the views we want to pass the names to
 		int[] viewIDs = new int[] { R.id.deduction_listing_deduction_name, R.id.deduction_listing_deduction_amount };
 
 		mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.deduction_listings, null, DataColumns, viewIDs, 0);
 
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
 
+		// the main view that houses our layout
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_deduction_list, null);
 
+		// the listview that holds the deduction list
 		ListView listview = (ListView) view.findViewById(android.R.id.list);
 		listview.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
+			// set a short click listener
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// create a new dialog fragment
 				DialogFragment deduction_specifics = new DeductionSpecificsDialog();
 
+				// / bundle database row so we can get the correct info
+				// for our specific listing
 				Bundle arguments = new Bundle();
 				arguments.putLong("database_row", id);
 				deduction_specifics.setArguments(arguments);
 				deduction_specifics.show(getFragmentManager(), "dialog");
 			}
 		});
+		// set the long click listener
 		listview.setOnItemLongClickListener(new OnItemLongClickListener() {
 
+			// on long click we want to open the edit fragment
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent deduction_edit_intent = new Intent(getActivity(), DeductionEditActivity.class);
@@ -147,7 +153,5 @@ public class DeductionListDialog extends DialogFragment implements LoaderCallbac
 		case -1:
 			return;
 		}
-
 	}
-
 }
