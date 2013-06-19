@@ -103,6 +103,15 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu (Menu menu) {
+	    if (!premium_purchased)
+	        menu.getItem(1).setVisible(false);
+	    else
+	        menu.getItem(1).setVisible(true);
+	    return true;
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
