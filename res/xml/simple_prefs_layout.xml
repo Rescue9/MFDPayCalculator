@@ -36,8 +36,8 @@
             android:summary="@string/pref_years_of_service_summary"
             android:title="@string/pref_years_of_service_title" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Personal Info">
+   <!-- <PreferenceCategory android:title="Personal Info">
         <EditTextPreference android:dialogMessage="@string/pref_hire_date_dialog_message" android:dialogTitle="@string/pref_hire_date_dialog_title" android:summary="@string/pref_hire_date_summary" android:title="@string/pref_hire_date_title"/>
     </PreferenceCategory>
-
+ 	--> 
 </PreferenceScreen>
