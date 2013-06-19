@@ -22,7 +22,11 @@ package com.corridor9design.mfdpaycalculator.billing;
  * call {@link #getResult()}.
  */
 public class IabException extends Exception {
-    IabResult mResult;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7891065448993640646L;
+	IabResult mResult;
 
     public IabException(IabResult r) {
         this(r, null);

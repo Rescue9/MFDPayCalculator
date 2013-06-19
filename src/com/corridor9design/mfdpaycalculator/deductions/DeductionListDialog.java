@@ -1,15 +1,12 @@
 package com.corridor9design.mfdpaycalculator.deductions;
 
 import com.corridor9design.mfdpaycalculator.R;
-import com.corridor9design.mfdpaycalculator.R.id;
-import com.corridor9design.mfdpaycalculator.R.layout;
 import com.corridor9design.mfdpaycalculator.database.Deduction;
 import com.corridor9design.mfdpaycalculator.database.DeductionContentProvider;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
@@ -25,7 +22,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
 
 public class DeductionListDialog extends DialogFragment implements LoaderCallbacks<Cursor>, OnClickListener {
 
