@@ -12,7 +12,7 @@
             android:title="@string/pref_advanced_layout_title" />
 
         <ListPreference
-            android:defaultValue="Probationary Firefighter"
+            android:defaultValue="@string/pref_default_rank"
             android:dependency="pref_advanced_layout"
             android:dialogTitle="@string/pref_rank_dialog_title"
             android:enabled="true"
@@ -35,6 +35,9 @@
             android:selectable="true"
             android:summary="@string/pref_years_of_service_summary"
             android:title="@string/pref_years_of_service_title" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Personal Info">
+        <EditTextPreference android:dialogMessage="@string/pref_hire_date_dialog_message" android:dialogTitle="@string/pref_hire_date_dialog_title" android:summary="@string/pref_hire_date_summary" android:title="@string/pref_hire_date_title"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

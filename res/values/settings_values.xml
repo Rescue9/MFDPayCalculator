@@ -26,5 +26,10 @@
     <string name="pref_years_of_service_dialog_title">Enter your years of service</string>
     <string name="pref_years_of_service_dialog_message">Used for calculating longevity</string>
     <string name="pref_years_of_service_summary">0</string>
+    <string name="pref_default_rank">Probationary Firefighter</string>
+    <string name="pref_hire_date_title">Hire date</string>
+    <string name="pref_hire_date_dialog_title">Enter your employment date</string>
+    <string name="pref_hire_date_dialog_message">Used for calculating longevity</string>
+    <string name="pref_hire_date_summary">01/06/2000</string>
 
 </resources>
