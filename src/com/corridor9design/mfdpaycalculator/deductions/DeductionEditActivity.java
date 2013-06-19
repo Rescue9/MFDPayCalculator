@@ -177,7 +177,20 @@ public class DeductionEditActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				if(deduction_name_edit.getText().length()==0 && deduction_amount_edit.getText().length()==0){
+					deleteDeductionItem();
+					finish();
+				}
 				updateDeductionItem();
+				finish();
+			}
+		});
+		
+		deduction_negative_button.setText(R.string.deduction_button_ok);
+		deduction_negative_button.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
 				finish();
 			}
 		});
