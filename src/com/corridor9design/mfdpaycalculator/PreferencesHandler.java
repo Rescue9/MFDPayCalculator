@@ -29,6 +29,14 @@ public class PreferencesHandler {
 		editor.commit();
 	}
 
+	public void setBoolPreferences(String key, boolean value, Context context) {
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+		SharedPreferences.Editor editor = preferences.edit();
+
+		editor.putBoolean(key, value);
+		editor.commit();
+	}
+
 	// get preference of type String
 	public String getPreferences(String key, Context context) {
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -50,8 +58,8 @@ public class PreferencesHandler {
 
 	// get preference of type Boolean
 	public boolean getBoolPreference(String key, Context context) {
-		boolean pref = Boolean.parseBoolean(getPreferences(key, context));
-		return pref;
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+		return preferences.getBoolean(key, false);
 	}
 
 	// check to see if a preference is set

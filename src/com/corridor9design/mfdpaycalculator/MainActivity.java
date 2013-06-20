@@ -65,8 +65,6 @@ public class MainActivity extends Activity {
 	LinearLayout simple_layout_container;
 	LinearLayout advanced_layout_container;
 
-	boolean premium_purchased = false; // set premium purchase to false on run
-
 	// create handler objects to deal with preferences & calc engine values
 	PreferencesHandler ph = new PreferencesHandler();
 	ValuesHandler vh = new ValuesHandler();
@@ -106,7 +104,7 @@ public class MainActivity extends Activity {
 	
 	@Override
 	public boolean onPrepareOptionsMenu (Menu menu) {
-	    if (!premium_purchased)
+	    if (!ph.getBoolPreference("premium_purchased", this))
 	        menu.getItem(1).setVisible(false);
 	    else
 	        menu.getItem(1).setVisible(true);
@@ -139,17 +137,18 @@ public class MainActivity extends Activity {
 		super.onResume();
 
 		// check if premium version purchased
-		if (!premium_purchased) {
-			Log.d(TAG, "Checking premium_purchased...");
-
-			premium_purchased = ph.getBoolPreference("premium_purchased", this);
-			Log.d(TAG, "Is premium purchased: " + premium_purchased);
-			if (premium_purchased) {
-				Toast.makeText(this, "Premium version purchased", Toast.LENGTH_LONG).show();
-				premium_purchased = true;
-			}
+		if (!ph.getBoolPreference("premium_purchased", this)) {
+		        Log.d(TAG, "Checking premium_purchased...");
+		        Log.d(TAG, "Is premium purchased: " + ph.getBoolPreference("premium_purchased", this));
 		}
-
+		if (ph.getBoolPreference("premium_purchased", this)) {
+		        if (!ph.getBoolPreference("premium_toast", this)){
+		                Toast.makeText(this, "Premium version purchased", Toast.LENGTH_LONG).show();
+		                ph.setBoolPreferences("premium_toast", true, this);
+		                invalidateOptionsMenu();
+		        }
+		}
+		
 		ph.setValuesFromPreferences(this); // read values from preferences
 		setupGuiLayout(); // setup simple or advanced layout
 		setupButtons(); // setup buttons to receive click events
