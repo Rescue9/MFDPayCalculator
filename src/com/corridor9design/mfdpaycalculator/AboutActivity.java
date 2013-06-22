@@ -1,3 +1,12 @@
+/**
+ * Program: AboutActivity.java
+ * Programmer: Andrew Buskov
+ * Date: Jun 17, 2013
+ * Purpose: To create an activity that will display information about
+ *  this program and provide the user with a way to purchase a premium
+ *  version.
+ */
+
 package com.corridor9design.mfdpaycalculator;
 
 import android.app.Activity;
@@ -23,45 +32,43 @@ import com.google.ads.AdView;
 
 public class AboutActivity extends Activity {
 
+	// declare the google ads display
 	AdRequest ad_request = new AdRequest();
 	private AdView ad_view;
 
-	// objects
+	// declare button & text for premium purchasing
 	Button purchase_button;
 	TextView premium_versin_text;
 
 	// debug tag for logging
 	static final String TAG = "MFDPayCalc";
 
-	// SKU for our products:
-	static final String SKU_PREMIUM = "mfd_pay_calculator_remove_ads";
-
-	// does user have premium key?
-	boolean isPremium = false;
-
-	// (arbitrary) tequest code for the purchase flow
-	static final int RC_REQUEST = 12131;
-
-	// create an IAB helper object
-	IabHelper mHelper;
-
-	public AboutActivity() {
-		// TODO Auto-generated constructor stub
-	}
+	// GOOGLE ADS & BILLING
+	static final String SKU_PREMIUM = "mfd_pay_calculator_remove_ads"; // SKU for our products:
+	boolean isPremium = false; // does user have premium key?
+	static final int RC_REQUEST = 6800293; // (arbitrary) request code for the purchase flow
+	IabHelper mHelper; // create an In-App Billing helper object
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE); // remove title from window
 		setContentView(R.layout.activity_about);
 
 		purchase_button = (Button) findViewById(R.id.about_premium_purchase_button);
 		premium_versin_text = (TextView) findViewById(R.id.about_premium_version);
 
-		// setup in-app billing
-		String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApMZgB6WstG7wxH5/595qHdO5uo7vQu2wDcwNs4DGgzJVKIbHxafw3lg1RswIMECems9sqoj6bI6aISqLhASx2lX/fCDXI5PSxPymlkgNUTMlS4yd7ZBkQF1UMwbwMSJWJ84FYOjRB26ctXTkhOa9A9oL73OgMvolTNbpuCG7YB9UnoJuhlmu182537Qh5sZAMi6fAM4JfaVKicFczIuIhHXTXSGWUX0d2xPiRGXNDHzTB8D2MT1LmfTrjjC8gsEBg/+Frjk5U6I3gUH9aH2fxKeVvy+KblrZsMVNrv7APPqSJ3CSkBlI3+4FiSBjnyLGfUYdmNRBhPeXi55PJN3A9QIDAQAB"; 
+		// setup in-app billing public key substrings
+		String myB = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApMZgB6WstG7w";
+		String asE = "xH5/595qHdO5uo7vQu2wDcwNs4DGgzJVKIbHxafw3lg1RswIMECems9s";
+		String enC = "qoj6bI6aISqLhASx2lX/fCDXI5PSxPymlkgNUTMlS4yd7ZBkQF1UMwbw";
+		String odE = "MSJWJ84FYOjRB26ctXTkhOa9A9oL73OgMvolTNbpuCG7YB9UnoJuhlmu";
+		String dpU = "182537Qh5sZAMi6fAM4JfaVKicFczIuIhHXTXSGWUX0d2xPiRGXNDHzT";
+		String bkE = "B8D2MT1LmfTrjjC8gsEBg/+Frjk5U6I3gUH9aH2fxKeVvy+KblrZsMVN";
+		String y64 = "rv7APPqSJ3CSkBlI3+4FiSBjnyLGfUYdmNRBhPeXi55PJN3A9QIDAQAB";
+		String myBaseEncodedPubKey64 = myB + asE + enC + odE + dpU + bkE + y64;
 
-		mHelper = new IabHelper(this, base64EncodedPublicKey);
+		mHelper = new IabHelper(this, myBaseEncodedPubKey64);
 
 		Log.d(TAG, "Starting IAB setup");
 		mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
@@ -101,7 +108,9 @@ public class AboutActivity extends Activity {
 
 	@Override
 	public void onDestroy() {
+		// remove all ad views
 		if (ad_view != null) {
+			ad_view.removeAllViews();
 			ad_view.destroy();
 		}
 		// destroy billing helper
@@ -123,12 +132,12 @@ public class AboutActivity extends Activity {
 			} else {
 				Log.d(TAG, "Query inventory was successful.");
 
-				// does the user have the premium upgrade?
+				// check for a premium upgrade?
 				isPremium = inventory.hasPurchase(SKU_PREMIUM);
 
 				// update UI here
 				refreshUi();
-				
+
 				// tag log with purchase status
 				Log.d(TAG, "User is " + (isPremium ? "PREMIUM" : "NOT PREMIUM"));
 			}
@@ -176,24 +185,14 @@ public class AboutActivity extends Activity {
 
 		});
 	}
-	
-	protected boolean premiumPurchased(){
-		// create a boolean variable to hold our return value
-		boolean preference_purchased = false;
-		
+
+	protected void premiumIsPurchased() {
 		// lets see if we have a preference for a permium item being purchased
 		PreferencesHandler ph = new PreferencesHandler();
-		if (ph.getBoolPreference("purchased_premium", this)){
-			preference_purchased = true;
-			System.out.println("Should be true: " + preference_purchased);
-			return preference_purchased;
-		}
-		System.out.println("Should be false: " + preference_purchased);
-
-		return preference_purchased;
+		ph.setBoolPreferences("premium_purchased", true, this);
 	}
-	
-	protected void refreshUi(){
+
+	protected void refreshUi() {
 
 		if (!isPremium) {
 			// create the adview instance
@@ -211,16 +210,18 @@ public class AboutActivity extends Activity {
 			ad_request.addTestDevice("E952DED8DFB1CA8350FD5D82F409703A"); // Note 10.1 Test ID
 
 			ad_view.loadAd(ad_request);
-			
+
 			// display button for purchase
-			purchase_button.setVisibility(View.GONE); //TODO Change to VISIBLE on production
+			purchase_button.setVisibility(View.VISIBLE); // TODO Change to VISIBLE on production
 			premium_versin_text.setVisibility(View.GONE);
 
 		} else {
-			//remove purchase button
+			// remove purchase button
 			purchase_button.setVisibility(View.GONE);
-			premium_versin_text.setVisibility(View.GONE); //TODO Change to VISIBLE on production
+			premium_versin_text.setVisibility(View.VISIBLE); // TODO Change to VISIBLE on production
 
+			// set premium purchased preference
+			premiumIsPurchased();
 		}
 	}
 }

@@ -2,8 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/MainLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -13,139 +14,166 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible" >
-
-        <TextView
-            android:id="@+id/base_pay_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".5"
-            android:text="@string/base_pay_label"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:visibility="visible" />
-
-        <TextView
-            android:id="@+id/gross_pay_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/gross_pay_label"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:visibility="visible" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible" >
-
-        <TextView
-            android:id="@+id/base_pay_total"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight=".5"
-            android:text="@string/zero_dollar_amount"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:visibility="visible" />
-
-        <TextView
-            android:id="@+id/gross_pay_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:text="@string/zero_dollar_amount"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:visibility="visible" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/GrayLine01"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:visibility="visible" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:visibility="visible" >
-
-        <TextView
-            android:id="@+id/taxes_total"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight=".5"
-            android:text="@string/zero_dollar_amount"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:visibility="visible" />
-
-        <TextView
-            android:id="@+id/deposited_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:text="@string/zero_dollar_amount"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:visibility="visible" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible" >
-
-        <TextView
-            android:id="@+id/taxes_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".5"
-            android:text="@string/taxes_label"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:visibility="visible" />
-
-        <TextView
-            android:id="@+id/deposited_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/deposit_label"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:visibility="visible" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/WhiteLineSplitFrame01"
-        android:layout_width="wrap_content"
-        android:layout_height="2dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/holo_blue_dark"
-        android:visibility="visible" />
-
-    <LinearLayout
-        android:id="@+id/simple_layout_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_weight="1"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/rank_label"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="5dp"
-            android:text="@string/rank_label"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:visibility="visible" />
+            android:visibility="visible" >
+
+            <TextView
+                android:id="@+id/base_pay_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:text="@string/base_pay_label"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/gross_pay_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:gravity="right"
+                android:text="@string/gross_pay_label"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible" >
+
+            <TextView
+                android:id="@+id/base_pay_total"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="@string/zero_dollar_amount"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/gross_pay_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight=".5"
+                android:gravity="right"
+                android:text="@string/zero_dollar_amount"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:visibility="visible" />
+
+        </LinearLayout>
 
         <View
-            android:id="@+id/GrayLine02"
+            android:id="@+id/GrayLine01"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="5dp"
             android:background="@android:color/darker_gray"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:visibility="visible" >
+
+            <TextView
+                android:id="@+id/taxes_total"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="@string/zero_dollar_amount"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/deposited_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight=".5"
+                android:gravity="right"
+                android:text="@string/zero_dollar_amount"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible" >
+
+            <TextView
+                android:id="@+id/taxes_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:text="@string/taxes_label"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/deposited_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:gravity="right"
+                android:text="@string/deposit_label"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/WhiteLineSplitFrame01"
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/holo_blue_dark"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/simple_layout_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/rank_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:text="@string/rank_label"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:visibility="visible" />
+
+            <View
+                android:id="@+id/GrayLine02"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/darker_gray"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/calculate_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/calculate_button"
             android:visibility="visible" />
 
     </LinearLayout>
@@ -153,7 +181,8 @@
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
         android:layout_weight="1"
         android:visibility="visible" >
 
@@ -197,14 +226,13 @@
                         android:id="@+id/base_pay_rate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="5"
+                        android:layout_weight="3"
                         android:ems="10"
                         android:hint="@string/zero_amount"
                         android:inputType="numberDecimal"
                         android:selectAllOnFocus="true"
                         android:visibility="visible"
                         android:width="0dp" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -234,13 +262,12 @@
                         android:id="@+id/overtime1_rate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="5"
+                        android:layout_weight="3"
                         android:ems="10"
                         android:hint="@string/zero_amount"
                         android:inputType="numberDecimal"
                         android:selectAllOnFocus="true"
                         android:visibility="visible" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -270,13 +297,12 @@
                         android:id="@+id/overtime2_rate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="5"
+                        android:layout_weight="3"
                         android:ems="10"
                         android:hint="@string/zero_amount"
                         android:inputType="numberDecimal"
                         android:selectAllOnFocus="true"
                         android:visibility="visible" />
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -306,13 +332,12 @@
                         android:id="@+id/years_worked"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="5"
+                        android:layout_weight="3"
                         android:ems="10"
                         android:hint="@string/zero_hint"
                         android:inputType="numberDecimal"
                         android:selectAllOnFocus="true"
                         android:visibility="visible" />
-
                 </LinearLayout>
             </LinearLayout>
 
@@ -415,19 +440,5 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:visibility="visible" >
-
-        <Button
-            android:id="@+id/calculate_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/calculate_button"
-            android:visibility="visible" />
-    </RelativeLayout>
 
 </LinearLayout>

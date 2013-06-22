@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.corridor9design.mfdpaycalculator"
-    android:versionCode="18"
-    android:versionName="Ver_0.37" >
+    android:versionCode="19"
+    android:versionName="0.37.02" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -27,11 +27,16 @@
             </intent-filter>
         </activity>
         <activity android:name="com.corridor9design.mfdpaycalculator.AboutActivity" />
-        <activity android:name="com.corridor9design.mfdpaycalculator.SettingsActivity" >
-        </activity>
+        <activity android:name="com.corridor9design.mfdpaycalculator.SettingsActivity" />
+        <activity android:name="com.corridor9design.mfdpaycalculator.deductions.DeductionEditActivity" />
         <activity
             android:name="com.google.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+
+        <provider
+            android:name=".database.DeductionContentProvider"
+            android:authorities="com.corridor9design.mfdpaycalculator.database.deductioncontentprovider" >
+        </provider>
     </application>
 
 </manifest>

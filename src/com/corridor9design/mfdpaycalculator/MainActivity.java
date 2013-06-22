@@ -1,6 +1,21 @@
+/**
+ * Program: MainActivity.java
+ * Programmer: Andrew Buskov
+ * Date: Jun 17, 2013
+ * Purpose: To create an Android application that can be used by members
+ *  of the Madisonville Fire Department to properly calculate their individual
+ *  paycheck amounts based upon the number of holidays, overtime hours, and 
+ *  scheduled days worked in a specific pay period.
+ */
+
 package com.corridor9design.mfdpaycalculator;
 
 import java.text.DecimalFormat;
+
+import com.corridor9design.mfdpaycalculator.deductions.DeductionListDialog;
+import com.corridor9design.mfdpaycalculator.engine.CalcEngine;
+import com.corridor9design.mfdpaycalculator.engine.ValueModifier;
+import com.corridor9design.mfdpaycalculator.engine.ValuesHandler;
 
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -8,6 +23,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,10 +37,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	
+
 	// debug tag for logging
 	static final String TAG = "MFDPayCalc";
-	
+
 	// gui text elements
 	TextView base_pay_total;
 	TextView gross_pay_total;
@@ -43,35 +59,38 @@ public class MainActivity extends Activity {
 	Button overtime_button;
 	Button scheduled_days_button;
 	Button calculate_button;
+	private RadioGroup radio_pay_group;
 
 	// gui layout elements
 	LinearLayout simple_layout_container;
 	LinearLayout advanced_layout_container;
 
-	private RadioGroup radio_pay_group;
-
+	// create handler objects to deal with preferences & calc engine values
 	PreferencesHandler ph = new PreferencesHandler();
 	ValuesHandler vh = new ValuesHandler();
 	ValueModifier vm = new ValueModifier();
 
+	// set specific decimal formats for different TextView fields
 	DecimalFormat df_totals = new DecimalFormat("$##0.00");
 	DecimalFormat df_rates = new DecimalFormat("##0.000");
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// tag logcat for initial start
+		Log.d(TAG, "Starting...");
 		setContentView(R.layout.activity_main);
 
 		// hide the keyboard until user requests it
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-		
-		// setup settings defaults
-		PreferenceManager.setDefaultValues(this, R.xml.prefs_layout, false);
+
+		// set default values from preference file. necessary for first run
+		PreferenceManager.setDefaultValues(this, R.xml.simple_prefs_layout, false);
 
 		// set valueHandler values from preference handler
 		ph.setValuesFromPreferences(this);
 
-		// setup gui instances & set layout
+		// instantiate gui objects
 		setupGuiInstances();
 
 	}
@@ -81,6 +100,15 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu (Menu menu) {
+	    if (!ph.getBoolPreference("premium_purchased", this))
+	        menu.getItem(1).setVisible(false);
+	    else
+	        menu.getItem(1).setVisible(true);
+	    return true;
 	}
 
 	@Override
@@ -95,6 +123,10 @@ public class MainActivity extends Activity {
 			Intent settings = new Intent(this, SettingsActivity.class);
 			startActivity(settings);
 			return true;
+		case R.id.action_deduction_list:
+			DialogFragment newFragment = new DeductionListDialog();
+			newFragment.show(getFragmentManager(), "dialog");
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -103,38 +135,52 @@ public class MainActivity extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		ph.setValuesFromPreferences(this);
-		setupGuiLayout();
-		setupButtonClicks();
-		refreshGui();
+
+		// check if premium version purchased
+		if (!ph.getBoolPreference("premium_purchased", this)) {
+		        Log.d(TAG, "Checking premium_purchased...");
+		        Log.d(TAG, "Is premium purchased: " + ph.getBoolPreference("premium_purchased", this));
+		}
+		if (ph.getBoolPreference("premium_purchased", this)) {
+		        if (!ph.getBoolPreference("premium_toast", this)){
+		                Toast.makeText(this, "Premium version purchased", Toast.LENGTH_LONG).show();
+		                ph.setBoolPreferences("premium_toast", true, this);
+		                invalidateOptionsMenu();
+		        }
+		}
+		
+		ph.setValuesFromPreferences(this); // read values from preferences
+		setupGuiLayout(); // setup simple or advanced layout
+		setupButtons(); // setup buttons to receive click events
+		refreshGui(); // set gui objects from values
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		ph.saveValuesToPreferences(this);
+		ph.saveValuesToPreferences(this); // save values
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		ph.saveValuesToPreferences(this);
+		ph.saveValuesToPreferences(this); // save values
 	}
 
 	public void setupGuiInstances() {
-		// gui display elements
+		// gui display objects
 		base_pay_total = (TextView) findViewById(R.id.base_pay_total);
 		gross_pay_total = (TextView) findViewById(R.id.gross_pay_total);
 		taxes_total = (TextView) findViewById(R.id.taxes_total);
 		deposited_total = (TextView) findViewById(R.id.deposited_total);
 
-		// gui entry elements
+		// gui entry objects
 		base_pay_rate = (EditText) findViewById(R.id.base_pay_rate);
 		overtime1_rate = (EditText) findViewById(R.id.overtime1_rate);
 		overtime2_rate = (EditText) findViewById(R.id.overtime2_rate);
 		years_worked = (EditText) findViewById(R.id.years_worked);
 
-		// gui button elements
+		// gui button objects
 		holidays_button = (Button) findViewById(R.id.holidays_button);
 		overtime_button = (Button) findViewById(R.id.overtime_button);
 		scheduled_days_button = (Button) findViewById(R.id.scheduled_days_button);
@@ -154,23 +200,28 @@ public class MainActivity extends Activity {
 
 		// change layout based upon preferences
 		if (!isAdvancedLayout) {
+			// SIMPLE LAYOUT
 			simple_layout_container.setVisibility(View.VISIBLE);
 			rank_label.setText("Current rank: " + current_rank_label);
 			advanced_layout_container.setVisibility(View.GONE);
 
-			vh.setupSimpleValues(Integer.parseInt(ph.getPreferences("current_rank_int", this)));
-			vh.setYears_worked(ph.getIntPreference("pref_years_of_service", this));
+			vh.setupSimpleValues(Integer.parseInt(ph.getPreferences("current_rank_int", this))); // setup gui objects
+																									// from rank values
+																									// in valuehandler
+			vh.setYears_worked(ph.getIntPreference("pref_years_of_service", this)); // set years worked based upon value
+																					// in settings
 
 		} else {
+			// ADVANCED LAYOUT
 			simple_layout_container.setVisibility(View.GONE);
 			advanced_layout_container.setVisibility(View.VISIBLE);
-			vh.setupSimpleValues(0);
+			vh.setupSimpleValues(0); // set values back to probationary firefighter
 		}
 	}
 
 	public void readGuiIntoValues() {
 		if (guiValuesFull()) {
-			// we need to reread the gui inputs into values right before
+			// reread the gui inputs into values right before
 			// calculating to make sure that we accept any user changes made
 			vh.setBase_pay_rate(vm.editToDouble(base_pay_rate));
 			vh.setOvertime1_pay_rate(vm.editToDouble(overtime1_rate));
@@ -186,7 +237,6 @@ public class MainActivity extends Activity {
 
 	public void refreshGui() {
 		// refresh totals
-		// df.format(vh.getBase_pay_total());
 		base_pay_total.setText(df_totals.format(vh.getBase_pay_total()));
 		gross_pay_total.setText(df_totals.format(vh.getGross_pay_total()));
 		taxes_total.setText(df_totals.format(vh.getTaxes_total()));
@@ -204,36 +254,47 @@ public class MainActivity extends Activity {
 		scheduled_days_button.setText("Scheduled Days: " + vh.getScheduled_days());
 	}
 
+	// check to make sure gui edittext objects have value. calc will FC if they do not
 	public boolean guiValuesFull() {
-		EditText[] gui_values = { base_pay_rate, overtime1_rate, overtime2_rate, years_worked };
-		Button[] gui_button = { scheduled_days_button, holidays_button, overtime_button };
+		EditText[] gui_values = { base_pay_rate, overtime1_rate, overtime2_rate, years_worked }; // edittext values
+		Button[] gui_button = { scheduled_days_button, holidays_button, overtime_button }; // button values
 		for (EditText gvn : gui_values) {
 			if (gvn.getText().toString().equals("")) {
+				// create a toast, set the toast's textview object font to red & display
 				Toast emptygvn = Toast.makeText(this, "Empty values. Resetting to previous", Toast.LENGTH_LONG);
 				TextView thisToast = (TextView) emptygvn.getView().findViewById(android.R.id.message);
 				thisToast.setTextColor(Color.RED);
 				emptygvn.show();
+
+				// also set the empty edittext font to red
 				gvn.setTextColor(Color.RED);
-				return false;
+				return false; // epic fail
 			}
+			// set value to white. useful if value was previously set to red
 			gvn.setTextColor(Color.WHITE);
 		}
+
 		for (Button gbn : gui_button) {
 			if (gbn.getText().toString().equals("")) {
+				// create a toast, set the toast's textview object font to red & display
 				Toast emptygbn = Toast.makeText(this, "Empty values. Resetting to previous", Toast.LENGTH_LONG);
 				TextView thisToast = (TextView) emptygbn.getView().findViewById(android.R.id.message);
 				thisToast.setTextColor(Color.RED);
 				emptygbn.show();
+
+				// also set the empty button font to red
 				gbn.setTextColor(Color.RED);
-				return false;
+				return false; // epic fail
 			}
+			// set the values to white. useful if thevalue was previously set to red
 			gbn.setTextColor(Color.WHITE);
 		}
-		
+
 		return true;
 	}
 
-	public void setupButtonClicks() {
+	// setup buttons
+	public void setupButtons() {
 		holidayButtonClick();
 		overtimeButtonClick();
 		scheduledDaysButtonClick();
@@ -247,13 +308,15 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				readGuiIntoValues();
 
+				// create a new dialog handler
 				DialogFragment newFragment = new DialogHandler();
 
+				// create a bundle housing a key letting the dialog handler
+				// know which button was pressed
 				Bundle args = new Bundle();
 				args.putInt("key", 0);
 				newFragment.setArguments(args);
 
-				base_pay_total.setText("TESTING_Holiday");
 				newFragment.show(getFragmentManager(), "holidays");
 			}
 		});
@@ -268,11 +331,12 @@ public class MainActivity extends Activity {
 
 				DialogFragment newFragment = new DialogHandler();
 
+				// create a bundle housing a key letting the dialog handler
+				// know which button was pressed
 				Bundle args = new Bundle();
 				args.putInt("key", 1);
 				newFragment.setArguments(args);
 
-				base_pay_total.setText("TESTING_Overtime");
 				newFragment.show(getFragmentManager(), "overtime");
 			}
 		});
@@ -287,11 +351,12 @@ public class MainActivity extends Activity {
 
 				DialogFragment newFragment = new DialogHandler();
 
+				// create a bundle housing a key letting the dialog handler
+				// know which button was pressed
 				Bundle args = new Bundle();
 				args.putInt("key", 2);
 				newFragment.setArguments(args);
 
-				base_pay_total.setText("TESTING_Scheduled");
 				newFragment.show(getFragmentManager(), "scheduled");
 			}
 		});
@@ -304,10 +369,11 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				readGuiIntoValues();
 
+				// create a new calculator engine object
 				CalcEngine cEngine = new CalcEngine();
 				cEngine.calculateBase();
 
-				// calculate gross & toast
+				// calculate gross based upon radio button index
 				switch (radio_pay_group.indexOfChild(findViewById(radio_pay_group.getCheckedRadioButtonId()))) {
 				case 0:
 					cEngine.calculateGross(radio_pay_group.indexOfChild(findViewById(radio_pay_group
@@ -325,12 +391,11 @@ public class MainActivity extends Activity {
 					Toast.makeText(MainActivity.this, R.string.toast_3rd_payday, Toast.LENGTH_SHORT).show();
 					break;
 				}
-				cEngine.calculateGross(radio_pay_group.indexOfChild(findViewById(radio_pay_group
-						.getCheckedRadioButtonId())));
-				cEngine.calculateTaxes(vh.getGross_pay_total());
-				cEngine.calculateDeposti(vh.getGross_pay_total() / 3);
-				refreshGui();
 
+				// calculate taxes & deposit amount (with deductions)
+				cEngine.calculateTaxes(vh.getGross_pay_total()); // simple taxes / not fully implemented
+				cEngine.calculateDeposit(vh.getGross_pay_total() / 3);
+				refreshGui();
 			}
 		});
 	}
