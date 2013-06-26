@@ -26,6 +26,7 @@ import com.corridor9design.mfdpaycalculator.billing.IabHelper;
 import com.corridor9design.mfdpaycalculator.billing.IabResult;
 import com.corridor9design.mfdpaycalculator.billing.Inventory;
 import com.corridor9design.mfdpaycalculator.billing.Purchase;
+import com.corridor9design.mfdpaycalculator.engine.DeductionEngine;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
@@ -88,6 +89,7 @@ public class AboutActivity extends Activity {
 		});
 		getVersionNumber();
 		purchasePro();
+		//testActivities(); // TODO used for testing
 	}
 
 	// get version number from AndroidManifest
@@ -105,7 +107,7 @@ public class AboutActivity extends Activity {
 		version.setText("Version: " + versionName);
 
 	}
-
+	
 	@Override
 	public void onDestroy() {
 		// remove all ad views
@@ -223,5 +225,11 @@ public class AboutActivity extends Activity {
 			// set premium purchased preference
 			premiumIsPurchased();
 		}
+	}
+	
+	public void testActivities(){
+		DeductionEngine de = new DeductionEngine();
+		System.out.println("Deductions total: " + de.returnDeductionTotal(this));
+
 	}
 }

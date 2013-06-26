@@ -219,7 +219,7 @@ public class DeductionEditActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				System.out.println("Add");
+				System.out.println("Added deduction");
 				getValues();
 				createDeductionItem();
 				finish();

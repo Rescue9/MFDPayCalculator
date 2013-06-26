@@ -7,10 +7,13 @@
 
 package com.corridor9design.mfdpaycalculator.engine;
 
+import android.content.Context;
+
 public class CalcEngine {
 
-	// create a new values handler object
+	// create a new values handler & deduction engine objects
 	ValuesHandler vh = new ValuesHandler();
+	DeductionEngine de = new DeductionEngine();
 
 	// create variables for use in calcengine class
 	// from calculation done on supplied values
@@ -59,7 +62,7 @@ public class CalcEngine {
 	}
 
 	// set deposit total based upon above calculation
-	public void calculateDeposit(double deposit) {
-		vh.setDeposit_total(deposit * 2); // FIXME this calculation is too simple.
+	public void calculateDeposit(Context context, double deposit) {
+		vh.setDeposit_total(((deposit - de.returnDeductionTotal(context)) /3) * 2); // FIXME this calculation is too simple.
 	}
 }
