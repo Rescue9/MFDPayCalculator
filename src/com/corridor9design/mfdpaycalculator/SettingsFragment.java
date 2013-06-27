@@ -10,6 +10,7 @@ package com.corridor9design.mfdpaycalculator;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -22,6 +23,8 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 	public static final String ADVANCED_LAYOUT = "pref_advanced_layout";
 	public static final String CURRENT_RANK_INT = "current_rank_int";
 	public static final String YEARS_OF_SERVICE = "pref_years_of_service";
+	public static final String MARITAL_STATUS = "pref_marital_status";
+	public static final String EXEMPTIONS = "pref_exemptions";
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -83,6 +86,28 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 			Preference pref_years_of_service = findPreference(key);
 			pref_years_of_service.setSummary(sharedPreferences.getString(YEARS_OF_SERVICE, "0"));
 
+		}
+		
+		// if the key changed is the marital status...
+		if (key.equals(MARITAL_STATUS)){
+			// get the new value & set the status from that
+			ListPreference marital_status = (ListPreference) findPreference(key);
+			marital_status.setSummary(marital_status.getEntry());
+			
+		}
+		
+		// if the key changed is the exemptions...
+		if (key.equals(EXEMPTIONS)){
+			// check to see if it is null
+			if (EXEMPTIONS.matches("")){
+				// if null, set to 0 & commit back to preferences
+				editor.putString(key, "0");
+				editor.apply();
+			}
+			
+			// update the exemptions summary on the settings page
+			EditTextPreference exemptions = (EditTextPreference) findPreference(key);
+			exemptions.setSummary(exemptions.getText());
 		}
 	}
 

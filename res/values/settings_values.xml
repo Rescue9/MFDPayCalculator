@@ -17,7 +17,18 @@
         <item>Captain</item>
         <item>Major</item>
     </string-array>
+    
+    <string-array name="marital_status">
+        <item>Single</item>
+        <item>Married</item>
+    </string-array>
 
+    <string-array name="marital_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+    <string name="pref_advanced_layout_name">Layout</string>
     <string name="pref_advanced_layout_title">Enable advanced layout</string>
     <string name="pref_advanced_layout_summary">Enter specific pay rates</string>
     <string name="pref_rank_title">Current rank:</string>
@@ -31,5 +42,13 @@
     <string name="pref_hire_date_dialog_title">Enter your employment date</string>
     <string name="pref_hire_date_dialog_message">Used for calculating longevity</string>
     <string name="pref_hire_date_summary">01/06/2000</string>
+    <string name="pref_tax_info_name">Tax info</string>
+    <string name="pref_marital_status_title">Marital Status</string>
+    <string name="pref_marital_status_dialog_title">What is your marital status</string>
+    <string name="pref_marital_status_summary">Single</string>
+    <string name="pref_exemptions_title">Exemptions</string>
+    <string name="pref_exemptions_dialog_title">Enter withholding allowences</string>
+    <string name="pref_exemptions_dialog_message">This info is from your W4 form: \nSingle = 0, Single+1 = 1, Married = 2, etc.</string>
+    <string name="pref_exemptions_summary">0</string>
 
 </resources>
