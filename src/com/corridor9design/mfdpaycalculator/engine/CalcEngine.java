@@ -64,5 +64,7 @@ public class CalcEngine {
 	// set deposit total based upon above calculation
 	public void calculateDeposit(Context context, double deposit) {
 		vh.setDeposit_total(((deposit - de.returnDeductionTotal(context)) /3) * 2); // FIXME this calculation is too simple.
+		
+		de.returnPreTaxDeductions(context);
 	}
 }
