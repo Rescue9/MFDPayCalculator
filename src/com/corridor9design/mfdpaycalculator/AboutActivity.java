@@ -26,7 +26,6 @@ import com.corridor9design.mfdpaycalculator.billing.IabHelper;
 import com.corridor9design.mfdpaycalculator.billing.IabResult;
 import com.corridor9design.mfdpaycalculator.billing.Inventory;
 import com.corridor9design.mfdpaycalculator.billing.Purchase;
-import com.corridor9design.mfdpaycalculator.engine.DeductionEngine;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
