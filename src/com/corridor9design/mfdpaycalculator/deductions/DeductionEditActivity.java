@@ -192,7 +192,7 @@ public class DeductionEditActivity extends Activity {
 			}
 		});
 		
-		deduction_negative_button.setText(R.string.deduction_button_ok);
+		deduction_negative_button.setText(R.string.deduction_button_cancel);
 		deduction_negative_button.setOnClickListener(new OnClickListener() {
 			
 			@Override

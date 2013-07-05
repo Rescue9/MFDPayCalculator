@@ -72,13 +72,13 @@ public class DeductionSpecificsDialog extends DialogFragment {
 			}
 		});
 		// we want have a delete button 
-		alertDialogBuilder.setNegativeButton(R.string.deduction_button_delete, new OnClickListener() {
+		/*alertDialogBuilder.setNegativeButton(R.string.deduction_button_delete, new OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				deleteDeductionItem();
 			}
-		});
+		});*/
 		return alertDialogBuilder.create();
 	}
 
