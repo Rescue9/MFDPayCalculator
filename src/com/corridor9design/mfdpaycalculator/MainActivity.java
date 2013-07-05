@@ -394,7 +394,7 @@ public class MainActivity extends Activity {
 
 				// calculate taxes & deposit amount (with deductions)
 				cEngine.calculateTaxes(vh.getGross_pay_total()); // FIXME simple taxes / not fully implemented
-				cEngine.calculateDeposit(MainActivity.this, vh.getGross_pay_total()); // FIXME simple deposit / not fully implemented
+				cEngine.calculateDeposit(MainActivity.this, vh.getGross_pay_total(), radio_pay_group.indexOfChild(findViewById(radio_pay_group.getCheckedRadioButtonId()))); // FIXME simple deposit / not fully implemented
 				refreshGui();
 			}
 		});

@@ -227,9 +227,10 @@ public class AboutActivity extends Activity {
 		}
 	}
 	
-	public void testActivities(){
+	// TODO this is a dummy method to test with
+	/*public void testActivities(){
 		DeductionEngine de = new DeductionEngine();
 		System.out.println("Deductions total: " + de.returnDeductionTotal(this));
 
-	}
+	}*/
 }
