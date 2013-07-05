@@ -138,14 +138,5 @@ public class DeductionSpecificsDialog extends DialogFragment {
 		if (cursor.getString(7).equals("true")) {
 			deduction_third_payday.setChecked(true);
 		}
-
-	}
-
-	private void deleteDeductionItem() {
-		// create a resolver to connect to the content provider
-		ContentResolver resolver = getActivity().getContentResolver();
-		String[] selectionArgs = new String[] { database_id + "" };
-
-		resolver.delete(DeductionContentProvider.CONTENT_URI, Deduction.COLUMN_ID + "=?", selectionArgs);
 	}
 }
