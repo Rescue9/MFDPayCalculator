@@ -52,7 +52,7 @@ public class TaxEngine {
 		exemption_allowance = exemptions * 150;
 		
 		fed_taxable_amount = gross_pay - exemption_allowance - pre_tax_deductions;
-		System.out.println("Fed_Tax_amount = " + fed_taxable_amount);
+		//System.out.println("Fed_Tax_amount = " + fed_taxable_amount);
 		
 		if(marital_status == 1){
 			federal_taxes = singleTaxRate(fed_taxable_amount);
@@ -83,16 +83,16 @@ public class TaxEngine {
 	
 	public double calculateCityTaxes(Context context, int payday){
 		
+		double city_taxes = vh.getGross_pay_total() * .015; // city tax is 1.5%
 		
-		
-		return 0.0;
+		return city_taxes;
 	}
 	
 	public double calculateMedicare(Context context, int payday){
 		
+		double medicare_taxes = vh.getGross_pay_total() * .0145; // medicare is 1.45%
 		
-		
-		return 0.0;
+		return medicare_taxes;
 	}
 	
 	public double singleTaxRate(double taxable_amount){
@@ -118,7 +118,7 @@ public class TaxEngine {
 			single_tax_rate = ((taxable_amount - 3463) * .28) + 687.95;
 		}
 		
-		System.out.println("Single tax rate = " + single_tax_rate);
+		//System.out.println("Single tax rate = " + single_tax_rate);
 		return single_tax_rate;
 	}
 	

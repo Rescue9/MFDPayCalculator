@@ -58,16 +58,18 @@ public class CalcEngine {
 	}
 
 	// set tax deduction total based upon above calculation
-	public void calculateTaxes(Context context, int payday) {
+	public double calculateTaxes(Context context, int payday) {
 		//vh.setTaxes_total(taxable / 3); // FIXME this calculation is too simple.
-		vh.setTaxes_total(te.returnTaxWitholding(context, payday));
+		double taxes = te.returnTaxWitholding(context, payday);
+		vh.setTaxes_total(taxes);
+		return taxes;
 	}
 
 	// set deposit total based upon above calculation
 	public void calculateDeposit(Context context, double deposit, int payday) {
-		vh.setDeposit_total(((deposit - de.returnDeductionTotal(context, payday)) /3) * 2); // FIXME this calculation is too simple.
-		
-		de.returnPreTaxDeductions(context, payday);
-		de.returnPostTaxDeductions(context, payday);
+		//vh.setDeposit_total(((deposit - de.returnDeductionTotal(context, payday)) /3) * 2); // FIXME this calculation is too simple.
+		vh.setDeposit_total(deposit - calculateTaxes(context, payday) - de.returnDeductionTotal(context, payday));
+		//de.returnPreTaxDeductions(context, payday);
+		//de.returnPostTaxDeductions(context, payday);
 	}
 }

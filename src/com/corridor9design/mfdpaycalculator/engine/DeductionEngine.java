@@ -18,13 +18,13 @@ import android.content.Context;
 import android.database.Cursor;
 
 public class DeductionEngine {
-	
+
 	ValuesHandler vh = new ValuesHandler();
 
 	// set the projection (what we're wanting from the database) to pass to the method
 	private static final String[] PROJECTION = new String[] { "_id", "amount", "number", "payday1", "payday2",
 			"payday3" };
-	
+
 	// set the standard CERS deduction for Hazardous Duty
 	private static final double CERS_MULTIPLIER = 0.08;
 
@@ -32,12 +32,15 @@ public class DeductionEngine {
 	double[] single_deduction;
 
 	public double returnDeductionTotal(Context context, int payday) {
+		double pre_tax_deductions = returnPreTaxDeductions(context, payday);
+		double post_tax_deductions = returnPostTaxDeductions(context, payday);
+		double deductions_total = post_tax_deductions + pre_tax_deductions;
 
-		double deductions_total = returnPostTaxDeductions(context, payday) + returnPreTaxDeductions(context, payday);
-
-		System.out.println("Calculating for #" + (payday + 1) + " payday of month."); // payday + 1 because payday
-																						// starts at 0
+		// payday + 1 because payday starts at 0
+		System.out.println("Calculating for #" + (payday + 1) + " payday of month.");
 		System.out.println("Total deductions = " + deductions_total);
+		System.out.println("PreTax deductions = " + pre_tax_deductions);
+		System.out.println("PostTax deductions = " + post_tax_deductions);
 
 		return deductions_total;
 	}
@@ -46,7 +49,7 @@ public class DeductionEngine {
 		ContentResolver resolver = context.getContentResolver();
 		Cursor cursor = resolver.query(DeductionContentProvider.CONTENT_URI, PROJECTION, null, null, null);
 
-		String[] selection_args = new String[] { "1", "2", "12", "13", "14", "17", "28", "30" };
+		String[] selection_args = new String[] { "1", "2", "12", "13", "14", "17", "27", "28", "30" };
 
 		double post_tax_deductions = 0.0;
 
@@ -61,7 +64,6 @@ public class DeductionEngine {
 				}
 			} while (cursor.moveToNext());
 		}
-		System.out.println("PostTax deductions = " + post_tax_deductions);
 		return post_tax_deductions;
 	}
 
@@ -86,15 +88,10 @@ public class DeductionEngine {
 				}
 			} while (cursor.moveToNext());
 		}
-		
-		System.out.println("PreTax deductions = " + pre_tax_deduction_total);
-		
+
 		// calculate CERS as 8% of gross
 		double cers = vh.getGross_pay_total() * CERS_MULTIPLIER;
-		System.out.println("CERS = " + cers);
-
 		pre_tax_deduction_total += cers;
-		System.out.println("PreTaxCers deductions = " + pre_tax_deduction_total);
 
 		return pre_tax_deduction_total;
 	}
