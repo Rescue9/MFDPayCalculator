@@ -14,6 +14,7 @@ public class CalcEngine {
 	// create a new values handler & deduction engine objects
 	ValuesHandler vh = new ValuesHandler();
 	DeductionEngine de = new DeductionEngine();
+	TaxEngine te = new TaxEngine();
 
 	// create variables for use in calcengine class
 	// from calculation done on supplied values
@@ -57,8 +58,9 @@ public class CalcEngine {
 	}
 
 	// set tax deduction total based upon above calculation
-	public void calculateTaxes(double taxable) {
-		vh.setTaxes_total(taxable / 3); // FIXME this calculation is too simple.
+	public void calculateTaxes(Context context, int payday) {
+		//vh.setTaxes_total(taxable / 3); // FIXME this calculation is too simple.
+		vh.setTaxes_total(te.returnTaxWitholding(context, payday));
 	}
 
 	// set deposit total based upon above calculation
