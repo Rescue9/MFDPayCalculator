@@ -26,8 +26,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import java.text.*;
 
 public class DeductionSpecificsDialog extends DialogFragment {
+ 
+ 	DecimalFormat df = new DecimalFormat("$##0.00");
+	
 	// declare variables
 	String deduction_name;
 	String deduction_amount;
@@ -124,7 +128,7 @@ public class DeductionSpecificsDialog extends DialogFragment {
 		cursor.moveToFirst();
 
 		deduction_name = cursor.getString(1);
-		deduction_specific_amount.setText(cursor.getString(2));
+		deduction_specific_amount.setText(df.format(Double.parseDouble(cursor.getString(2))));
 		deduction_specific_number.setText(cursor.getString(3));
 		deduction_specific_description.setText(cursor.getString(4));
 
