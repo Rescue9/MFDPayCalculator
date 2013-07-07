@@ -26,6 +26,7 @@ import com.corridor9design.mfdpaycalculator.billing.IabHelper;
 import com.corridor9design.mfdpaycalculator.billing.IabResult;
 import com.corridor9design.mfdpaycalculator.billing.Inventory;
 import com.corridor9design.mfdpaycalculator.billing.Purchase;
+import com.corridor9design.mfdpaycalculator.engine.DateEngine;
 import com.corridor9design.mfdpaycalculator.preferences.PreferencesHandler;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
@@ -89,7 +90,7 @@ public class AboutActivity extends Activity {
 		});
 		getVersionNumber();
 		purchasePro();
-		//testActivities(); // TODO used for testing
+		testActivities(); // TODO used for testing
 	}
 
 	// get version number from AndroidManifest
@@ -232,5 +233,7 @@ public class AboutActivity extends Activity {
 		PreferencesHandler ph = new PreferencesHandler();
 		System.out.println("Hire Date: " + ph.getPreference("pref_hire_date", this));
 
+		DateEngine de = new DateEngine();
+		de.getElapsedDays(this);
 	}
 }
