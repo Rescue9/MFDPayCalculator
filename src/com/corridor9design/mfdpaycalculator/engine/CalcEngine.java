@@ -49,10 +49,8 @@ public class CalcEngine {
 		// if simple layout use methods for overtime calculation
 		if(!ph.preferenceSet("pref_advanced_layout", context)){
 			longevity_days = (7 * dte.getElapsedDays(context));
-			System.out.println(longevity_days);
 			longevity_pay = (7 * dte.getElapsedYears(context));
 			long_hourly_rate = (longevity_days / 2912 / 30.4375);
-			System.out.println(long_hourly_rate);
 
 			overtime1_pay = calculateScheduledOvertime();
 			overtime2_pay = calculateUnscheduledOvertime();
