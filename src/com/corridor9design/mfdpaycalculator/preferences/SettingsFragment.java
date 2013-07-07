@@ -18,7 +18,6 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.corridor9design.mfdpaycalculator.R;
-import com.corridor9design.mfdpaycalculator.R.xml;
 
 public class SettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 
