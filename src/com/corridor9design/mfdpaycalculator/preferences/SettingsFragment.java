@@ -5,7 +5,7 @@
  * Purpose: To create a fragment holding application settings.
  */
 
-package com.corridor9design.mfdpaycalculator;
+package com.corridor9design.mfdpaycalculator.preferences;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -16,6 +16,9 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.util.Log;
+
+import com.corridor9design.mfdpaycalculator.R;
+import com.corridor9design.mfdpaycalculator.R.xml;
 
 public class SettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 

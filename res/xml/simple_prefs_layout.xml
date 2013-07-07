@@ -61,10 +61,10 @@
             android:title="@string/pref_exemptions_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Personal Info" >
-        <EditTextPreference
+        <com.corridor9design.mfdpaycalculator.preferences.DatePreference
+            android:defaultValue="2000.01.06"
             android:dialogMessage="@string/pref_hire_date_dialog_message"
-            android:dialogTitle="@string/pref_hire_date_dialog_title"
-            android:summary="@string/pref_hire_date_summary"
+            android:key="pref_hire_date"
             android:title="@string/pref_hire_date_title" />
     </PreferenceCategory>
 

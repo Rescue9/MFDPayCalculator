@@ -16,6 +16,7 @@ import com.corridor9design.mfdpaycalculator.deductions.DeductionListDialog;
 import com.corridor9design.mfdpaycalculator.engine.CalcEngine;
 import com.corridor9design.mfdpaycalculator.engine.ValueModifier;
 import com.corridor9design.mfdpaycalculator.engine.ValuesHandler;
+import com.corridor9design.mfdpaycalculator.preferences.SettingsActivity;
 
 import android.app.Activity;
 import android.app.DialogFragment;

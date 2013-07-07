@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.corridor9design.mfdpaycalculator.AboutActivity" />
-        <activity android:name="com.corridor9design.mfdpaycalculator.SettingsActivity" />
+        <activity android:name="com.corridor9design.mfdpaycalculator.preferences.SettingsActivity" />
         <activity android:name="com.corridor9design.mfdpaycalculator.deductions.DeductionEditActivity" />
         <activity
             android:name="com.google.ads.AdActivity"
