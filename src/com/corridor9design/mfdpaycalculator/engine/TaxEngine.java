@@ -10,7 +10,7 @@ package com.corridor9design.mfdpaycalculator.engine;
 
 import android.content.Context;
 
-import com.corridor9design.mfdpaycalculator.PreferencesHandler;
+import com.corridor9design.mfdpaycalculator.preferences.PreferencesHandler;
 
 public class TaxEngine {
 	

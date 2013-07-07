@@ -5,7 +5,7 @@
  * Purpose: To create a handler class for getting & setting values.
  */
 
-package com.corridor9design.mfdpaycalculator;
+package com.corridor9design.mfdpaycalculator.preferences;
 
 import com.corridor9design.mfdpaycalculator.engine.ValuesHandler;
 
