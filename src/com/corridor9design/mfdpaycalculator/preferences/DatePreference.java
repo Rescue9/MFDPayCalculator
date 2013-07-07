@@ -209,7 +209,7 @@ public class DatePreference extends DialogPreference implements
     datePicker.clearFocus();
     onDateChanged(datePicker, datePicker.getYear(), datePicker.getMonth(),
         datePicker.getDayOfMonth());
-    onDialogClosed(which == DialogInterface.BUTTON1); // OK?
+    onDialogClosed(which == DialogInterface.BUTTON_POSITIVE); // OK?
   }
 
   /**
