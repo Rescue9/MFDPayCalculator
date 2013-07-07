@@ -24,11 +24,11 @@ public class CalcEngine {
 	int holiday_hours = vh.getHolidays_during_pay() * 8;
 
 	// calculate pay, subtotals, and longevity from above variables
-	double base_pay_subtotal = vh.getBase_pay_rate() * 80;
-	double overtime1_pay = vh.getOvertime1_pay_rate() * overtime1_hours;
-	double overtime2_pay = vh.getOvertime2_pay_rate() * overtime2_hours;
-	double holiday_pay = vh.getBase_pay_rate() * holiday_hours;
 	double longevity = vh.getYears_worked() * 7;
+	double base_pay_subtotal = vh.getBase_pay_rate() * 80;
+	double overtime1_pay = vh.getOvertime1_pay_rate() * overtime1_hours; // calculateScheduledOvertime();
+	double overtime2_pay = vh.getOvertime2_pay_rate() * overtime2_hours; //calculateUnscheduledOvertime();
+	double holiday_pay = vh.getBase_pay_rate() * holiday_hours;
 
 	// calculate totals from subtotals and variables above
 	double base_pay_total = base_pay_subtotal + overtime1_pay + holiday_pay;
@@ -40,7 +40,30 @@ public class CalcEngine {
 	// set base pay value from above total
 	public void calculateBase() {
 		vh.setBase_pay_total(base_pay_total);
+		System.out.println("calculateBase: " + vh.getBase_pay_total());
+
 	}
+	
+	public double calculateScheduledOvertime(){
+		// calculate longevity for the scheduled overtime
+		double long_sched_ot = (longevity * 12) / 2912;
+		
+		// scheduled overtime calculation
+		double sched_ot = (vh.getBase_pay_rate() + long_sched_ot) * 1.5 * overtime1_hours;
+		System.out.println("calculateScheduledOvertime " + sched_ot);
+		return sched_ot;
+	}
+	
+	public double calculateUnscheduledOvertime(){
+		// calculate longevity for the scheduled overtime
+		double long_sched_ot = (longevity * 12) / 2912;
+				
+		// scheduled overtime calculation
+		double unsched_ot = (vh.getBase_pay_rate() + long_sched_ot + (3100.00/2080.00)) * 1.5 * overtime2_hours;
+		System.out.println("calculateUnscheduledOvertime " + unsched_ot);
+		return unsched_ot;
+	}
+	
 
 	// set gross pay value from above total based upon payday
 	public void calculateGross(int payday) {
