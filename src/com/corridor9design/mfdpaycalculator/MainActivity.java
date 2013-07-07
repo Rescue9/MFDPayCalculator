@@ -146,7 +146,7 @@ public class MainActivity extends Activity {
 		if (ph.getBoolPreference("premium_purchased", this)) {
 		        if (!ph.getBoolPreference("premium_toast", this)){
 		                Toast.makeText(this, "Premium version purchased", Toast.LENGTH_LONG).show();
-		                ph.setBoolPreferences("premium_toast", true, this);
+		                ph.setBoolPreference("premium_toast", true, this);
 		                invalidateOptionsMenu();
 		        }
 		}
@@ -198,7 +198,7 @@ public class MainActivity extends Activity {
 	public void setupGuiLayout() {
 		// get preference settings
 		boolean isAdvancedLayout = ph.preferenceSet("pref_advanced_layout", this);
-		String current_rank_label = ph.getPreferences("pref_rank", this);
+		String current_rank_label = ph.getPreference("pref_rank", this);
 
 		// change layout based upon preferences
 		if (!isAdvancedLayout) {
@@ -208,7 +208,7 @@ public class MainActivity extends Activity {
 			advanced_layout_container.setVisibility(View.GONE);
 
 			// setup gui objects from rank values in valuehandler
-			vh.setupSimpleValues(Integer.parseInt(ph.getPreferences("current_rank_int", this))); 
+			vh.setupSimpleValues(Integer.parseInt(ph.getPreference("current_rank_int", this))); 
 			// set years worked based upon value in settings
 			vh.setYears_worked(ph.getIntPreference("pref_years_of_service", this)); 
 

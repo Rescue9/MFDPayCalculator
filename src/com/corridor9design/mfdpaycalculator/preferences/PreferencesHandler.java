@@ -21,7 +21,7 @@ public class PreferencesHandler {
 	}
 
 	// set some preference as passed to method
-	public void setPreferences(String key, String value, Context context) {
+	public void setPreference(String key, String value, Context context) {
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 		SharedPreferences.Editor editor = preferences.edit();
 
@@ -29,7 +29,7 @@ public class PreferencesHandler {
 		editor.commit();
 	}
 
-	public void setBoolPreferences(String key, boolean value, Context context) {
+	public void setBoolPreference(String key, boolean value, Context context) {
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 		SharedPreferences.Editor editor = preferences.edit();
 
@@ -38,21 +38,21 @@ public class PreferencesHandler {
 	}
 
 	// get preference of type String
-	public String getPreferences(String key, Context context) {
+	public String getPreference(String key, Context context) {
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 		return preferences.getString(key, "0");
 	}
 
 	// get preference of type Double
 	public double getDoublePreference(String key, Context context) {
-		double pref = Double.parseDouble(getPreferences(key, context));
+		double pref = Double.parseDouble(getPreference(key, context));
 		return pref;
 
 	}
 
 	// get preference of type Integer
 	public int getIntPreference(String key, Context context) {
-		int pref = Integer.parseInt(getPreferences(key, context));
+		int pref = Integer.parseInt(getPreference(key, context));
 		return pref;
 	}
 
@@ -91,20 +91,20 @@ public class PreferencesHandler {
 	// save values to their respective shared preference saves
 	public void saveValuesToPreferences(Context context) {
 		// save values in total fields
-		setPreferences("base_pay_total", vh.getBase_pay_total() + "", context);
-		setPreferences("gross_pay_total", vh.getGross_pay_total() + "", context);
-		setPreferences("taxes_total", vh.getTaxes_total() + "", context);
-		setPreferences("deposit_total", vh.getDeposit_total() + "", context);
+		setPreference("base_pay_total", vh.getBase_pay_total() + "", context);
+		setPreference("gross_pay_total", vh.getGross_pay_total() + "", context);
+		setPreference("taxes_total", vh.getTaxes_total() + "", context);
+		setPreference("deposit_total", vh.getDeposit_total() + "", context);
 
 		// save values for hourly calculations
-		setPreferences("base_pay_rate", vh.getBase_pay_rate() + "", context);
-		setPreferences("overtime1_pay_rate", vh.getOvertime1_pay_rate() + "", context);
-		setPreferences("overtime2_pay_rate", vh.getOvertime2_pay_rate() + "", context);
-		setPreferences("scheduled_days", vh.getScheduled_days() + "", context);
+		setPreference("base_pay_rate", vh.getBase_pay_rate() + "", context);
+		setPreference("overtime1_pay_rate", vh.getOvertime1_pay_rate() + "", context);
+		setPreference("overtime2_pay_rate", vh.getOvertime2_pay_rate() + "", context);
+		setPreference("scheduled_days", vh.getScheduled_days() + "", context);
 
 		// save additional values
-		setPreferences("callback_hours", vh.getCallback_hours() + "", context);
-		setPreferences("years_worked", vh.getYears_worked() + "", context);
-		setPreferences("holidays_worked", vh.getHolidays_during_pay() + "", context);
+		setPreference("callback_hours", vh.getCallback_hours() + "", context);
+		setPreference("years_worked", vh.getYears_worked() + "", context);
+		setPreference("holidays_worked", vh.getHolidays_during_pay() + "", context);
 	}
 }
