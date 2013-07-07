@@ -191,7 +191,7 @@ public class AboutActivity extends Activity {
 	protected void premiumIsPurchased() {
 		// lets see if we have a preference for a permium item being purchased
 		PreferencesHandler ph = new PreferencesHandler();
-		ph.setBoolPreferences("premium_purchased", true, this);
+		ph.setBoolPreference("premium_purchased", true, this);
 	}
 
 	protected void refreshUi() {
@@ -228,9 +228,9 @@ public class AboutActivity extends Activity {
 	}
 	
 	// TODO this is a dummy method to test with
-	/*public void testActivities(){
-		DeductionEngine de = new DeductionEngine();
-		System.out.println("Deductions total: " + de.returnDeductionTotal(this));
+	public void testActivities(){
+		PreferencesHandler ph = new PreferencesHandler();
+		System.out.println("Hire Date: " + ph.getPreference("pref_hire_date", this));
 
-	}*/
+	}
 }
