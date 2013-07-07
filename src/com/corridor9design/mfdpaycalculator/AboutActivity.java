@@ -26,7 +26,6 @@ import com.corridor9design.mfdpaycalculator.billing.IabHelper;
 import com.corridor9design.mfdpaycalculator.billing.IabResult;
 import com.corridor9design.mfdpaycalculator.billing.Inventory;
 import com.corridor9design.mfdpaycalculator.billing.Purchase;
-import com.corridor9design.mfdpaycalculator.engine.DeductionEngine;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
@@ -227,9 +226,10 @@ public class AboutActivity extends Activity {
 		}
 	}
 	
-	public void testActivities(){
+	// TODO this is a dummy method to test with
+	/*public void testActivities(){
 		DeductionEngine de = new DeductionEngine();
 		System.out.println("Deductions total: " + de.returnDeductionTotal(this));
 
-	}
+	}*/
 }

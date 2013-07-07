@@ -18,6 +18,7 @@ public class Deduction implements BaseColumns {
 	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_NAME = "name";
 	public static final String COLUMN_AMOUNT = "amount";
+	public static final String COLUMN_NUMBER = "number";
 	public static final String COLUMN_DESCRIPTION = "description";
 	public static final String COLUMN_PAYDAY1 = "payday1";
 	public static final String COLUMN_PAYDAY2 = "payday2";
@@ -25,8 +26,9 @@ public class Deduction implements BaseColumns {
 
 	// create deduction table String
 	private static final String CREATE_DEDUCTIONS_TABLE = "CREATE TABLE " + TABLE_DEDUCTION + " (" + COLUMN_ID
-			+ " INTEGER PRIMARY KEY," + COLUMN_NAME + " TEXT, " + COLUMN_AMOUNT + " TEXT, " + COLUMN_DESCRIPTION
-			+ " TEXT, " + COLUMN_PAYDAY1 + " TEXT, " + COLUMN_PAYDAY2 + " TEXT, " + COLUMN_PAYDAY3 + " TEXT" + ")";
+			+ " INTEGER PRIMARY KEY," + COLUMN_NAME + " TEXT, " + COLUMN_AMOUNT + " TEXT, " + COLUMN_NUMBER + " TEXT, "
+			+ COLUMN_DESCRIPTION + " TEXT, " + COLUMN_PAYDAY1 + " TEXT, " + COLUMN_PAYDAY2 + " TEXT, " + COLUMN_PAYDAY3
+			+ " TEXT" + ")";
 
 	public static void onCreate(SQLiteDatabase database) {
 		// create the actual table

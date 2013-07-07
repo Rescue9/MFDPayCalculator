@@ -33,6 +33,7 @@ public class DeductionEditActivity extends Activity {
 	// declare variables
 	String deduction_name;
 	String deduction_amount;
+	String deduction_number;
 	String deduction_description;
 	String first_payday;
 	String second_payday;
@@ -42,6 +43,7 @@ public class DeductionEditActivity extends Activity {
 	// declare gui elements
 	EditText deduction_name_edit;
 	EditText deduction_amount_edit;
+	EditText deduction_number_edit;
 	EditText deduction_description_edit;
 	CheckBox deduction_first_pay_checkbox;
 	CheckBox deduction_second_pay_checkbox;
@@ -86,6 +88,7 @@ public class DeductionEditActivity extends Activity {
 		// gui display elements
 		deduction_name_edit = (EditText) findViewById(R.id.deduction_name);
 		deduction_amount_edit = (EditText) findViewById(R.id.deduction_amount);
+		deduction_number_edit = (EditText) findViewById(R.id.deduction_number);
 		deduction_description_edit = (EditText) findViewById(R.id.deduction_description);
 		deduction_first_pay_checkbox = (CheckBox) findViewById(R.id.deduction_checkbox_first_payday);
 		deduction_second_pay_checkbox = (CheckBox) findViewById(R.id.deduction_checkbox_second_payday);
@@ -99,6 +102,7 @@ public class DeductionEditActivity extends Activity {
 		// get values from current input
 		deduction_name = deduction_name_edit.getText().toString();
 		deduction_amount = deduction_amount_edit.getText().toString();
+		deduction_number = deduction_number_edit.getText().toString();
 		deduction_description = deduction_description_edit.getText().toString();
 
 		if (deduction_first_pay_checkbox.isChecked()) {
@@ -123,7 +127,7 @@ public class DeductionEditActivity extends Activity {
 		ContentResolver resolver = getContentResolver();
 
 		// set arrays for querying database
-		String[] projection = new String[] { "_id", "name", "amount", "description", "payday1", "payday2", "payday3" };
+		String[] projection = new String[] { "_id", "name", "amount", "number", "description", "payday1", "payday2", "payday3" };
 		String[] selectionArgs = new String[] { id + "" };
 
 		// clear previous values
@@ -134,6 +138,7 @@ public class DeductionEditActivity extends Activity {
 		values.get(Deduction.COLUMN_DESCRIPTION);
 		values.get(Deduction.COLUMN_ID);
 		values.get(Deduction.COLUMN_NAME);
+		values.get(Deduction.COLUMN_NUMBER);
 		values.get(Deduction.COLUMN_PAYDAY1);
 		values.get(Deduction.COLUMN_PAYDAY2);
 		values.get(Deduction.COLUMN_PAYDAY3);
@@ -148,16 +153,17 @@ public class DeductionEditActivity extends Activity {
 		// set the edittext areas to the cursor strings from the database
 		deduction_name_edit.setText(cursor.getString(1));
 		deduction_amount_edit.setText(cursor.getString(2));
-		deduction_description_edit.setText(cursor.getString(3));
+		deduction_number_edit.setText(cursor.getString(3));
+		deduction_description_edit.setText(cursor.getString(4));
 
 		// use these if statements to check boxes as return results are strings
-		if (cursor.getString(4).equals("true")) {
+		if (cursor.getString(5).equals("true")) {
 			deduction_first_pay_checkbox.setChecked(true);
 		}
-		if (cursor.getString(5).equals("true")) {
+		if (cursor.getString(6).equals("true")) {
 			deduction_second_pay_checkbox.setChecked(true);
 		}
-		if (cursor.getString(6).equals("true")) {
+		if (cursor.getString(7).equals("true")) {
 			deduction_third_pay_checkbox.setChecked(true);
 		}
 
@@ -186,7 +192,7 @@ public class DeductionEditActivity extends Activity {
 			}
 		});
 		
-		deduction_negative_button.setText(R.string.deduction_button_ok);
+		deduction_negative_button.setText(R.string.deduction_button_cancel);
 		deduction_negative_button.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -200,6 +206,7 @@ public class DeductionEditActivity extends Activity {
 	private void clearValues() {
 		deduction_name_edit.setText("");
 		deduction_amount_edit.setText("");
+		deduction_number_edit.setText("");
 		deduction_description_edit.setText("");
 		deduction_first_pay_checkbox.setChecked(false);
 		deduction_second_pay_checkbox.setChecked(false);
@@ -246,6 +253,7 @@ public class DeductionEditActivity extends Activity {
 		values.put(Deduction.COLUMN_AMOUNT, deduction_amount);
 		values.put(Deduction.COLUMN_DESCRIPTION, deduction_description);
 		values.put(Deduction.COLUMN_NAME, deduction_name);
+		values.put(Deduction.COLUMN_NUMBER, deduction_number);
 		values.put(Deduction.COLUMN_PAYDAY1, first_payday);
 		values.put(Deduction.COLUMN_PAYDAY2, second_payday);
 		values.put(Deduction.COLUMN_PAYDAY3, third_payday);
@@ -267,6 +275,7 @@ public class DeductionEditActivity extends Activity {
 		values.put(Deduction.COLUMN_AMOUNT, deduction_amount);
 		values.put(Deduction.COLUMN_DESCRIPTION, deduction_description);
 		values.put(Deduction.COLUMN_NAME, deduction_name);
+		values.put(Deduction.COLUMN_NUMBER, deduction_number);
 		values.put(Deduction.COLUMN_PAYDAY1, first_payday);
 		values.put(Deduction.COLUMN_PAYDAY2, second_payday);
 		values.put(Deduction.COLUMN_PAYDAY3, third_payday);

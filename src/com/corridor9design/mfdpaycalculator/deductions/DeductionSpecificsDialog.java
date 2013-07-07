@@ -31,6 +31,7 @@ public class DeductionSpecificsDialog extends DialogFragment {
 	// declare variables
 	String deduction_name;
 	String deduction_amount;
+	String deduction_number;
 	String deduction_description;
 	String first_payday;
 	String second_payday;
@@ -39,6 +40,7 @@ public class DeductionSpecificsDialog extends DialogFragment {
 
 	// declare gui elements
 	TextView deduction_specific_amount;
+	TextView deduction_specific_number;
 	TextView deduction_specific_description;
 
 	CheckBox deduction_first_payday;
@@ -70,13 +72,13 @@ public class DeductionSpecificsDialog extends DialogFragment {
 			}
 		});
 		// we want have a delete button 
-		alertDialogBuilder.setNegativeButton(R.string.deduction_button_delete, new OnClickListener() {
+		/*alertDialogBuilder.setNegativeButton(R.string.deduction_button_delete, new OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				deleteDeductionItem();
 			}
-		});
+		});*/
 		return alertDialogBuilder.create();
 	}
 
@@ -87,6 +89,7 @@ public class DeductionSpecificsDialog extends DialogFragment {
 	public void setupGuiElements() {
 
 		deduction_specific_amount = (TextView) view.findViewById(R.id.deduction_specific_amount);
+		deduction_specific_number = (TextView) view.findViewById(R.id.deduction_specific_number);
 		deduction_specific_description = (TextView) view.findViewById(R.id.deduction_specific_description);
 		deduction_first_payday = (CheckBox) view.findViewById(R.id.deduction_specific_checkbox_first_payday);
 		deduction_second_payday = (CheckBox) view.findViewById(R.id.deduction_specific_checkbox_second_payday);
@@ -98,13 +101,14 @@ public class DeductionSpecificsDialog extends DialogFragment {
 		ContentValues values = new ContentValues();
 
 		// set arrays for querying database
-		String[] projection = new String[] { "_id", "name", "amount", "description", "payday1", "payday2", "payday3" };
+		String[] projection = new String[] { "_id", "name", "amount", "number", "description", "payday1", "payday2", "payday3" };
 		String[] selectionArgs = new String[] { database_id + "" };
 
 		values.clear();
 
 		// get these columns into the content values object
 		values.get(Deduction.COLUMN_AMOUNT);
+		values.get(Deduction.COLUMN_NUMBER);
 		values.get(Deduction.COLUMN_DESCRIPTION);
 		values.get(Deduction.COLUMN_ID);
 		values.get(Deduction.COLUMN_NAME);
@@ -121,26 +125,18 @@ public class DeductionSpecificsDialog extends DialogFragment {
 
 		deduction_name = cursor.getString(1);
 		deduction_specific_amount.setText(cursor.getString(2));
-		deduction_specific_description.setText(cursor.getString(3));
+		deduction_specific_number.setText(cursor.getString(3));
+		deduction_specific_description.setText(cursor.getString(4));
 
 		// use these if statements to check boxes as return results are strings
-		if (cursor.getString(4).equals("true")) {
+		if (cursor.getString(5).equals("true")) {
 			deduction_first_payday.setChecked(true);
 		}
-		if (cursor.getString(5).equals("true")) {
+		if (cursor.getString(6).equals("true")) {
 			deduction_second_payday.setChecked(true);
 		}
-		if (cursor.getString(6).equals("true")) {
+		if (cursor.getString(7).equals("true")) {
 			deduction_third_payday.setChecked(true);
 		}
-
-	}
-
-	private void deleteDeductionItem() {
-		// create a resolver to connect to the content provider
-		ContentResolver resolver = getActivity().getContentResolver();
-		String[] selectionArgs = new String[] { database_id + "" };
-
-		resolver.delete(DeductionContentProvider.CONTENT_URI, Deduction.COLUMN_ID + "=?", selectionArgs);
 	}
 }

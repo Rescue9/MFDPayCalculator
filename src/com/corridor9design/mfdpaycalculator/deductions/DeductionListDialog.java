@@ -4,6 +4,8 @@ import com.corridor9design.mfdpaycalculator.R;
 import com.corridor9design.mfdpaycalculator.database.Deduction;
 import com.corridor9design.mfdpaycalculator.database.DeductionContentProvider;
 
+import java.text.DecimalFormat;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -22,6 +24,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 public class DeductionListDialog extends DialogFragment implements LoaderCallbacks<Cursor>, OnClickListener {
 
@@ -44,6 +47,30 @@ public class DeductionListDialog extends DialogFragment implements LoaderCallbac
 		int[] viewIDs = new int[] { R.id.deduction_listing_deduction_name, R.id.deduction_listing_deduction_amount };
 
 		mAdapter = new SimpleCursorAdapter(getActivity(), R.layout.deduction_listings, null, DataColumns, viewIDs, 0);
+		
+		
+		// set a binder so we can add a dollar sign in front of the amount
+		mAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
+			
+			@Override
+			public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+				// if the column index is the amount column
+				if (columnIndex == 2){
+					// assign view to a new TextView
+					TextView amount = (TextView) view;
+					// create a number string from the cursor string in the amount column
+					String number_string = cursor.getString(cursor.getColumnIndex("amount"));
+					// setup decimal format
+					DecimalFormat df = new DecimalFormat("$##.00");
+					// create a new formatted string
+					String my_new_amount = df.format(Double.parseDouble(number_string));
+					// pass that new formatted string to the textview
+					amount.setText(my_new_amount);
+					return true;
+				}
+				return false;
+			}
+		});
 
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
 

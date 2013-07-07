@@ -14,7 +14,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MyDeductionDbHelper extends SQLiteOpenHelper {
 
 	// static variables
-	private static final int DATABASE_VERSION = 1; // database version
+	private static final int DATABASE_VERSION = 2; // database version
 	private static final String DATABASE_NAME = "Deductions.db"; // database name
 
 	// constructor

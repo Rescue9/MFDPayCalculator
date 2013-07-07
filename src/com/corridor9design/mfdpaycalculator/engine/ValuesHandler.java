@@ -156,9 +156,9 @@ public class ValuesHandler {
 			break;
 
 		case 5:
-			this.setBase_pay_rate(13.929);
-			this.setOvertime1_pay_rate(20.894);
-			this.setOvertime2_pay_rate(23.129);
+			this.setBase_pay_rate(14.208);
+			this.setOvertime1_pay_rate(21.896);
+			this.setOvertime2_pay_rate(24.131);
 			break;
 		}
 	}
