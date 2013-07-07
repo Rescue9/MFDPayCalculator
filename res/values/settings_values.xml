@@ -45,7 +45,6 @@
     <string name="pref_tax_info_name">Tax info</string>
     <string name="pref_marital_status_title">Marital Status</string>
     <string name="pref_marital_status_dialog_title">What is your marital status</string>
-    <string name="pref_marital_status_summary">Single</string>
     <string name="pref_exemptions_title">Exemptions</string>
     <string name="pref_exemptions_dialog_title">Enter withholding allowences</string>
     <string name="pref_exemptions_dialog_message">This info is from your W4 form: \nSingle = 0, Single+1 = 1, Married = 2, etc.</string>

@@ -36,23 +36,22 @@
             android:summary="@string/pref_years_of_service_summary"
             android:title="@string/pref_years_of_service_title" />
     </PreferenceCategory>
-    
     <PreferenceCategory android:title="@string/pref_tax_info_name" >
         <ListPreference
             android:defaultValue="1"
             android:dialogTitle="@string/pref_marital_status_dialog_title"
             android:enabled="true"
+            android:entries="@array/marital_status"
+            android:entryValues="@array/marital_values"
             android:key="pref_marital_status"
             android:selectable="true"
-			android:summary="%s"
-			android:title="@string/pref_marital_status_title"
-            android:entries="@array/marital_status"
-            android:entryValues="@array/marital_values" />
-        
-        <EditTextPreference 
+            android:summary="%s"
+            android:title="@string/pref_marital_status_title" />
+
+        <EditTextPreference
             android:defaultValue="0"
-            android:dialogTitle="@string/pref_exemptions_dialog_title"
             android:dialogMessage="@string/pref_exemptions_dialog_message"
+            android:dialogTitle="@string/pref_exemptions_dialog_title"
             android:enabled="true"
             android:inputType="number"
             android:key="pref_exemptions"
@@ -60,10 +59,13 @@
             android:selectable="true"
             android:summary="@string/pref_exemptions_summary"
             android:title="@string/pref_exemptions_title" />
-            
-    </PreferenceCategory>  
-   <!-- <PreferenceCategory android:title="Personal Info">
-        <EditTextPreference android:dialogMessage="@string/pref_hire_date_dialog_message" android:dialogTitle="@string/pref_hire_date_dialog_title" android:summary="@string/pref_hire_date_summary" android:title="@string/pref_hire_date_title"/>
     </PreferenceCategory>
- 	--> 
+    <PreferenceCategory android:title="Personal Info" >
+        <EditTextPreference
+            android:dialogMessage="@string/pref_hire_date_dialog_message"
+            android:dialogTitle="@string/pref_hire_date_dialog_title"
+            android:summary="@string/pref_hire_date_summary"
+            android:title="@string/pref_hire_date_title" />
+    </PreferenceCategory>
+
 </PreferenceScreen>
