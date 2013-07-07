@@ -9,12 +9,15 @@ package com.corridor9design.mfdpaycalculator.engine;
 
 import android.content.Context;
 
+import com.corridor9design.mfdpaycalculator.PreferencesHandler;
+
 public class CalcEngine {
 
 	// create a new values handler & deduction engine objects
 	ValuesHandler vh = new ValuesHandler();
 	DeductionEngine de = new DeductionEngine();
 	TaxEngine te = new TaxEngine();
+	PreferencesHandler ph = new PreferencesHandler();
 
 	// create variables for use in calcengine class
 	// from calculation done on supplied values
@@ -26,6 +29,8 @@ public class CalcEngine {
 	// calculate pay, subtotals, and longevity from above variables
 	double longevity = vh.getYears_worked() * 7;
 	double base_pay_subtotal = vh.getBase_pay_rate() * 80;
+	
+	// if advanced layout use edittext inputs for overtime calculation	
 	double overtime1_pay = vh.getOvertime1_pay_rate() * overtime1_hours; // calculateScheduledOvertime();
 	double overtime2_pay = vh.getOvertime2_pay_rate() * overtime2_hours; //calculateUnscheduledOvertime();
 	double holiday_pay = vh.getBase_pay_rate() * holiday_hours;
@@ -35,10 +40,21 @@ public class CalcEngine {
 	double gross_pay_1st_total = base_pay_total + longevity + overtime2_pay;
 	double gross_pay_2nd_total = base_pay_total + vh.getIncentive() + overtime2_pay;
 	double gross_pay_3rd_total = base_pay_total + overtime2_pay;
-	double gross_pay_total = vh.getGross_pay_total();
 
 	// set base pay value from above total
-	public void calculateBase() {
+	public void calculateBase(Context context) {
+		// if simple layout use methods for overtime calculation
+		if(!ph.preferenceSet("pref_advanced_layout", context)){
+			System.out.println("CATCH");
+		overtime1_pay = calculateScheduledOvertime(); //vh.getOvertime1_pay_rate() * overtime1_hours;
+		overtime2_pay = calculateUnscheduledOvertime(); //vh.getOvertime2_pay_rate() * overtime2_hours;
+		
+		base_pay_total = base_pay_subtotal + overtime1_pay + holiday_pay;
+		gross_pay_1st_total = base_pay_total + longevity + overtime2_pay;
+		gross_pay_2nd_total = base_pay_total + vh.getIncentive() + overtime2_pay;
+		gross_pay_3rd_total = base_pay_total + overtime2_pay;
+
+		}
 		vh.setBase_pay_total(base_pay_total);
 		System.out.println("calculateBase: " + vh.getBase_pay_total());
 

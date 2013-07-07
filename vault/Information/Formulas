@@ -3,7 +3,21 @@
 (base + long_ans + (3100/2080)) * 1.5 * unsched_ot
 
 
+-=(Monthly Calculation)=-
 (7 / 12) * longevity_total_months since hire
-For Ex. 5/3/10 hire date 
+For Ex. 5/3/92 hire date 
 	7/7/13 current date
 	38 months on the job.
+
+----- USE THIS -----
+-=(Daily Calculation)=-
+For Ex. 01/06/2000 hire date   (From and including: Thursday, January 6, 2000)
+			07/05/2013 paycheck date   (To, but not including Friday, July 5, 2013)
+			4929 days on the job.
+			
+longevity = (7 *  longevity_total_days since hire)
+long_ans = (longevity / 2912 / 30.4375) // 30.4375 = 365.25 (days in year) / 12 (months in year)
+
+sched_ot_pay = (base + long_ans) * 1.5 * sched_ot_hrs
+unsched_ot_pay = (base + long_ans + (3100/2080)) * 1.5 * unsched_ot_hrs
+----- USE THIS -----

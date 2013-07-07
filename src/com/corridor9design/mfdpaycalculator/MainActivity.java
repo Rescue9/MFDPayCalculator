@@ -205,11 +205,10 @@ public class MainActivity extends Activity {
 			rank_label.setText("Current rank: " + current_rank_label);
 			advanced_layout_container.setVisibility(View.GONE);
 
-			vh.setupSimpleValues(Integer.parseInt(ph.getPreferences("current_rank_int", this))); // setup gui objects
-																									// from rank values
-																									// in valuehandler
-			vh.setYears_worked(ph.getIntPreference("pref_years_of_service", this)); // set years worked based upon value
-																					// in settings
+			// setup gui objects from rank values in valuehandler
+			vh.setupSimpleValues(Integer.parseInt(ph.getPreferences("current_rank_int", this))); 
+			// set years worked based upon value in settings
+			vh.setYears_worked(ph.getIntPreference("pref_years_of_service", this)); 
 
 		} else {
 			// ADVANCED LAYOUT
@@ -371,7 +370,7 @@ public class MainActivity extends Activity {
 
 				// create a new calculator engine object
 				CalcEngine cEngine = new CalcEngine();
-				cEngine.calculateBase();
+				cEngine.calculateBase(MainActivity.this);
 
 				// calculate gross based upon radio button index
 				switch (radio_pay_group.indexOfChild(findViewById(radio_pay_group.getCheckedRadioButtonId()))) {
