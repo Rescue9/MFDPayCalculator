@@ -90,7 +90,7 @@ public class AboutActivity extends Activity {
 		});
 		getVersionNumber();
 		purchasePro();
-		testActivities(); // TODO used for testing
+		//testActivities(); // TODO used for testing
 	}
 
 	// get version number from AndroidManifest
