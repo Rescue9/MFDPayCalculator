@@ -18,42 +18,60 @@ public class CalcEngine {
 	DeductionEngine de = new DeductionEngine();
 	TaxEngine te = new TaxEngine();
 	PreferencesHandler ph = new PreferencesHandler();
+	DateEngine dte = new DateEngine();
 
 	// create variables for use in calcengine class
 	// from calculation done on supplied values
 	double base_pay_hours = vh.getScheduled_days() * 24;
-	double overtime1_hours = (vh.getScheduled_days() * 24) - 80;
-	double overtime2_hours = vh.getCallback_hours();
+	double sched_overtime_hours = (vh.getScheduled_days() * 24) - 80;
+	double unsched_overtime_hours = vh.getCallback_hours();
 	int holiday_hours = vh.getHolidays_during_pay() * 8;
 
 	// calculate pay, subtotals, and longevity from above variables
-	double longevity = vh.getYears_worked() * 7;
 	double base_pay_subtotal = vh.getBase_pay_rate() * 80;
-	
-	// if advanced layout use edittext inputs for overtime calculation	
-	double overtime1_pay = vh.getOvertime1_pay_rate() * overtime1_hours; // calculateScheduledOvertime();
-	double overtime2_pay = vh.getOvertime2_pay_rate() * overtime2_hours; //calculateUnscheduledOvertime();
 	double holiday_pay = vh.getBase_pay_rate() * holiday_hours;
+	
+	// if advanced layout use edittext inputs for overtime calculation
+	double longevity_days;
+	double longevity_pay;
+	double long_hourly_rate;
+	double overtime1_pay;
+	double overtime2_pay;
 
 	// calculate totals from subtotals and variables above
-	double base_pay_total = base_pay_subtotal + overtime1_pay + holiday_pay;
-	double gross_pay_1st_total = base_pay_total + longevity + overtime2_pay;
-	double gross_pay_2nd_total = base_pay_total + vh.getIncentive() + overtime2_pay;
-	double gross_pay_3rd_total = base_pay_total + overtime2_pay;
+	double base_pay_total;
+	double gross_pay_1st_total;
+	double gross_pay_2nd_total;
+	double gross_pay_3rd_total;
 
 	// set base pay value from above total
 	public void calculateBase(Context context) {
 		// if simple layout use methods for overtime calculation
 		if(!ph.preferenceSet("pref_advanced_layout", context)){
-			System.out.println("CATCH");
-		overtime1_pay = calculateScheduledOvertime(); //vh.getOvertime1_pay_rate() * overtime1_hours;
-		overtime2_pay = calculateUnscheduledOvertime(); //vh.getOvertime2_pay_rate() * overtime2_hours;
-		
-		base_pay_total = base_pay_subtotal + overtime1_pay + holiday_pay;
-		gross_pay_1st_total = base_pay_total + longevity + overtime2_pay;
-		gross_pay_2nd_total = base_pay_total + vh.getIncentive() + overtime2_pay;
-		gross_pay_3rd_total = base_pay_total + overtime2_pay;
+			longevity_days = (7 * dte.getElapsedDays(context));
+			System.out.println(longevity_days);
+			longevity_pay = (7 * dte.getElapsedYears(context));
+			long_hourly_rate = (longevity_days / 2912 / 30.4375);
+			System.out.println(long_hourly_rate);
 
+			overtime1_pay = calculateScheduledOvertime();
+			overtime2_pay = calculateUnscheduledOvertime();
+		
+			base_pay_total = base_pay_subtotal + overtime1_pay + holiday_pay;
+			gross_pay_1st_total = base_pay_total + longevity_pay + overtime2_pay;
+			gross_pay_2nd_total = base_pay_total + vh.getIncentive() + overtime2_pay;
+			gross_pay_3rd_total = base_pay_total + overtime2_pay;
+
+		} else {
+			overtime1_pay = vh.getOvertime1_pay_rate() * sched_overtime_hours;
+			overtime2_pay = vh.getOvertime2_pay_rate() * unsched_overtime_hours;
+			longevity_pay = vh.getYears_worked() * 7;
+			
+			base_pay_total = base_pay_subtotal + overtime1_pay + holiday_pay;
+			gross_pay_1st_total = base_pay_total + longevity_pay + overtime2_pay;
+			gross_pay_2nd_total = base_pay_total + vh.getIncentive() + overtime2_pay;
+			gross_pay_3rd_total = base_pay_total + overtime2_pay;
+	
 		}
 		vh.setBase_pay_total(base_pay_total);
 		System.out.println("calculateBase: " + vh.getBase_pay_total());
@@ -61,21 +79,15 @@ public class CalcEngine {
 	}
 	
 	public double calculateScheduledOvertime(){
-		// calculate longevity for the scheduled overtime
-		double long_sched_ot = (longevity * 12) / 2912;
-		
 		// scheduled overtime calculation
-		double sched_ot = (vh.getBase_pay_rate() + long_sched_ot) * 1.5 * overtime1_hours;
+		double sched_ot = (vh.getBase_pay_rate() + long_hourly_rate) * 1.5 * sched_overtime_hours;
 		System.out.println("calculateScheduledOvertime " + sched_ot);
 		return sched_ot;
 	}
 	
 	public double calculateUnscheduledOvertime(){
-		// calculate longevity for the scheduled overtime
-		double long_sched_ot = (longevity * 12) / 2912;
-				
 		// scheduled overtime calculation
-		double unsched_ot = (vh.getBase_pay_rate() + long_sched_ot + (3100.00/2080.00)) * 1.5 * overtime2_hours;
+		double unsched_ot = (vh.getBase_pay_rate() + long_hourly_rate + (3100.00/2080.00)) * 1.5 * unsched_overtime_hours;
 		System.out.println("calculateUnscheduledOvertime " + unsched_ot);
 		return unsched_ot;
 	}
@@ -108,7 +120,5 @@ public class CalcEngine {
 	public void calculateDeposit(Context context, double deposit, int payday) {
 		//vh.setDeposit_total(((deposit - de.returnDeductionTotal(context, payday)) /3) * 2); // FIXME this calculation is too simple.
 		vh.setDeposit_total(deposit - calculateTaxes(context, payday) - de.returnDeductionTotal(context, payday));
-		//de.returnPreTaxDeductions(context, payday);
-		//de.returnPostTaxDeductions(context, payday);
 	}
 }
