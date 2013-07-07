@@ -1,3 +1,9 @@
 (longevity * 12) / 2912= lon_ans = .375
 (base + long_ans) * 1.5 * sched_ot 
 (base + long_ans + (3100/2080)) * 1.5 * unsched_ot
+
+
+(7 / 12) * longevity_total_months since hire
+For Ex. 5/3/10 hire date 
+	7/7/13 current date
+	38 months on the job.
