@@ -10,6 +10,7 @@ package com.corridor9design.mfdpaycalculator.preferences;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -30,6 +31,8 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
 		// add the preferences to the fragment from the xml layout
 		addPreferencesFromResource(R.xml.simple_prefs_layout);
 
@@ -37,38 +40,44 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 		Preference pref_years_of_service = findPreference(YEARS_OF_SERVICE);
 		pref_years_of_service.setSummary((String) PreferenceManager.getDefaultSharedPreferences(getActivity())
 				.getString(YEARS_OF_SERVICE, "0"));
-		
+
 		// update the exemptions summary on the settings page
 		Preference exemptions = findPreference(EXEMPTIONS);
-		exemptions.setSummary((String) PreferenceManager.getDefaultSharedPreferences(getActivity())
-				.getString(EXEMPTIONS, "0"));
+		exemptions.setSummary((String) PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(
+				EXEMPTIONS, "0"));
 
+		// setup checkbox summary
+		CheckBoxPreference advanced_layout = (CheckBoxPreference) findPreference(ADVANCED_LAYOUT);
+		advanced_layout
+				.setSummary(sharedPreferences.getBoolean(ADVANCED_LAYOUT, false) ? "Disable to use standard pay rates"
+						: "Enable to use your specific pay rates");
 	}
 
 	// create a preference change listener to update information on change.
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		SharedPreferences.Editor editor = sharedPreferences.edit(); // create a shared preferences editor
+		// create a shared preferences editor
+		SharedPreferences.Editor editor = sharedPreferences.edit();
 
-		ListPreference rank_listpreference = (ListPreference) findPreference(CURRENT_RANK_LISTPREFERENCE);
-		String current_rank_label = sharedPreferences.getString(CURRENT_RANK_LISTPREFERENCE, ""); // get the current
-																									// rank string
-		String years_of_service = sharedPreferences.getString(YEARS_OF_SERVICE, "0"); // get the current years of
-																						// service string
+		String current_rank_label = sharedPreferences.getString(CURRENT_RANK_LISTPREFERENCE, "");
 
+		// set advanced layout checkbox summary
+		CheckBoxPreference advanced_layout = (CheckBoxPreference) findPreference(ADVANCED_LAYOUT);
+
+		// get the current years of service string
+		String years_of_service = sharedPreferences.getString(YEARS_OF_SERVICE, "0");
+
+		// add
+		if (key.equals(ADVANCED_LAYOUT)) {
+			advanced_layout.setSummary(sharedPreferences.getBoolean(key, false) ? "Disable to use standard pay rates"
+					: "Enable to use your specific pay rates");
+		}
 		// if the preference changed is the current rank...
 		if (key.equals(CURRENT_RANK_LISTPREFERENCE)) {
 			// get the new rank value
-			Preference rank_list = findPreference(key);
+			ListPreference current_rank = (ListPreference) findPreference(key);
 			// set the summary to the new rank value
-			rank_list.setSummary(sharedPreferences.getString(key, ""));
-			// set the rank index to the new rank integer
-			int rank_index = rank_listpreference.findIndexOfValue(current_rank_label);
-
-			// write this back into shared preferences
-			editor.putString(CURRENT_RANK_INT, rank_index + "");
-			editor.commit();
-
+			current_rank.setSummary(current_rank.getEntry());
 		}
 
 		// if the key changed is the layout...
@@ -94,24 +103,24 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 			pref_years_of_service.setSummary(sharedPreferences.getString(YEARS_OF_SERVICE, "0"));
 
 		}
-		
+
 		// if the key changed is the marital status...
-		if (key.equals(MARITAL_STATUS)){
+		if (key.equals(MARITAL_STATUS)) {
 			// get the new value & set the status from that
 			ListPreference marital_status = (ListPreference) findPreference(key);
 			marital_status.setSummary(marital_status.getEntry());
-			
+
 		}
-		
+
 		// if the key changed is the exemptions...
-		if (key.equals(EXEMPTIONS)){
+		if (key.equals(EXEMPTIONS)) {
 			// check to see if it is null
-			if (EXEMPTIONS.matches("")){
+			if (EXEMPTIONS.matches("")) {
 				// if null, set to 0 & commit back to preferences
 				editor.putString(key, "0");
 				editor.apply();
 			}
-			
+
 			// update the exemptions summary on the settings page
 			Preference exemptions = findPreference(key);
 			exemptions.setSummary(sharedPreferences.getString(EXEMPTIONS, "0"));
