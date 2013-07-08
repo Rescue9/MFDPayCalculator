@@ -95,4 +95,33 @@ public class DeductionEngine {
 
 		return pre_tax_deduction_total;
 	}
+	
+	public double returnMedicareDeductions(Context context, int payday) {
+		// from what column do we want to match and what arguments do we want to match
+		String selection = Deduction.COLUMN_NUMBER + " in (?,?,?,?,?,?,?,?)";
+		String[] selection_args = new String[] { "1", "2", "12", "13", "14", "17", "28", "30" };
+
+		ContentResolver resolver = context.getContentResolver();
+		Cursor cursor = resolver.query(DeductionContentProvider.CONTENT_URI, PROJECTION, selection, selection_args,
+				null);
+
+		// fetch our deductions
+		double medicare_tax_deductions = 0.0;
+
+		if (cursor.moveToFirst()) {
+			do {
+				// set payday+3 due to payday radio button being 0,1,2 where
+				// cursor columns for payday are 3,4,5
+				if (cursor.getString(payday + 3).equals("true")) {
+					medicare_tax_deductions += cursor.getDouble(1);
+				}
+			} while (cursor.moveToNext());
+		}
+
+		// calculate CERS as 8% of gross
+		double cers = vh.getGross_pay_total() * CERS_MULTIPLIER;
+		medicare_tax_deductions += cers;
+
+		return medicare_tax_deductions;
+	}
 }
