@@ -10,7 +10,6 @@ package com.corridor9design.mfdpaycalculator.preferences;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -38,6 +37,12 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 		Preference pref_years_of_service = findPreference(YEARS_OF_SERVICE);
 		pref_years_of_service.setSummary((String) PreferenceManager.getDefaultSharedPreferences(getActivity())
 				.getString(YEARS_OF_SERVICE, "0"));
+		
+		// update the exemptions summary on the settings page
+		Preference exemptions = findPreference(EXEMPTIONS);
+		exemptions.setSummary((String) PreferenceManager.getDefaultSharedPreferences(getActivity())
+				.getString(EXEMPTIONS, "0"));
+
 	}
 
 	// create a preference change listener to update information on change.
@@ -108,8 +113,8 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 			}
 			
 			// update the exemptions summary on the settings page
-			EditTextPreference exemptions = (EditTextPreference) findPreference(key);
-			exemptions.setSummary(exemptions.getText());
+			Preference exemptions = findPreference(key);
+			exemptions.setSummary(sharedPreferences.getString(EXEMPTIONS, "0"));
 		}
 	}
 
