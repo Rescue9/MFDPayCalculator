@@ -17,18 +17,20 @@
         <item>Captain</item>
         <item>Major</item>
     </string-array>
+    
     <string-array name="marital_status">
         <item>Single</item>
         <item>Married</item>
     </string-array>
+
     <string-array name="marital_values">
         <item>1</item>
         <item>2</item>
     </string-array>
-
+    
     <string name="pref_advanced_layout_name">Layout</string>
     <string name="pref_advanced_layout_title">Enable advanced layout</string>
-    <string name="pref_advanced_layout_summary">Enable to use your specific pay rates</string>
+    <string name="pref_advanced_layout_summary">Enter specific pay rates</string>
     <string name="pref_rank_title">Current rank:</string>
     <string name="pref_rank_dialog_title">Set your current rank</string>
     <string name="pref_years_of_service_title">Years of service</string>

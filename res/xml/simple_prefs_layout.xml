@@ -2,6 +2,15 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <PreferenceCategory android:title="@string/pref_advanced_layout_name" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:disableDependentsState="true"
+            android:enabled="true"
+            android:key="pref_advanced_layout"
+            android:selectable="true"
+            android:summary="@string/pref_advanced_layout_summary"
+            android:title="@string/pref_advanced_layout_title" />
+
         <ListPreference
             android:defaultValue="@string/pref_default_rank"
             android:dependency="pref_advanced_layout"
@@ -26,15 +35,6 @@
             android:selectable="true"
             android:summary="@string/pref_years_of_service_summary"
             android:title="@string/pref_years_of_service_title" />
-
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:disableDependentsState="true"
-            android:enabled="true"
-            android:key="pref_advanced_layout"
-            android:selectable="true"
-            android:summary="@string/pref_advanced_layout_summary"
-            android:title="@string/pref_advanced_layout_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_tax_info_name" >
         <ListPreference
