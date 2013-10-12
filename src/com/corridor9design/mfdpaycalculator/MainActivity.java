@@ -95,10 +95,10 @@ public class MainActivity extends Activity {
         // instantiate gui objects
         setupGuiInstances();
 
-		/*if (BuildConfig.DEBUG) {
+		if (BuildConfig.DEBUG) {
 		    PreferencesHandler ph = new PreferencesHandler();
 		    ph.setBoolPreference("premium_purchased", true, this);
-		}*/
+		} // TODO: Comment out entire block for release versions
 
     }
 

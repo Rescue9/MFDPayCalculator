@@ -47,7 +47,7 @@ public class AboutActivity extends Activity {
 
 	// GOOGLE ADS & BILLING
 	static final String SKU_PREMIUM = "mfd_pay_calculator_remove_ads"; // SKU for our products:
-	boolean isPremium = false; // does user have premium key?
+	boolean isPremium; // does user have premium key?
 	static final int RC_REQUEST = 6800293; // (arbitrary) request code for the purchase flow
 	IabHelper mHelper; // create an In-App Billing helper object
 
@@ -135,8 +135,12 @@ public class AboutActivity extends Activity {
 			} else {
 				Log.d(TAG, "Query inventory was successful.");
 
+				if(BuildConfig.DEBUG){
+				    isPremium = isPremiumPurchased();
+				} else {				
 				// check for a premium upgrade?
 				isPremium = inventory.hasPurchase(SKU_PREMIUM);
+				}
 
 				// update UI here
 				refreshUi();
@@ -189,11 +193,17 @@ public class AboutActivity extends Activity {
 		});
 	}
 
-	protected void premiumIsPurchased() {
-		// lets see if we have a preference for a permium item being purchased
-		PreferencesHandler ph = new PreferencesHandler();
-		ph.setBoolPreference("premium_purchased", true, this);
-	}
+    protected void setPremiumPurchased() {
+        // lets see if we have a preference for a permium item being purchased
+        PreferencesHandler ph = new PreferencesHandler();
+        ph.setBoolPreference("premium_purchased", true, this);
+    }
+
+    protected boolean isPremiumPurchased() {
+        // lets see if we have a preference for a permium item being purchased
+        PreferencesHandler ph = new PreferencesHandler();
+        return ph.getBoolPreference("premium_purchased", this);
+    }
 
 	protected void refreshUi() {
 
@@ -210,7 +220,7 @@ public class AboutActivity extends Activity {
 			// initiate a generic request to load
 			ad_request.addTestDevice(AdRequest.TEST_EMULATOR); // Emulator
 			ad_request.addTestDevice("EFCCE6E324855D892FC4772BE5938406"); // Galaxy S3 Test ID
-			ad_request.addTestDevice("E952DED8DFB1CA8350FD5D82F409703A"); // Note 10.1 Test ID
+			ad_request.addTestDevice("BE96FBBFCE6B626CF6428702F01FB67D"); // Note 10.1 Test ID
 
 			ad_view.loadAd(ad_request);
 
@@ -224,7 +234,7 @@ public class AboutActivity extends Activity {
 			premium_versin_text.setVisibility(View.VISIBLE); // TODO Change to VISIBLE on production
 
 			// set premium purchased preference
-			premiumIsPurchased();
+			setPremiumPurchased();
 		}
 	}
 	
