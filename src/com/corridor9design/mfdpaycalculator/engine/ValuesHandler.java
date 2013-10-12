@@ -10,7 +10,7 @@ package com.corridor9design.mfdpaycalculator.engine;
 
 public class ValuesHandler {
 
-	private static final double INCENTIVE = 258.33;
+	public static final double INCENTIVE = 258.33;
 
 	// totals after calculation
 	private static double base_pay_total;
@@ -126,39 +126,33 @@ public class ValuesHandler {
 	public void setupSimpleValues(int rank) {
 		switch (rank) {
 		case 0:
-			this.setBase_pay_rate(8.773);
-			this.setOvertime1_pay_rate(13.160);
-			this.setOvertime2_pay_rate(15.395);
+			this.setBase_pay_rate(8.948);
+			this.setOvertime1_pay_rate(0);
+			this.setOvertime2_pay_rate(0);
 			break;
-
+			
 		case 1:
-			this.setBase_pay_rate(11.737);
-			this.setOvertime1_pay_rate(17.606);
-			this.setOvertime2_pay_rate(19.841);
-			break;
+		    this.setBase_pay_rate(9.366);
+		    break;
 
 		case 2:
-			this.setBase_pay_rate(12.060);
-			this.setOvertime1_pay_rate(18.098);
-			this.setOvertime2_pay_rate(20.333);
+			this.setBase_pay_rate(11.972);
 			break;
 
 		case 3:
-			this.setBase_pay_rate(12.556);
-			this.setOvertime1_pay_rate(18.834);
-			this.setOvertime2_pay_rate(21.069);
+			this.setBase_pay_rate(12.306);
 			break;
 
 		case 4:
-			this.setBase_pay_rate(13.138);
-			this.setOvertime1_pay_rate(19.707);
-			this.setOvertime2_pay_rate(21.942);
+			this.setBase_pay_rate(12.807);
 			break;
 
 		case 5:
-			this.setBase_pay_rate(13.929);
-			this.setOvertime1_pay_rate(20.894);
-			this.setOvertime2_pay_rate(23.129);
+			this.setBase_pay_rate(13.401);
+			break;
+
+		case 6:
+			this.setBase_pay_rate(14.208);
 			break;
 		}
 	}

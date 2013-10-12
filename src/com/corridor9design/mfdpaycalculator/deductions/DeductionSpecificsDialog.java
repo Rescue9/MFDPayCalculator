@@ -26,121 +26,123 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import java.text.*;
 
 public class DeductionSpecificsDialog extends DialogFragment {
-	// declare variables
-	String deduction_name;
-	String deduction_amount;
-	String deduction_description;
-	String first_payday;
-	String second_payday;
-	String third_payday;
-	long database_id;
 
-	// declare gui elements
-	TextView deduction_specific_amount;
-	TextView deduction_specific_description;
+    DecimalFormat df = new DecimalFormat("$##0.00");
 
-	CheckBox deduction_first_payday;
-	CheckBox deduction_second_payday;
-	CheckBox deduction_third_payday;
+    // declare variables
+    String deduction_name;
+    String deduction_amount;
+    String deduction_number;
+    String deduction_description;
+    String first_payday;
+    String second_payday;
+    String third_payday;
+    long database_id;
 
-	View view;
+    // declare gui elements
+    TextView deduction_specific_amount;
+    TextView deduction_specific_number;
+    TextView deduction_specific_description;
 
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		// find out what row we're looking for from the bundle
-		database_id = getArguments().getLong("database_row");
+    CheckBox deduction_first_payday;
+    CheckBox deduction_second_payday;
+    CheckBox deduction_third_payday;
 
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-		// specify the base view that we want out info to populate
-		view = getActivity().getLayoutInflater().inflate(R.layout.dialog_deduction_specifics, null);
+    View view;
 
-		// setup gui
-		setupGuiElements();
-		getDeduction();
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // find out what row we're looking for from the bundle
+        database_id = getArguments().getLong("database_row");
 
-		alertDialogBuilder.setTitle(deduction_name);
-		alertDialogBuilder.setView(view);
-		alertDialogBuilder.setPositiveButton(R.string.deduction_button_ok, new OnClickListener() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        // specify the base view that we want out info to populate
+        view = getActivity().getLayoutInflater().inflate(R.layout.dialog_deduction_specifics, null);
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				return;
-			}
-		});
-		// we want have a delete button 
-		alertDialogBuilder.setNegativeButton(R.string.deduction_button_delete, new OnClickListener() {
+        // setup gui
+        setupGuiElements();
+        getDeduction();
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				deleteDeductionItem();
-			}
-		});
-		return alertDialogBuilder.create();
-	}
+        alertDialogBuilder.setTitle(deduction_name);
+        alertDialogBuilder.setView(view);
+        alertDialogBuilder.setPositiveButton(R.string.deduction_button_ok, new OnClickListener() {
 
-	public void onResume() {
-		super.onResume();
-	}
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+        return alertDialogBuilder.create();
+    }
 
-	public void setupGuiElements() {
+    public void onResume() {
+        super.onResume();
+    }
 
-		deduction_specific_amount = (TextView) view.findViewById(R.id.deduction_specific_amount);
-		deduction_specific_description = (TextView) view.findViewById(R.id.deduction_specific_description);
-		deduction_first_payday = (CheckBox) view.findViewById(R.id.deduction_specific_checkbox_first_payday);
-		deduction_second_payday = (CheckBox) view.findViewById(R.id.deduction_specific_checkbox_second_payday);
-		deduction_third_payday = (CheckBox) view.findViewById(R.id.deduction_specific_checkbox_third_payday);
-	}
+    public void setupGuiElements() {
 
-	public void getDeduction() {
-		ContentResolver resolver = getActivity().getContentResolver();
-		ContentValues values = new ContentValues();
+        deduction_specific_amount = (TextView) view.findViewById(R.id.deduction_specific_amount);
+        deduction_specific_number = (TextView) view.findViewById(R.id.deduction_specific_number);
+        deduction_specific_description = (TextView) view
+                .findViewById(R.id.deduction_specific_description);
+        deduction_first_payday = (CheckBox) view
+                .findViewById(R.id.deduction_specific_checkbox_first_payday);
+        deduction_second_payday = (CheckBox) view
+                .findViewById(R.id.deduction_specific_checkbox_second_payday);
+        deduction_third_payday = (CheckBox) view
+                .findViewById(R.id.deduction_specific_checkbox_third_payday);
+    }
 
-		// set arrays for querying database
-		String[] projection = new String[] { "_id", "name", "amount", "description", "payday1", "payday2", "payday3" };
-		String[] selectionArgs = new String[] { database_id + "" };
+    public void getDeduction() {
+        ContentResolver resolver = getActivity().getContentResolver();
+        ContentValues values = new ContentValues();
 
-		values.clear();
+        // set arrays for querying database
+        String[] projection = new String[] {
+                "_id", "name", "amount", "number", "description", "payday1", "payday2", "payday3"
+        };
+        String[] selectionArgs = new String[] {
+            database_id + ""
+        };
 
-		// get these columns into the content values object
-		values.get(Deduction.COLUMN_AMOUNT);
-		values.get(Deduction.COLUMN_DESCRIPTION);
-		values.get(Deduction.COLUMN_ID);
-		values.get(Deduction.COLUMN_NAME);
-		values.get(Deduction.COLUMN_PAYDAY1);
-		values.get(Deduction.COLUMN_PAYDAY2);
-		values.get(Deduction.COLUMN_PAYDAY3);
+        values.clear();
 
-		// we want a singular row, so we'll create a new URI with the row id
-		Uri singleUri = ContentUris.withAppendedId(DeductionContentProvider.CONTENT_URI, database_id);
+        // get these columns into the content values object
+        values.get(Deduction.COLUMN_AMOUNT);
+        values.get(Deduction.COLUMN_NUMBER);
+        values.get(Deduction.COLUMN_DESCRIPTION);
+        values.get(Deduction.COLUMN_ID);
+        values.get(Deduction.COLUMN_NAME);
+        values.get(Deduction.COLUMN_PAYDAY1);
+        values.get(Deduction.COLUMN_PAYDAY2);
+        values.get(Deduction.COLUMN_PAYDAY3);
 
-		// get the row from the content provider into a cursor
-		Cursor cursor = resolver.query(singleUri, projection, Deduction.COLUMN_ID + "=?", selectionArgs, null);
-		cursor.moveToFirst();
+        // we want a singular row, so we'll create a new URI with the row id
+        Uri singleUri = ContentUris.withAppendedId(DeductionContentProvider.CONTENT_URI,
+                database_id);
 
-		deduction_name = cursor.getString(1);
-		deduction_specific_amount.setText(cursor.getString(2));
-		deduction_specific_description.setText(cursor.getString(3));
+        // get the row from the content provider into a cursor
+        Cursor cursor = resolver.query(singleUri, projection, Deduction.COLUMN_ID + "=?",
+                selectionArgs, null);
+        cursor.moveToFirst();
 
-		// use these if statements to check boxes as return results are strings
-		if (cursor.getString(4).equals("true")) {
-			deduction_first_payday.setChecked(true);
-		}
-		if (cursor.getString(5).equals("true")) {
-			deduction_second_payday.setChecked(true);
-		}
-		if (cursor.getString(6).equals("true")) {
-			deduction_third_payday.setChecked(true);
-		}
+        deduction_name = cursor.getString(1);
+        deduction_specific_amount.setText(df.format(Double.parseDouble(cursor.getString(2))));
+        deduction_specific_number.setText(cursor.getString(3));
+        deduction_specific_description.setText(cursor.getString(4));
 
-	}
-
-	private void deleteDeductionItem() {
-		// create a resolver to connect to the content provider
-		ContentResolver resolver = getActivity().getContentResolver();
-		String[] selectionArgs = new String[] { database_id + "" };
-
-		resolver.delete(DeductionContentProvider.CONTENT_URI, Deduction.COLUMN_ID + "=?", selectionArgs);
-	}
+        // use these if statements to check boxes as return results are strings
+        if (cursor.getString(5).equals("true")) {
+            deduction_first_payday.setChecked(true);
+        }
+        if (cursor.getString(6).equals("true")) {
+            deduction_second_payday.setChecked(true);
+        }
+        if (cursor.getString(7).equals("true")) {
+            deduction_third_payday.setChecked(true);
+        }
+    }
 }

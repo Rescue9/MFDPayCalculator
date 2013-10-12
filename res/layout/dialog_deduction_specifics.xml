@@ -8,30 +8,45 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <TextView
-        android:id="@+id/deduction_specific_amount_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/deduction_amount_label"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/deduction_specific_amount_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/deduction_amount_label"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/deduction_number" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/deduction_specific_amount_dollar_sign"
-            android:layout_width="wrap_content"
+            android:id="@+id/deduction_specific_amount"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="@string/dollar_sign"
+            android:layout_weight="1"
+            android:text="@string/deduction_amount"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-            android:id="@+id/deduction_specific_amount"
+            android:id="@+id/deduction_specific_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/deduction_amount"
+			android:layout_marginRight="10dp"
+            android:text="@string/deduction_number_default"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </LinearLayout>

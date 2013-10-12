@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Personal Info" >
+        <com.corridor9design.mfdpaycalculator.preferences.DatePreference
+            android:defaultValue="2000.01.06"
+            android:dialogMessage="@string/pref_hire_date_dialog_message"
+            android:key="pref_hire_date"
+            android:title="@string/pref_hire_date_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -20,7 +20,7 @@
     
     <string name="scheduled_days_label">Scheduled Days: 0</string>
     <string name="overtime_label">Overtime: 0 hrs</string>
-    <string name="holidays_label">Holidays: 0 days</string>
+    <string name="holidays_label">Holidays: 0</string>
     
     <string name ="calculate_button">Calculate</string>
     

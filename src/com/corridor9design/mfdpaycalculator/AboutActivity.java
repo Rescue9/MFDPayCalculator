@@ -26,6 +26,8 @@ import com.corridor9design.mfdpaycalculator.billing.IabHelper;
 import com.corridor9design.mfdpaycalculator.billing.IabResult;
 import com.corridor9design.mfdpaycalculator.billing.Inventory;
 import com.corridor9design.mfdpaycalculator.billing.Purchase;
+import com.corridor9design.mfdpaycalculator.engine.DateEngine;
+import com.corridor9design.mfdpaycalculator.preferences.PreferencesHandler;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
@@ -88,6 +90,7 @@ public class AboutActivity extends Activity {
 		});
 		getVersionNumber();
 		purchasePro();
+		//testActivities(); // TODO used for testing
 	}
 
 	// get version number from AndroidManifest
@@ -105,7 +108,7 @@ public class AboutActivity extends Activity {
 		version.setText("Version: " + versionName);
 
 	}
-
+	
 	@Override
 	public void onDestroy() {
 		// remove all ad views
@@ -189,7 +192,7 @@ public class AboutActivity extends Activity {
 	protected void premiumIsPurchased() {
 		// lets see if we have a preference for a permium item being purchased
 		PreferencesHandler ph = new PreferencesHandler();
-		ph.setBoolPreferences("premium_purchased", true, this);
+		ph.setBoolPreference("premium_purchased", true, this);
 	}
 
 	protected void refreshUi() {
@@ -223,5 +226,14 @@ public class AboutActivity extends Activity {
 			// set premium purchased preference
 			premiumIsPurchased();
 		}
+	}
+	
+	// TODO this is a dummy method to test with
+	public void testActivities(){
+		PreferencesHandler ph = new PreferencesHandler();
+		if(BuildConfig.DEBUG) Log.d(MainActivity.TAG, "Hire Date: " + ph.getPreference("pref_hire_date", this));
+
+		DateEngine de = new DateEngine(this);
+		de.getElapsedDays(this);
 	}
 }

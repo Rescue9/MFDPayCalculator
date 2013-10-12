@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="Layout" >
+    <PreferenceCategory android:title="@string/pref_advanced_layout_name">
         <CheckBoxPreference
             android:defaultValue="false"
             android:disableDependentsState="true"
             android:enabled="true"
             android:key="pref_advanced_layout"
-            android:selectable="true"
+            android:selectable="false"
             android:summary="@string/pref_advanced_layout_summary"
             android:title="@string/pref_advanced_layout_title" />
 
@@ -36,8 +36,4 @@
             android:summary="@string/pref_years_of_service_summary"
             android:title="@string/pref_years_of_service_title" />
     </PreferenceCategory>
-   <!-- <PreferenceCategory android:title="Personal Info">
-        <EditTextPreference android:dialogMessage="@string/pref_hire_date_dialog_message" android:dialogTitle="@string/pref_hire_date_dialog_title" android:summary="@string/pref_hire_date_summary" android:title="@string/pref_hire_date_title"/>
-    </PreferenceCategory>
- 	--> 
 </PreferenceScreen>

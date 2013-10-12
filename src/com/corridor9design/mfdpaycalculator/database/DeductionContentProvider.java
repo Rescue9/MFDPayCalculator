@@ -179,8 +179,9 @@ public class DeductionContentProvider extends ContentProvider {
 
 	// check the columns received from the calling method to make sure they exist in our table
 	private void checkColumns(String[] projection) {
-		String[] available = { Deduction.COLUMN_AMOUNT, Deduction.COLUMN_DESCRIPTION, Deduction.COLUMN_ID,
-				Deduction.COLUMN_NAME, Deduction.COLUMN_PAYDAY1, Deduction.COLUMN_PAYDAY2, Deduction.COLUMN_PAYDAY3 };
+		String[] available = { Deduction.COLUMN_NAME, Deduction.COLUMN_AMOUNT, Deduction.COLUMN_NUMBER,
+				Deduction.COLUMN_DESCRIPTION, Deduction.COLUMN_ID, Deduction.COLUMN_PAYDAY1, Deduction.COLUMN_PAYDAY2,
+				Deduction.COLUMN_PAYDAY3 };
 
 		if (projection != null) {
 			HashSet<String> requestedColumns = new HashSet<String>(Arrays.asList(projection));

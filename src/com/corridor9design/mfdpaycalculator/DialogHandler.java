@@ -17,9 +17,13 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager.LayoutParams;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 public class DialogHandler extends DialogFragment {
 	// create value handling objects
@@ -31,6 +35,7 @@ public class DialogHandler extends DialogFragment {
 	EditText dialog_edittext_value;
 	int value;
 	View view;
+	AlertDialog alertDialog;
 
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		// get arguments from bundle
@@ -60,12 +65,13 @@ public class DialogHandler extends DialogFragment {
 
 		// set the view to be inflated by the builder
 		builder.setView(view);
+		dialog_edittext_value = (EditText) view.findViewById(R.id.dialog_edittext1);
+
 
 		// Add positive action button
 		builder.setPositiveButton(R.string.dialog_button_accept, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
-				dialog_edittext_value = (EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_edittext1);
 
 				// set value to 0 if empty
 				if (dialog_edittext_value.getText().length() == 0) {
@@ -95,8 +101,21 @@ public class DialogHandler extends DialogFragment {
 			}
 		});
 
+		dialog_edittext_value.setOnEditorActionListener(new OnEditorActionListener(){
+
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				if (actionId == EditorInfo.IME_ACTION_DONE){
+					alertDialog.getButton(Dialog.BUTTON_POSITIVE).performClick();
+				}
+				
+				return false;
+			}
+			
+		});
 		// create the dialog
-		return builder.create();
+		alertDialog = builder.create();
+		return alertDialog;
 	}
 
 	public void onActivityCreated(Bundle savedInstanceState) {

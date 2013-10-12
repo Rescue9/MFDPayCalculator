@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_tax_info_name" >
+        <ListPreference
+            android:defaultValue="1"
+            android:dialogTitle="@string/pref_marital_status_dialog_title"
+            android:enabled="true"
+            android:entries="@array/marital_status"
+            android:entryValues="@array/marital_values"
+            android:key="pref_marital_status"
+            android:selectable="true"
+            android:summary="%s"
+            android:title="@string/pref_marital_status_title" />
+
+        <EditTextPreference
+            android:defaultValue="0"
+            android:dialogMessage="@string/pref_exemptions_dialog_message"
+            android:dialogTitle="@string/pref_exemptions_dialog_title"
+            android:enabled="true"
+            android:inputType="number"
+            android:key="pref_exemptions"
+            android:selectAllOnFocus="true"
+            android:selectable="true"
+            android:summary="@string/pref_exemptions_summary"
+            android:title="@string/pref_exemptions_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:enabled="true"
+            android:key="pref_additional_withholding"
+            android:selectAllOnFocus="true"
+            android:selectable="true"
+            android:summary="@string/pref_additional_withholding_summary"
+            android:title="@string/pref_additional_withholding_title" />
+
+        <EditTextPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/pref_additional_withholding_federal_dialog_title"
+            android:enabled="true"
+            android:inputType="number"
+            android:key="pref_additional_withholding_federal"
+            android:dependency="pref_additional_withholding"
+            android:selectAllOnFocus="true"
+            android:selectable="true"
+            android:summary="@string/pref_additional_withholding_federal_summary"
+            android:title="@string/pref_additional_withholding_federal_title" />
+
+        <EditTextPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/pref_additional_withholding_state_dialog_title"
+            android:dialogMessage="@string/pref_additional_withholding_state_dialog_message"
+            android:enabled="true"
+            android:inputType="number"
+            android:key="pref_additional_withholding_state"
+            android:dependency="pref_additional_withholding"
+            android:selectAllOnFocus="true"
+            android:selectable="true"
+            android:summary="@string/pref_additional_withholding_state_summary"
+            android:title="@string/pref_additional_withholding_state_title" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

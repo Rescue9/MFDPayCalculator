@@ -2,7 +2,8 @@
 <resources>
 
     <string-array name="rank_options">
-        <item>Probationary Firefighter</item>
+        <item>Probationary Firefighter 1</item>
+        <item>Probationary Firefighter 2</item>
         <item>Firefighter</item>
         <item>Engineer</item>
         <item>Lieutenant</item>
@@ -10,15 +11,27 @@
         <item>Major</item>
     </string-array>
     <string-array name="rank_values">
-        <item>Probationary Firefighter</item>
+        <item>Probationary Firefighter 1</item>
+        <item>Probationary Firefighter 2</item>
         <item>Firefighter</item>
         <item>Engineer</item>
         <item>Lieutenant</item>
         <item>Captain</item>
         <item>Major</item>
     </string-array>
+    
+    <string-array name="marital_status">
+        <item>Single</item>
+        <item>Married</item>
+    </string-array>
 
-    <string name="pref_advanced_layout_title">Enable advanced layout</string>
+    <string-array name="marital_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    
+    <string name="pref_advanced_layout_name">Layout</string>
+    <string name="pref_advanced_layout_title">Enable advanced layout - CURRENTLY DISABLED</string>
     <string name="pref_advanced_layout_summary">Enter specific pay rates</string>
     <string name="pref_rank_title">Current rank:</string>
     <string name="pref_rank_dialog_title">Set your current rank</string>
@@ -26,10 +39,27 @@
     <string name="pref_years_of_service_dialog_title">Enter your years of service</string>
     <string name="pref_years_of_service_dialog_message">Used for calculating longevity</string>
     <string name="pref_years_of_service_summary">0</string>
-    <string name="pref_default_rank">Probationary Firefighter</string>
+    <string name="pref_default_rank">Probationary Firefighter 1</string>
     <string name="pref_hire_date_title">Hire date</string>
     <string name="pref_hire_date_dialog_title">Enter your employment date</string>
     <string name="pref_hire_date_dialog_message">Used for calculating longevity</string>
     <string name="pref_hire_date_summary">01/06/2000</string>
-
+    <string name="pref_tax_info_name">Tax info</string>
+    <string name="pref_marital_status_title">Marital Status</string>
+    <string name="pref_marital_status_dialog_title">What is your marital status</string>
+    <string name="pref_exemptions_title">Exemptions</string>
+    <string name="pref_exemptions_dialog_title">Enter withholding allowences</string>
+    <string name="pref_exemptions_dialog_message">This info is from your W4 form: \nSingle = 0, Single+1 = 1, Married = 2, etc.</string>
+    <string name="pref_exemptions_summary">0</string>
+    <string name="pref_additional_withholding_title">Additional Withholding Amounts</string>
+    <string name="pref_additional_withholding_summary">Any additional withheld for taxes</string>
+    <string name="pref_additional_withholding_federal_title">Federal Withholding</string>
+    <string name="pref_additional_withholding_federal_dialog_title">Enter amount to withhold for Federal</string>
+    <string name="pref_additional_withholding_federal_summary">0</string>
+    <string name="pref_additional_withholding_state_title">State Withholding</string>
+    <string name="pref_additional_withholding_state_dialog_title">Enter amount to withhold for State</string>
+    <string name="pref_additional_withholding_state_dialog_message">Most people won\'t have this</string>
+    <string name="pref_additional_withholding_state_summary">0</string>
+    
+    
 </resources>

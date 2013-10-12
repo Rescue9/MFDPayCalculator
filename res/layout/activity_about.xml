@@ -7,15 +7,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_dark">
 
         <ImageView
             android:id="@+id/about_icon_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/app_name"
-            android:paddingLeft="10dp"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/ic_launcher"
+            android:layout_margin="4dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,15 +29,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@android:color/primary_text_dark"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="4dp" />
 
             <TextView
                 android:id="@+id/about_copyright"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
                 android:text="@string/copyright"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@android:color/primary_text_dark"
+                android:textSize="12sp"
+                android:layout_marginRight="8dp" />
 
         </LinearLayout>
 
@@ -52,7 +58,6 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:paddingTop="15dp"
             android:scrollbarStyle="outsideOverlay" >
 
             <TextView
@@ -61,12 +66,14 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/about_description"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:padding="8dp" />
         </ScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:background="@android:color/background_dark">
 
             <TextView
                 android:id="@+id/about_premium_version"
@@ -74,37 +81,44 @@
                 android:layout_height="match_parent"
                 android:gravity="center_vertical|bottom"
                 android:text="@string/premium_version"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:visibility="gone" />
+                android:textAppearance="@android:style/TextAppearance.Large.Inverse"
+                android:visibility="visible"
+                android:textColor="@android:color/primary_text_dark"
+                android:layout_margin="4dp" />
 
             <Button
                 android:id="@+id/about_premium_purchase_button"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:text="@string/purchase_premium"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:textColor="@android:color/primary_text_dark"
+                android:layout_margin="4dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="right|bottom"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/about_version_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="5dp"
                     android:text="@string/release_version"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@android:color/primary_text_dark"
+                    android:layout_marginRight="4dp" />
 
                 <TextView
                     android:id="@+id/about_contact_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="5dp"
                     android:text="@string/contact_information"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@android:color/primary_text_dark"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginBottom="4dp" />
             </LinearLayout>
 
         </LinearLayout>
