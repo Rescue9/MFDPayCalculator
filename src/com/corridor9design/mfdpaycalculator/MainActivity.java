@@ -12,6 +12,8 @@ package com.corridor9design.mfdpaycalculator;
 
 import java.text.DecimalFormat;
 
+import com.aretha.slidemenu.SlideMenu;
+import com.aretha.slidemenu.SlideMenu.LayoutParams;
 import com.corridor9design.mfdpaycalculator.deductions.DeductionListDialog;
 import com.corridor9design.mfdpaycalculator.engine.CalcEngine;
 import com.corridor9design.mfdpaycalculator.engine.ValueModifier;
@@ -26,6 +28,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -81,7 +84,27 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         // tag logcat for initial start
         if (BuildConfig.DEBUG) Log.d(TAG, "Starting...");
-        setContentView(R.layout.activity_main);
+        
+        // begin implementing slidemenu
+        SlideMenu slideMenu = new SlideMenu(this);
+        setContentView(slideMenu);
+        
+        // setup the content
+        View contentView = LayoutInflater.from(getBaseContext()).inflate(R.layout.activity_main, null);
+        //contentView = LayoutInflater.from(getBaseContext()).inflate(R.layout.activity_main, null);
+        
+        slideMenu.addView(contentView, new SlideMenu.LayoutParams(LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT, LayoutParams.ROLE_CONTENT));
+
+        /* // Setup the primary menu
+        View primaryMenu = new View(this);
+        slideMenu.addView(primaryMenu, new SlideMenu.LayoutParams(300,
+                LayoutParams.MATCH_PARENT, LayoutParams.ROLE_PRIMARY_MENU));
+
+        // Setup the secondary menu
+        View secondaryMenu = LayoutInflater.from(getBaseContext()).inflate(R.layout.deduction_listings, null);
+        slideMenu.addView(secondaryMenu, new SlideMenu.LayoutParams(300,
+                LayoutParams.MATCH_PARENT, LayoutParams.ROLE_SECONDARY_MENU));*/
 
         // hide the keyboard until user requests it
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
