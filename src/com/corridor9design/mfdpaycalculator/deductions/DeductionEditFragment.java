@@ -123,10 +123,11 @@ public class DeductionEditFragment extends DialogFragment {
                                 Log.d(MainActivity.TAG, "Added Deduction");
                             getValues();
                             if (deduction_name_edit.getText().length() != 0
-                                    && deduction_amount_edit.getText().length() != 0) {
+                                    && deduction_amount_edit.getText().length() != 0
+                                    && deduction_number_edit.getText().length() != 0) {
                                 createDeductionItem();
                             } else {
-                                Toast.makeText(getActivity(), "Deduction must have Name & Amount",
+                                Toast.makeText(getActivity(), "Deduction must have Name, Amount, and Number",
                                         Toast.LENGTH_LONG).show();
                             }
                             dismiss();

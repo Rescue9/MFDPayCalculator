@@ -96,12 +96,12 @@ public class MainActivity extends Activity {
         slideMenu.addView(contentView, new SlideMenu.LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT, LayoutParams.ROLE_CONTENT));
 
-        /* // Setup the primary menu
-        View primaryMenu = new View(this);
+        /*// Setup the primary menu
+        View primaryMenu = LayoutInflater.from(getBaseContext()).inflate(R.layout.menu_main, null);
         slideMenu.addView(primaryMenu, new SlideMenu.LayoutParams(300,
-                LayoutParams.MATCH_PARENT, LayoutParams.ROLE_PRIMARY_MENU));
+                LayoutParams.MATCH_PARENT, LayoutParams.ROLE_PRIMARY_MENU));*/
 
-        // Setup the secondary menu
+        /*// Setup the secondary menu
         View secondaryMenu = LayoutInflater.from(getBaseContext()).inflate(R.layout.deduction_listings, null);
         slideMenu.addView(secondaryMenu, new SlideMenu.LayoutParams(300,
                 LayoutParams.MATCH_PARENT, LayoutParams.ROLE_SECONDARY_MENU));*/
